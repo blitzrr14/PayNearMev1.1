@@ -1,0 +1,9 @@
+﻿@model PayNearMe.Models.ErrorModel
+@{
+    ViewBag.Title = "Error";
+}
+
+<h1 class="text-danger">Error: @Model.ErrorCode </h1>
+<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h4 class="text-danger">@Model.ErrorMessage</h4>
+

@@ -1,0 +1,347 @@
+﻿@model PayNearMe.Models.Response.ProfileResponse
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div class="">
+    <div class="edit-prof-container">
+        <div class="row">
+            <div class="col-md-9 col-sm-9">
+                <div class="signup-img col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-md-5 col-sm-5 col-xs-5 header-profile" >
+                    <span>Edit Profile</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@using (Html.BeginForm("EditProfile", "Profile", FormMethod.Post, new { id = "editprofile-form", enctype = "multipart/form-data" }))
+    {
+    @Html.AntiForgeryToken()
+    <div class="body-profile">
+        <div>
+
+            
+          
+            <div class="row clearfix" style="height:50px">
+               
+                <span class="col-md-2" style="padding-top:10px">Email Address <span style="color:red"> *</span></span>
+                <div class="row col-md-5">
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.sender.UserID, new { @class = "form-control", @type = "email", @placeholder = "Email Address", @maxlength = "50", @required = "required", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.sender.UserID)
+                    </div>
+                </div>
+                @if (Model.sender.ImagePath != "") 
+                {
+                     <img class="prof-pic" id="profile-pic" src="@Model.sender.ImagePath"/>
+                }
+                else
+                {
+                    <img class="prof-pic" id="profile-pic" src="../Images/glyphicon-user.PNG"/>
+                }
+
+            </div>
+            <div class="row row-margin clearfix">
+                <span class="col-md-2" style="padding-top:10px">Name <span style="color:red"> *</span></span>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.sender.firstName, new { @class = "form-control", @type = "text", @placeholder = "First Name", @maxlength = "50", @required = "required", @readonly = "true" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.sender.middleName, new { @class = "form-control", @type = "text", @placeholder = "Middle Name", @maxlength = "50", @readonly = "true", @id = "midName" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.sender.lastName, new { @class = "form-control", @type = "text", @placeholder = "LastName", @maxlength = "50", @required = "required", @readonly = "true" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-margin">
+                <span class="col-md-2" style="padding-top:10px">BirthDate <span style="color:red"> *</span></span>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.sender.BirthDate, new
+                       {
+                           @class = "form-control",
+                           @maxlength = "10",
+                           @type = "text",
+                           @placeholder = "mm/dd/yyyy",
+                           @id = "birthdate",
+                           @required = "required",
+                           @readonly="true"
+                       })
+                            <span class="msgBDateError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                            @Html.ValidationMessageFor(model => model.sender.BirthDate)
+                            <div id="msgbirthdate" class="msgBDateError hidden"
+                                 style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                            </div>
+
+ 
+                        </div>
+   
+                    </div>
+
+
+                </div>
+      
+                <div class="col-md-1">
+                    <label for="slfprt" class="btn btn-file">Select Image</label>
+                    <input id="slfprt" type="file" name="slfprt" accept="image/*" style="margin-bottom: 10px; display:none" onchange="previewImage(this);">
+                </div>
+                <script>
+                    function previewImage(image) {
+
+                        if (image.files && image.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                $('#profile-pic').attr('src', e.target.result);
+                            }
+
+                            reader.readAsDataURL(image.files[0]);
+                        }
+                       
+                    }
+                </script>
+                
+            </div>
+
+            <div class="row row-margin">
+                <span class="col-md-2" style="padding-top:10px">Gender <span style="color:red"> *</span></span>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            @Html.DropDownListFor(model => model.sender.Gender,
+                                                       new List<SelectListItem>() { new SelectListItem { Value = "Male", Text = "Male"},
+                                                                                    new SelectListItem { Value = "Female", Text = "Female"  }},
+                                                       new { @class = "form-control", @required = "required" })
+   
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-margin">
+                <span class="col-md-2" style="padding-top:10px">Address <span style="color:red"> *</span></span>
+                <div class="col-md-5">
+                    @Html.TextBoxFor(model => model.sender.Street, new { @class = "form-control", @type = "text", @placeholder = "Street", @maxlength = "50", @required = "required", @readonly = "true"})
+                    @Html.ValidationMessageFor(model => model.sender.Street)
+                </div>
+
+                <div class="col-md-3">
+                    <div>
+                        @Html.TextBoxFor(model => model.sender.ZipCode, new { @class = "form-control", @type = "text", @placeholder = "Zip Code", @maxlength = "50", @required = "required", @readonly = "true"})
+                    </div>
+                    <div id="msgdata_zipcode" class="msgEmailError"
+                            style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                    </div>
+                </div>  
+                <div class="col-md-2">
+                    @Html.TextBoxFor(model => model.sender.City, new { @id = "data_City", @class = "form-control", @type = "text", @placeholder = "City", @maxlength = "50", @required = "required", @readonly = "true" })
+                </div>
+                
+               
+            </div>
+
+            <div class="row row-margin">
+                <div class=" col-md-5 col-md-offset-2">
+                    @Html.TextBoxFor(model => model.sender.Country, new { @class = "form-control", @type = "text", @placeholder = "Country", @maxlength = "50", @required = "required", @readonly = "true" })
+
+                </div>
+                <div class="col-md-5">
+                   
+                        
+                            @Html.TextBoxFor(model => model.sender.State, new { @id = "data_State", @class = "form-control", @type = "text", @placeholder = "State", @maxlength = "50", @required = "required", @readonly = "true" })
+                       
+               
+                   
+                </div>
+               
+            </div>
+
+            <div class="row row-margin">
+                <span class="col-md-2" style="padding-top:10px">Mobile No.<span style="color:red"> *</span></span>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">+1</span>
+                        @Html.TextBoxFor(model => model.sender.PhoneNo, new { @id = "cellPhone", @class = "form-control msgMobile", @maxlength = "10", @type = "text", @placeholder = "Phone", @required = "required" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.sender.PhoneNo)       
+                </div>
+            </div>
+            <div class="row row-margin" >
+                <div class="col-md-2">
+                    <div class="form-display-table-cell">
+                        <label for="">ID<span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                        @Html.DropDownListFor(model => model.sender.IDType, Model.IDs, new { @class = "form-control", @type = "text", @placeholder = "ID Type", @required = "required" })
+                </div>
+                      
+                <div class="col-sm-5">                       
+                        @Html.TextBoxFor(model => model.sender.IDNo, new { @class = "form-control", @type = "text", @placeholder = "ID Number", @required = "required" })
+                </div>
+            </div>
+
+            <div class="row row-margin">
+                <div class="col-md-offset-2 col-sm-1">
+                    Expiry Date<span style="color:red">*</span>
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(model => model.sender.ExpiryDate, new { @class = "form-control", @type = "text", @placeholder = "Expiry Date", @maxlength = "10", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.sender.ExpiryDate)
+                    <div id="msgsender_ExpiryDate" class="msgsender_ExpiryDateError hidden"
+                         style="width: 100%; text-align: center; font-size: 12px; color: #ff000a; padding: 5px;">
+                    </div>
+                </div>
+               
+                <div class="row row-margin">
+                    <div class="col-md-2 col-md-offset-10">
+                        <button id="btnEditProfile" class="btn btn-blue" type="button">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+</div>
+
+<script>
+
+    var idXprDateE = true;
+    var birthDate = true;
+
+    $(document).ready(function ()
+    {
+
+
+        $('input#sender_ExpiryDate').keydown(function (e) {
+            var currentInput = $(this).val();
+            if ((!isNumber(e) && !isBackSpace(e) && !isArrowKeys(e) && !isTab(e) && !isDelete(e) && !isSelectAll(e))
+                || ((e.keyCode == 48 || e.keyCode == 96) && currentInput.length == 1 && currentInput[0] == '0')
+                || currentInput.length > 10)
+                e.preventDefault();
+            else if ((currentInput.length == 2 || currentInput.length == 5) && !isBackSpace(e))
+                $('input#sender_ExpiryDate').val(currentInput + '/');
+        });
+
+      
+
+        $('input#sender_ExpiryDate').focusout(function (e) {
+            var idXprDateVal = $(this).val();
+            idXprDateE = false;
+
+            if (idXprDateVal[2] != '/' || idXprDateVal[5] != '/') {
+                $(this).val('');
+                idXprDateE = false;
+                inputInvalid2('sender_ExpiryDate', 'msgsender_ExpiryDateError', 'Invalid date format');
+                //this.setCustomValidity('Invalid dsate format');
+            }
+            else if (idXprDateVal.length < 10 ||
+                parseInt(idXprDateVal.slice(0, 2)) > 12 || //if month > 12
+                parseInt(idXprDateVal.slice(3, 5)) < 01 || //if days < 01
+                parseInt(idXprDateVal.slice(3, 5)) > 31    //if days > 31
+               ) {
+                idXprDateE = false;
+               // this.setCustomValidity('Invalid date format');
+                inputInvalid2('sender_ExpiryDate', 'msgsender_ExpiryDateError', 'Invalid date format');
+            }
+            else if (parseInt((new Date().getTime()) -
+                     parseInt(new Date(idXprDateVal).getTime())) > 0) {
+                idXprDateE = false;
+                inputInvalid2('sender_ExpiryDate', 'msgsender_ExpiryDateError', 'ID is Expired.');
+            }
+            else {
+                inputValid2('sender_ExpiryDate', 'msgsender_ExpiryDateError');
+                idXprDateE = true;
+            }
+        });
+
+        $("#btnEditProfile").click(function () {
+            var data = new FormData($("#editprofile-form")[0]);
+            $("#editprofile-form").validate();
+            if ($("#editprofile-form").valid()) {
+      
+                if (!idXprDateE) { $('input#sender_ExpiryDate').focus(); return; }
+                ajxloadtoggle();
+                $.ajax({
+                    url: '@Url.Action("EditProfile","Profile")',
+                    data: data,
+                    type: 'POST',
+                    async: false,
+                    cache: false,
+                    contentType: false,
+                    processData:false,
+                    success: function (resp) {
+                        if (resp.respcode == 1) {
+
+                            errModal("Profile's information is successfully updated!")
+                        }
+                        else {
+
+                            errModal(resp.message);
+
+                        }
+                        ajxloadtoggle();
+                    },
+                    error: function (captchaValidity) {
+                        alert("xx");
+                        errModal("Please try again, server connection could not be established.");
+                        ajxloadtoggle();
+
+                    }
+                });
+            }
+        
+
+       
+                
+            
+        });
+    });
+  
+    
+
+
+    function inputValid2(elemId, cLass) {
+        if (cLass != '') {
+            $('div.' + cLass).addClass('hidden');
+            $('span.' + cLass).removeClass('glyphicon-remove');
+            $('span.' + cLass).addClass('glyphicon-ok');
+        }
+        if (elemId != '') {
+            $('input#' + elemId).css("border-color", "#ccc");
+            document.getElementById('msg' + elemId).innerHTML = '';
+        }
+    }
+
+    function inputInvalid2(elemId, cLass, msg) {
+        if (cLass != '') {
+            $('.' + cLass).removeClass('hidden');
+            $('span.' + cLass).addClass('glyphicon-remove');
+        }
+        if (elemId != '') {
+            $('input#' + elemId).css("border-color", "#ff000a");
+            document.getElementById('msg' + elemId).innerHTML = msg;
+        }
+    }
+
+    function errModal(message) {
+        $("#modContent").html(message);
+        $("#myModal").show();
+    }
+
+
+</script>

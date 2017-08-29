@@ -1,0 +1,106 @@
+﻿@model PayNearMe.Models.Authenticate
+
+@{
+    ViewBag.Title = "Authenticate";
+}
+
+
+<br />
+<div style="width: 100%; margin: 0 auto; background-color: #eee; border-radius: 10px; border: 1px solid #ddd;">
+    <div class="page-title" style="background-color:#ff0000; color:#fff; margin-bottom: 0px;">
+        <span class="" style="font-size: 32px; font-weight: 500;">
+            Sign up
+        </span>
+    </div>
+    <br />
+    <br />
+    <div class="page-title" style=" margin-bottom: 0px;">
+        <span class="" style="font-size: 25px; font-weight: 500;">
+            Activate Your uLink Account
+        </span>
+        <br />
+        <br />
+        <span class="" style="font-size: 15px;">
+            Please enter the activation code sent to your e-mail address.
+            <br />
+            If you don't receive any e-mail within the next 10 minutes please contact Customer Service.
+        </span>
+    </div>
+
+    @using (Html.BeginForm("AuthenticateCode", "Register", FormMethod.Post, new { id = "authenticate-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+        
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group clearfix">
+
+                <label class="control-label col-sm-offset-1 col-sm-2">Email Address*</label>
+                <div class=" col-sm-offset-1 col-sm-4">
+                    @Html.TextBoxFor(model => model.userId, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.userId)
+                </div>
+
+                   
+            </div>
+
+     
+
+            <div class="form-group clearfix">
+
+                <label class="control-label col-sm-offset-1 col-sm-2">Activation Code*</label>
+
+                <div class="col-sm-4 col-sm-offset-1">
+                    @Html.TextBoxFor(model => model.authenticationCode, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.authenticationCode)
+                </div>
+
+              
+
+            </div>
+            <div class="form-group clearfix ">
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" id="btn-resend" class="btn-link col-sm-offset-5" style="color:red" data-resend="@Url.Action("ResendAuth","Register")">Resend activation code.</button>
+
+
+
+            </div>
+
+            <div class="form-group clearfix">
+                <div class="col-sm-offset-1 col-sm-2">@Html.ActionLink("Cancel", "LogIn", "Account", null, new { @style = "color:blue;font-size:18px" })</div>
+                <div class="col-sm-offset-5 col-sm-2">
+                    <input type="button" id="auth-finish" value="Finish" class="btn btn-primary" style="width:130px;background-color:blue;" data-authenticate="@Url.Action("AuthenticateCode", "Register")" data-home="@Url.Action("Index", "Home")" data-auth="@Url.Action("Authenticate", "Register")" />
+                    
+                </div>
+                
+            </div>
+            <br />
+
+            <div id="myModal" class="modal">
+
+            
+                @*<div class="modal-header"></div>*@
+                <div class="modal-content">
+                  
+                    <div class="panel-heading panel-modal-heading">
+                        MESSAGE:
+                        <span style="font-size:inherit" class="close" id="closeModal">&times;</span>
+                    </div>
+                    <div class="panel-body panel-modal-body">
+                        <p id="modContent"></p>
+                    </div>
+                   
+                </div>
+                @*<div class="modal-footer"></div>*@
+
+            </div>
+         
+        </div>
+    }
+    </div>
+
+

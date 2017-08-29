@@ -1,0 +1,74 @@
+﻿@model PayNearMe.Models.SendModel
+@{
+    ViewBag.Title = "GenerateBarcode";
+}
+<div class="success-transaction__desc well-lg clearfix">
+
+    <div class="col-md-12 ">
+        <h2 class="text-success success-transaction--title text-info clearfix"><span class="title-main">Successful Transaction </span> <span id="rePrintId" class="title-reprint"></span> @*<span class="title-inprogress" id="transStatus">Pending</span>*@</h2>
+    </div>
+
+    <div class=" row-custom clearfix">
+        <div class="col-md-6">
+            <div class="success-transaction--table success-transaction--table-left">
+
+                <div class=" row form-group  clearfix">
+                    <div class="col-md-3 col-sm-3">
+                        <div class="form-display-table-cell">
+                            <label for="">Transaction No</label>
+                        </div>
+
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        @*<div class="transaction-no text-center" id="txNumber" style="padding-left:10px;">*@
+                        <div id="txNumber" style="padding-left:10px;">
+                            <img src="@Model.ImageUrl">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="success-transaction--table success-transaction--table-right">
+                <table class="table ">
+
+                    <tbody>
+                        <tr>
+                            <td style="width:170px;" class="table-data-label bg-info">Beneficiary Name</td>
+                            <td class="table-data-label bg-info" id="beneNameOnConfirmReceipt"></td>
+                        </tr>
+                        <tr>
+                            <td class="table-data-label">Reception Method</td>
+                            <td class="table-data-value" id="receptionMethOnConfirmReceipt"></td>
+                        </tr>
+                        <tr>
+                            <td>Payer Name</td>
+                            <td id="pNameOnConfirmReceipt"></td>
+                        </tr>
+
+                        <tr class="beneAccountCreditTr" style="display: none">
+                            <td>Account Number</td>
+                            <td id="beneAccountNo"></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+        <!--             for alert configuration to stay connected with Bene while transaction -->
+        <div class="col-md-12 clearfix row"><p class="step-three__notification space-bottom0">*Set up your beneficiarys&nbsp;<a href="javascript:void(0);" id="alertsetupId" onclick="">alert.</a>&nbsp;</p></div>
+    </div>
+
+    <div class="col-md-12 clearfix">
+        <div class="btn-container">
+            <button type="button" class="btn btn-success" onclick="showDailog();">Print Receipt</button>
+            <div style="padding: 8px;text-align: left;"></div>
+        </div>
+    </div>
+</div>
+

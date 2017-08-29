@@ -1,0 +1,128 @@
+﻿@model PayNearMe.Models.PendingTransaction
+@{
+    ViewBag.Title = "PendingTransaction";
+}
+@using (Ajax.BeginForm("PendingTransaction", "PendingTransaction", new AjaxOptions { HttpMethod = "Post" }))
+{
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <script src="js/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="js/jquery.freezeheader.js"></script>
+        <script language="javascript" type="text/javascript">
+            $(document).ready(function () {
+                $("#table1").freezeHeader({ 'height': '250px' });
+                $("#table2").freezeHeader();
+                $("#tbex1").freezeHeader();
+                $("#tbex2").freezeHeader();
+                $("#tbex3").freezeHeader();
+                $("#tbex4").freezeHeader();
+            })
+        </script>
+    </head>
+    <body>
+
+
+        <div class="page-body dynamic-pages">
+            <div class="container">
+                <div class="page-desc transaction-history">
+                    <div class="page-title bg-info">
+                        <h1> <span class="title__icon">Pending Transactions</span> </h1>
+                    </div>
+                    <div class="layout-border">
+                        <div class="transaction-history__desc well-lg clearfix">
+                            <form id="SearchCriteriaUsingDTAction" name="SearchCriteriaUsingDTAction">
+                                <div class="form-group clearfix">
+                                    <div class="col-md-5">
+                                        <div class="form-group row clearfix">
+                                            <div class="col-sm-4">
+                                                <div class="form-display-table-cell ">
+                                                    <label for="inputSuccess2">Transaction Number</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+
+                                                @Html.TextBoxFor(model => model.kptn, new { @class = "form-control", @id = "input" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group clearfix">
+                                        <div class="col-md-3">
+                                            <div class="btn-container">
+                                                <button type="button" class="btn btn-reset ">Reset</button>
+                                                <button type="submit" class="btn btn-success search-btn" name="search" @*onclick="location.href='@Url.Action("ViewTransaction", "PendingTransaction")'"*@>Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                   @if (Model != null)
+                                    {
+                                    <div class="transaction-history-table">
+                                        <div class="col-md-12 clearfix">
+                                            <div class="search-result well">
+                                                <p class="space-bottom0">@Model.table.Rows.Count Items Found. Displaying all items.</p>
+
+                                            </div>
+
+
+                                            <table id="table1" class="responsive-table table text-center space-bottom0">
+                                                <thead>
+                                                    <tr>
+                                                        <th bgcolor="#ff000a"><b>KPTN</b></th>
+                                                        <th bgcolor="#ff000a"><b>Control Number</b></th>
+                                                        <th bgcolor="#ff000a"><b>Date</b></th>
+                                                        <th bgcolor="#ff000a"><b>First Name</b></th>
+                                                        <th bgcolor="#ff000a"><b>Last Name</b></th>
+                                                        <th bgcolor="#ff000a"><b>Amount</b></th>
+                                                        <th bgcolor="#ff000a"><b>Status</b></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                  
+                                                        @for (int i = 0; i < Model.table.Rows.Count; i++)
+                                                        {
+                                                            <tr class="gridAlternada">
+                                                                <td>@Model.table.Rows[i][0].ToString()</td>
+                                                                <td>@Model.table.Rows[i][1].ToString()</td>
+                                                                <td>@Model.table.Rows[i][2].ToString()</td>
+                                                                <td>@Model.table.Rows[i][3].ToString()</td>
+                                                                <td>@Model.table.Rows[i][4].ToString()</td>
+                                                                <td>@Model.table.Rows[i][5].ToString()</td>
+                                                                <td>@Model.table.Rows[i][6].ToString()</td>
+                                                            </tr>
+                                                        }
+                                                    
+
+                                                  
+                                                    @*</tbody>*@
+                                                </tbody>
+                                            </table>
+
+                                            <div class="col-md-offset-9 space-top1x">
+                                                <div class=" btn-container">
+                                                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-download-alt"></span> Download pdf </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                   }
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+}
+
+

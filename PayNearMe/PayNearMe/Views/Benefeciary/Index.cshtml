@@ -1,0 +1,399 @@
+﻿@model PayNearMe.Models.BeneficiaryModel
+
+@{ ViewBag.Title = "Add Beneficiary"; }
+
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<div id="bodySection" style="margin: 0 auto; width: 100%;">
+    <div class="page">
+        <div id="f1_upload_process" style="display: none"></div>
+        <div class="page-body dynamic-pages">
+            <div class="page-desc beneficiaries">
+                <div class="page-title bg-info">
+                    <h1> <span class="title__icon">Beneficiaries</span> </h1>
+                </div>
+                <div style="padding: 30px; border: 1px solid lightgray; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                    <div id="add_newbeneficiarymain">
+                        <div class="step-content step-content__one" id="addbeneficiaryform" style="display: block;">
+                            <div class="add-new-benefi">
+                                <div class="page-title-secondry">
+                                    <div class="mar-adjust">
+                                        <div class="row">
+                                            <div class="col-md-12 hero-text-title">
+                                                <h2 id="beneHeadingMsg">Add New Beneficiary</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="divider light-bg"></div>
+                                <div class="beneficiary-information well-lg clearfix">
+                                    <div class="col-md-12">
+                                        <div class="form-group clearfix" id="errorMsgDivContainer" style="display: none;">
+                                            <p class="errorMsgDiv" id="errorMsgDiv"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form id="BeneForm">
+                                    <div class="beneficiary-information__sec-two  well-lg form-horizontal required-field">
+                                        <div class="col-md-12 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label for="">Name</label>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        @Html.TextBoxFor(model => model.firstName, new { @class = "form-control naming", @type = "text", id = "firstName", @placeholder = "First Name", @required = "required", @minlength = "2", @maxlength = "30" })
+                                                        @Html.ValidationMessageFor(model => model.firstName)
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        @Html.TextBoxFor(model => model.midlleName, new { @class = "form-control naming", @type = "text", id = "middleName", @placeholder = "Middle Name", @minlength = "2", @maxlength = "30" })
+                                                        @Html.ValidationMessageFor(model => model.midlleName)
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        @Html.TextBoxFor(model => model.lastname, new { @class = "form-control naming", @type = "text", id = "lastName", @placeholder = "Last Name", @required = "required", @minlength = "2", @maxlength = "30" })
+                                                        @Html.ValidationMessageFor(model => model.lastname)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label for="">Address</label>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-12">
+                                                        @Html.TextBoxFor(model => model.street, new { @class = "form-control textcap", @type = "text", id = "street", @placeholder = "Street", @required = "required", @minlength = "2", @maxlength = "50" })
+                                                        @Html.ValidationMessageFor(model => model.street)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-10 col-sm-offset-2">
+                                                    <div class="col-sm-4">
+                                                        @Html.TextBoxFor(model => model.zipcode, new { @class = "form-control", @type = "text", id = "zipcode", @placeholder = "Zip Code", @required = "required", @minlength = "4", @maxlength = "5" })
+                                                        @Html.ValidationMessageFor(model => model.zipcode)
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        @Html.TextBoxFor(model => model.city, new { @class = "form-control textcap", @type = "text", id = "city", @placeholder = "City", @required = "required", @minlength = "2", @maxlength = "50" })
+                                                        @Html.ValidationMessageFor(model => model.city)
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        @Html.TextBoxFor(model => model.country,
+                                                            new
+                                                            {
+                                                                @class = "form-control",
+                                                                @type = "text",
+                                                                id = "country",
+                                                                @placeholder = "Country",
+                                                                @required = "required",
+                                                                @minlength = "2",
+                                                                @maxlength = "120",
+                                                                @readonly = true,
+                                                                Value = "Philippines"
+                                                            })
+                                                        @Html.ValidationMessageFor(model => model.country)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label for="">Date Of Birth</label>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        @Html.TextBoxFor(model => model.dateOfBirth, new { @class = "form-control", @type = "text", id = "dateOfBirth", @placeholder = "mm/dd/yyyy", maxlength = "10" })
+                                                        <div id="msgdateOfBirth" class="msgBDateError hidden"
+                                                             style="width: 100%; text-align: center; font-size: 14px; color: #b94a48; padding: 5px;">
+                                                        </div>
+                                                        @Html.ValidationMessageFor(model => model.dateOfBirth)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label for="">Gender</label>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        @Html.DropDownListFor(model => model.gender,
+                                                                                    new List<SelectListItem>() { new SelectListItem { Value = "", Text = "-- Select --"},
+                                                                                                                 new SelectListItem { Value = "Male", Text = "Male"},
+                                                                                                                 new SelectListItem { Value = "Female", Text = "Female"}},
+                                                                                    new { @class = "form-control", @required = "required", @id = "rcvrgender" })
+                                                        @Html.ValidationMessageFor(model => model.gender)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <label for="">Relation</label>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        @Html.TextBoxFor(model => model.relation, new { @class = "form-control textcap", @type = "text", id = "relation", @placeholder = "Relation", @required = "required", @minlength = "2", @maxlength = "60" })
+                                                        @Html.ValidationMessageFor(model => model.relation)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <span style=" position: relative; display: inline-block; padding-top: 15px;">Mobile No.</span>
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon has-feedback" id="isdCodeId">+63</div>
+                                                            @Html.TextBoxFor(model => model.phoneNo, new { @class = "form-control", @type = "text", id = "phoneNo", @placeholder = "Phone Number", @minlength = "10", @maxlength = "10" })
+                                                        </div>
+                                                        @Html.ValidationMessageFor(model => model.phoneNo)
+                                                        <div id="msgphoneNo" class="msgPhoneError hidden"
+                                                             style="width: 100%; text-align: center; font-size: 14px; color: #b94a48; padding: 5px;">
+                                                        </div>
+
+                                                        @*-----------    S M S     C H E C K    V A L I D A T I O N    ------------*@
+                                                        <div id="smsContainer" style="display: none; color: #b94a48;">
+                                                            <label for="">Please Input Phone Number!</label>
+                                                        </div>
+                                                        @*------------    S M S     C H E C K    V A L I D A T I O N    ------------*@
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="divider light-bg"></div>
+
+
+                                        @*---------- E M A I L   C O N T A I N E R --------------------*@
+
+                                        <div><div class="row-4"></div></div>
+                                        <div class="col-md-12 clearfix">
+                                            <div class="btn-container space-top2x" style="float:right">
+                                                @Html.ActionLink("Cancel", "Benefeciaries", "Benefeciary", new { @class = "btn btn-cancel", @id = "cancelAddBenefiery" })
+                                                @* <button type="submit" class="btn btn-success" id="continue">Continue</button>*@
+                                                <button type="button" class="btn btn-success" id="continueAdd">Continue</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    <!-- for payer selection  ADD BENE HERE-->
+                    </div>
+                    
+                    
+                    @*------------------------------------------------------- B E N E F I C I A R Y      I N F O -----------------------------------------------*@
+                    <div id="BeneInfo" style="display:none">
+                        <div id="" style="">
+                            @using (Html.BeginForm("Submit", "Beneficiary", FormMethod.Post, new { id = "BeneConf" }))
+                            {
+                            <!-- for payer selection  add bene here-->
+                                <div class="payer-selection" id="cashPickUpScren" style="">
+                                    <div class="beneficiary-information-edit well-lg clearfix">
+                                        <div class="col-md-12 clearfix">
+                                            <div class="row">
+                                                <div class="col-xs-10">
+                                                    <h1>Beneficiary Information</h1>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <button class="btn-link edit-btn pull-right" id="edit" type="button"><span class="edit-btn--icon"><span class="edit-btn--text">Edit</span></span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-11 col-xs-offset-1">
+                                                <div class="beneficiary-information-icon">
+                                                    <div class="form-group clearfix" style="font-size:16px">
+                                                        <div class="row-sm-3">
+                                                            <div class="col-sm-4">
+                                                                <label for="">Firstname</label>
+                                                                <p class="text-info space-bottom0  wordwrap textcap" id="Bfname"></p>
+                                                                @Html.TextBoxFor(model => model.firstName, new { @class = "text-info tForBorder", @type = "text", id = "Bfname1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="">Middlename</label>
+                                                                <p class="text-info wordwrap textcap" id="Bmname"></p>
+                                                                @Html.TextBoxFor(model => model.midlleName, new { @class = "text-info tForBorder", @type = "text", id = "Bmname1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="">Lastname</label>
+                                                                <p class="text-info wordwrap textcap" id="Blname"></p>
+                                                                @Html.TextBoxFor(model => model.lastname, new { @class = "text-info tForBorder", @type = "text", id = "Blname1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row-sm-3">
+                                                            <div class="col-sm-4">
+                                                                <label for="">City</label>
+                                                                <p class="text-info space-bottom0  wordwrap textcap" id="Bcity"></p>
+                                                                @Html.TextBoxFor(model => model.city, new { @class = "text-info tForBorder textcap", @type = "text", id = "Bcity1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="">Country</label>
+                                                                <p class="text-info wordwrap" id="Bcountry"></p>
+                                                                @Html.TextBoxFor(model => model.country, new { @class = "text-info tForBorder textcap", @type = "text", id = "Bcountry1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+
+                                                            <div class="col-sm-4">
+                                                                <label for="">Street</label>
+                                                                <p class="text-info wordwrap textcap" id="Bstreet"></p>
+                                                                @Html.TextBoxFor(model => model.street, new { @class = "text-info tForBorder textcap", @type = "text", id = "Bstreet1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            
+                                                        </div>
+
+                                                        <div class="row-sm-3">
+                                                            <div class="col-sm-4">
+                                                                <label for="">Zipcode</label>
+                                                                <p class="text-info space-bottom0 wordwrap" id="Bzipcode"></p>
+                                                                @Html.TextBoxFor(model => model.zipcode, new { @class = "text-info tForBorder", @type = "text", id = "Bzipcode1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="">Date Of Birth</label>
+                                                                <p class="text-info space-bottom0 wordwrap" id="BdateOfBirth"></p>
+                                                                @Html.TextBoxFor(model => model.dateOfBirth, new { @class = "text-info tForBorder", @type = "text", id = "BdateOfBirth1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+
+                                                            <div class="col-sm-4">
+                                                                <label for="">Phone</label>
+                                                                <p class="text-info space-bottom0 wordwrap" id="Bphone"></p>
+                                                                @Html.TextBoxFor(model => model.phoneNo, new { @class = "text-info tForBorder", @type = "text", id = "Bphone1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="row-sm-3">
+                                                            <div class="col-sm-4">
+                                                                <label for="">Gender</label>
+                                                                <p class="text-info space-bottom0 wordwrap" id="Bgender"></p>
+                                                                @Html.TextBoxFor(model => model.gender, new { @class = "text-info tForBorder", @type = "text", id = "Bgender1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="">Relation</label>
+                                                                <p class="text-info space-bottom0 wordwrap textcap" id="Brelation"></p>
+                                                                @Html.TextBoxFor(model => model.relation, new { @class = "text-info tForBorder textcap", @type = "text", id = "Brelation1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                         
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" payer-information well-lg clearfix" id="payerinformation">
+                                        <div class="col-md-12">
+                                            <div class="btn-container" style="float:right">
+                                                <button id="finishing" type="button" class="btn btn-success">Finish</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- for Account Credit end here  -->
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="ajxModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-content" style="text-align:center;width:50%">
+        <div class="panel-heading panel-modal-heading">
+            MESSAGE
+        </div>
+        <div class="panel-body panel-modal-body">
+            <p id="ajxMsg"></p>
+            @Html.ActionLink("Okay", "Benefeciaries", "Benefeciary", new { @class="btn btn-success"})
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#btnSuccessOkay').click(function (e) {
+            $('#ajxModal').hide();
+        });
+
+        $('#finishing').click(function (e) {
+            var datos = $('#BeneConf').serialize();
+            ajxloadtoggle();
+            $.ajax(
+            {
+                async: true,
+                type: 'POST',
+                url: '@Url.Action("Submit","Benefeciary")',
+                data: datos,
+                //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                //dataType: 'html',
+                cache: false,
+                success: function (result) {
+                    $('#ajxModal').show();
+                    $('p#ajxMsg').html(result);
+                    ajxloadtoggle();
+                },
+                error: function (errMsg) {
+                    ajxloadtoggle();
+                    alert('Something went wrong while trying to process request. Please try again...');
+                }
+            });
+        });
+
+        $('#continueAdd').click(function () {
+            $('#BeneForm').validate();
+            if ($('#BeneForm').valid()) {
+                //alert($('#province').val());
+                //$('#beneficiaryPayCurrency').text($('#firstName').val());
+
+                $('#Bfname').text($('#firstName').val());
+                $('#Bmname').text($('#middleName').val());
+                $('#Blname').text($('#lastName').val());
+                $('#Bcity').text($('#city').val());
+                $('#Bprovince').text($('#province').val());
+                $('#Bcountry').text($('#country').val());
+                $('#BdateOfBirth').text($('#dateOfBirth').val());
+                $('#Bgender').text($('#rcvrgender').val());
+                $('#Bzipcode').text($('#zipcode').val());
+                $('#Brelation').text($('#relation').val());
+                $('#Bphone').text($('#phoneNo').val());
+                $('#Bstreet').text($('#street').val());
+
+                $('#Bfname1').val($('#firstName').val());
+                $('#Bfname1').val($('#firstName').val());
+                $('#Bmname1').val($('#middleName').val());
+                $('#Blname1').val($('#lastName').val());
+                $('#Bcity1').val($('#city').val());
+                $('#Bstreet1').val($('#street').val());
+               // $('#Bprovince1').val($('#province').val());
+                $('#Bcountry1').val($('#country').val());
+                $('#BdateOfBirth1').val($('#dateOfBirth').val());
+                $('#Bgender1').val($('#rcvrgender').val());
+                $('#Bzipcode1').val($('#zipcode').val());
+                $('#Brelation1').val($('#relation').val());
+                $('#Bphone1').val($('#phoneNo').val());
+                $('#BpaymentCurrency1').val($('#paymentCurrency').val());
+                $('#BreceptionMethod1').val($('#receptionMethod').val());
+                $('#Bcountry2').val($('#destinationCountry').val());
+                $('#rcvrEmail1').val($('#rcvrEmail').val());
+
+                //rcvrEmail
+
+                $('#add_newbeneficiarymain').hide();
+                $('#BeneInfo').show();
+            }
+            //$('#paymentmethod').val($('#receptionMethod').val());
+        });
+    });
+</script>

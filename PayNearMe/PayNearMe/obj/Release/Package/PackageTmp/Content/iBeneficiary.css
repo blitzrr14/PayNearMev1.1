@@ -1,0 +1,20 @@
+﻿body {
+}
+
+
+.tForBorder
+{
+    background-color:#ffffff;
+    border-color:#ffffff;
+    display: none;
+}
+
+.checkBox
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(1.3); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}

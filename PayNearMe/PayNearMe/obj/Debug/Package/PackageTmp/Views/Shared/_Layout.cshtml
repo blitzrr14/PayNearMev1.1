@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title style="font-weight: bold;">@ViewBag.Title - MLhuillier Online Remittance</title>
+    <link rel="shortcut icon" href="@Url.Content("~/Images/favicon.ico")" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Styles/cssBundle")
+    <script>
+        function ajxloadtoggle() {
+            if ($("#ml-ajx-load").hasClass("ajxloadhide")) {
+                $("#ml-ajx-load").removeClass("ajxloadhide");
+                $("#ml-ajx-load").addClass("ajxloadshow");
+            }
+            else {
+                $("#ml-ajx-load").removeClass("ajxloadshow");
+                $("#ml-ajx-load").addClass("ajxloadhide");
+            }
+        }
+    </script>
+</head>
+<body onload="noBack()" onpageshow="if (event.persisted) noBack();">
+   
+        <header class="navbar navbar-default  navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <img src="~/Images/logo_en.png" style="margin-bottom: 10px;padding-top: 10px;">
+                </div>
+
+                @if (ViewBag.Title != "Log In" && ViewBag.Title != "Sign Up" && ViewBag.Title != "Authenticate")
+                { 
+                    <div id="navbar-login">
+                        <div class="navbar-collapse collapse" style="height: 1px;">
+                            <ul class="nav navbar-nav">
+
+                                @if (ViewBag.Title != "Home") { 
+                                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                }
+
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Send Money <i class="fa fa-chevron-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Send Money", "Send", "Send")</li>
+                                        <li>@Html.ActionLink("Transaction History", "Transaction", "TransactionHistory")</li>
+                                        <li>@Html.ActionLink("Pending Transaction", "PendingTransaction", "PendingTransaction")</li>
+                                        <li>@Html.ActionLink("Beneficiaries", "Benefeciaries","Benefeciary")</li>
+                                       
+
+                                    </ul>
+
+                                </li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" aria-expanded="false">My Account <i class="fa fa-chevron-down"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Edit Profile", "Index", "Profile")</li>
+                                        <li>@Html.ActionLink("Change Password", "ChangePassword", "Profile")</li>
+                                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                                    </ul>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+        </header>
+    
+<div class="container">
+
+        <div class="modal" id="modal-inactivity" data-backdrop="static" data-keyboard="false">
+            <div class="modal-content" style="text-align:center;width:50%">
+                <div class="panel-heading panel-modal-heading">
+                    MESSAGE
+                </div>
+                <div class="panel-body panel-modal-body">
+                    <p>Your current session has expired. For your security, please Login again.</p>
+                    
+                    @Html.ActionLink("Okay", "sessionExpire", "Account", null, new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+            <div id="contentBody">
+                @RenderBody()
+            </div>
+    
+  
+    <div class="col-md-12 help-text">
+        <p class="" style="color:black">
+            Need Help? Email us at
+            <span style="text-decoration:underline; text-transform:none;">support@mlhuillierusa.com</span>
+            or call us at
+            <span style="text-decoration:underline; text-transform:none;"> (844) 456-2543 </span>
+        </p>
+    </div>
+</div>
+
+    <footer class="footer-r">
+        <div class="inner">
+            <p class="">&copy; @DateTime.Now.Year ─ <b>MLhuillier</b> Financial Services Inc. All rights reserved</p>
+        </div>
+    </footer>
+
+    <div id="ml-ajx-load" class="ajxloadhide"
+         style="position: absolute; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); top: 0px; color: white; font-weight: normal; font-size: 12px; transition-duration: 0.5s;">
+        <div style="position: absolute; top: 48%; left: 50%; width: 100px; height: 84px; margin: -42px 0 0 -50px;">
+            <img id="MLLogo-Ajax-Circle" src="~/Images/_CircleAjaxLoad.svg" style="user-select: none" />
+            <img id="MLLogo-Diamond" src="~/Images/_MLAjaxLoad.svg" style="user-select: none" />
+            <div style="text-align: center; user-select: none;">Please Wait...</div>
+        </div>
+    </div>
+
+</body>
+@RenderSection("scripts", required: false)
+@RenderSection("styes", required: false)
+</html>
+
+@if (ViewBag.Title != "Log In")
+{
+<script>
+// 5mins popup
+    $(document).ready(function () {
+             idleTime = 0;
+            $(document).ready(function () {
+                $limit = 300;
+
+                function timerIncrement() {
+                    idleTime = idleTime + 1;
+                    if (idleTime > $limit) { // 10 seconds
+                        $('#modal-inactivity').modal("show");
+                        idleTime = 0;
+                    }
+                }
+                // Increment the idle time counter every second.
+                var idleInterval = setInterval(timerIncrement, 1000); // 1 second
+
+                // Zero the idle timer on mouse movement.
+                $(this).mousemove(function (e) {
+                    idleTime = 0;
+                });
+                $(this).keypress(function (e) {
+                    idleTime = 0;
+                });
+            });
+            $(document).on({
+            "contextmenu": function(e) {
+                console.log("ctx menu button:", e.which);//writing to console
+                // Stop the context menu
+                e.preventDefault();
+             }});
+    });
+</script>
+}
+ 
+

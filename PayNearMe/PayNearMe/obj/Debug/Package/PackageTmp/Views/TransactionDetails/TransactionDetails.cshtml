@@ -1,0 +1,312 @@
+﻿@{
+    ViewBag.Title = "TransactionsDetails";
+}
+
+<div class="page-body dynamic-pages">
+    <div class="container">
+        <div class="page-desc transaction-detail">
+            <div class="page-title bg-info">
+                <h1><span class="title_icon"><img src="~/Images/edit-btn.png" height="46"> Transaction Detail</span> </h1>
+            </div>
+            <div class="layout-border">
+                <div class="transaction-detail__desc well-lg clearfix">
+                    <div class=" row-custom clearfix">
+                        <div class="col-sm-8">
+                            <div class="row">
+                                <div class=" form-group  form-horizontal clearfix">
+                                    <label for="" class="control-label col-md-4 col-sm-5">TRANSACTION NO</label>
+                                    <div class="col-md-5 col-sm-7">
+                                        <div class="transaction-no text-center">*********</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class=" form-group clearfix">
+                                <div class="transaction-status">
+                                    <div class="transaction-status__message">
+                                        <p>IN PROCESS</p>
+                                    </div>
+                                    <div class="transaction-status__date">30-Mar-17 01:16 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-custom clearfix">
+                        <div class="col-md-6">
+                            <div class="two-column-table">
+                                <h3>&nbsp;</h3>
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td class="table-data-label" style="width:170px;">Send Amount </td>
+                                            <td class="table-data-value text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-data-label">Service Fee</td>
+                                            <td class="table-data-value text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-data-label">Exchange Rate </td>
+                                            <td class="table-data-value text-right"></td>
+                                        </tr>
+                                        <tr class=" info">
+                                            <td class="table-data-label">Total Amount</td>
+                                            <td class="table-data-value text-right text-hilighted"><strong></strong></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="table-data-label ">Beneficiary Receives</td>
+                                            <td class="table-data-value text-right text-hilighted"><strong></strong> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="two-column-table  ">
+                                <h3> <span class="debit-card">Transaction Comments</span></h3>
+                                <div class="table  transaction-detail-comment">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" form-group clearfix">
+                        <div class="col-md-6">
+                            <div class="two-column-table remitter-information">
+                                <table class="table table-hover text-left">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2" class="table-data-label bg-info"><span class="table-data-value__spcl table__header-icon remitter-info-icon">Remitter Information</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="table-data-label" style="width:170px;">Name </td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="table-data-label">Sending Method         </td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td class="table-data-label">Address</td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="two-column-table beneficiary-information">
+                                <table class="table table-hover text-left space-bottom0">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2" class="table-data-label bg-info"><span class="table-data-value__spcl table__header-icon benef-icon-white">Beneficiary Information </span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="table-data-label" style="width:170px;">Name</td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="table-data-label">Reception Method</td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="table-data-label">Payer</td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td class="table-data-label">&nbsp;</td>
+                                            <td class="table-data-value">&nbsp;</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-offset-8 clearfix">
+                        <div class="btn-container">
+
+
+                            <button type="button" class="btn btn-success space-bottom1x">Print Receipt </button>
+
+                            <button type="button" class="btn btn-success space-bottom1x">Email Receipt </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    ViewBag.Title = "TransactionsDetails";
+}
+
+<div class="page-body dynamic-pages">
+    <div class="container">
+        <div class="page-desc transaction-detail">
+            <div class="page-title bg-info">
+                <h1><span class="title_icon"><img src="~/Images/edit-btn.png" height="46"> Transaction Detail</span> </h1>
+            </div>
+            <div class="layout-border">
+                <div class="transaction-detail__desc well-lg clearfix">
+                    <div class=" row-custom clearfix">
+                        <div class="col-sm-8">
+                            <div class="row">
+                                <div class=" form-group  form-horizontal clearfix">
+                                    <label for="" class="control-label col-md-4 col-sm-5">TRANSACTION NO</label>
+                                    <div class="col-md-5 col-sm-7">
+                                        <div class="transaction-no text-center">*********</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class=" form-group clearfix">
+                                <div class="transaction-status">
+                                    <div class="transaction-status__message">
+                                        <p>IN PROCESS</p>
+                                    </div>
+                                    <div class="transaction-status__date">30-Mar-17 01:16 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-custom clearfix">
+                        <div class="col-md-6">
+                            <div class="two-column-table">
+                                <h3>&nbsp;</h3>
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td class="table-data-label" style="width:170px;">Send Amount </td>
+                                            <td class="table-data-value text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-data-label">Service Fee</td>
+                                            <td class="table-data-value text-right"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-data-label">Exchange Rate </td>
+                                            <td class="table-data-value text-right"></td>
+                                        </tr>
+                                        <tr class=" info">
+                                            <td class="table-data-label">Total Amount</td>
+                                            <td class="table-data-value text-right text-hilighted"><strong></strong></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="table-data-label ">Beneficiary Receives</td>
+                                            <td class="table-data-value text-right text-hilighted"><strong></strong> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="two-column-table  ">
+                                <h3> <span class="debit-card">Transaction Comments</span></h3>
+                                <div class="table  transaction-detail-comment">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" form-group clearfix">
+                        <div class="col-md-6">
+                            <div class="two-column-table remitter-information">
+                                <table class="table table-hover text-left">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2" class="table-data-label bg-info"><span class="table-data-value__spcl table__header-icon remitter-info-icon">Remitter Information</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="table-data-label" style="width:170px;">Name </td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="table-data-label">Sending Method         </td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td class="table-data-label">Address</td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="two-column-table beneficiary-information">
+                                <table class="table table-hover text-left space-bottom0">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2" class="table-data-label bg-info"><span class="table-data-value__spcl table__header-icon benef-icon-white">Beneficiary Information </span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="table-data-label" style="width:170px;">Name</td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="table-data-label">Reception Method</td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="table-data-label">Payer</td>
+                                            <td class="table-data-value"></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td class="table-data-label">&nbsp;</td>
+                                            <td class="table-data-value">&nbsp;</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-offset-8 clearfix">
+                        <div class="btn-container">
+
+
+                            <button type="button" class="btn btn-success space-bottom1x">Print Receipt </button>
+
+                            <button type="button" class="btn btn-success space-bottom1x">Email Receipt </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

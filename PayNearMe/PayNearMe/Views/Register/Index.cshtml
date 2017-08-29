@@ -1,0 +1,467 @@
+﻿@model PayNearMe.Models.RegisterModel
+
+@{ ViewBag.Title = "Sign Up"; }
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+
+<div class="main-form">
+    <div class="page-title page-inner" style="background-color:#ff0000; color:#fff; margin-bottom: 0px;">
+        <span class="" style="font-size: 32px; font-weight: 500;">
+            Sign up
+        </span>
+    </div>
+
+    @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { id = "register-form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="layout-border clearfix" id="signup-data">
+            <div class="container">
+                <h2 style="margin-top: 0px; font-size: 24px; font-weight: 600;">Personal Information</h2>
+                <p>
+                    This service is currently available only for money transfers originated from California, USA.
+                </p>
+            </div>
+
+            <!--           server side error display start -->
+            <div class="form-group clearfix" id="errorMsgDivContainer" style="display: block;">
+                <div class="col-md-12 ">
+                    <div class="errorMsgDiv" style="color: red">
+                        <p class="duplicateUserMsg" id="duplicateUserMsg"></p>
+                        <p id="errorMsgDiv">
+                            @if (Model.errorMessage != "" || Model.errorMessage != String.Empty)
+                            {
+                                @Model.errorMessage
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--           server side error display end -->
+
+            <div class="col-md-12 form-group">
+                <div class="row">
+                    <div class="col-sm-2 ">
+                        <label>Email Address<span style="color:red;">*</span></label>
+                        @*@Html.LabelFor(model => model.data.emailAddress)*@
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="col-sm-12">
+                            <div class="has-feedback" id="passvalidate">
+                                @Html.TextBoxFor(model => model.data.UserID, new
+                                {
+                                    @class = "form-control",
+                                    @type = "email",
+                                    placeholder = "Email Address",
+                                    @maxlength = "50",
+                                    @autofocus = "",
+                                    @required = "required"
+                                })
+                                <span class="msgEmailError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                                @Html.ValidationMessageFor(model => model.data.UserID)
+                                <div id="msgdata_UserID" class="msgEmailError hidden"
+                                     style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="row">
+                    <div class="col-sm-2 ">
+                        <label>Password<span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <div class="has-feedback" id="passvalidate">
+                                @Html.TextBoxFor(model => model.data.Password, new { @maxlength = "20", @id = "password", @name = "password", @class = "form-control", placeholder = "Password", type = "password" })
+                                <span class="msgPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                                <div id="msgpassword" class="msgPassError hidden"
+                                     style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="has-feedback" id="confPassvalidate">
+                                @Html.TextBoxFor(model => model.data.Password, new { @maxlength = "20", @id = "confirm_password", @name = "password", @class = "form-control", placeholder = "Confirm Password", type = "password" })
+                                <span class="msgConfPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                                <div id="msgconfirm_password" class="msgConfPassError hidden"
+                                     style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Name<span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.data.firstName, new { @class = "form-control naming", @maxlength = "30", @minlength = "2", @type = "text", @placeholder = "First", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.data.firstName)
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="ph-sm" id="middlevalidate">
+                                @Html.TextBoxFor(model => model.data.middleName, new { @class = "form-control naming", @maxlength = "30", @type = "text", @placeholder = "Middle (Optional)" })
+                                @Html.ValidationMessageFor(model => model.data.middleName)
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="required-field-block has-feedback" id="lastvalidate">
+                                @Html.TextBoxFor(model => model.data.lastName, new { @class = "form-control naming", @maxlength = "30", @type = "text", @placeholder = "Last", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.data.lastName)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="col-md-12 form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Birth Date<span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="col-sm-5">
+                            <div class="has-feedback" id="validdob">
+                                @Html.TextBoxFor(model => model.data.BirthDate, new
+                                {
+                                    @class = "form-control",
+                                    @maxlength = "10",
+                                    @type = "text",
+                                    @placeholder = "mm/dd/yyyy",
+                                    @id = "birthdate",
+                                    @required = "required"
+                                })
+                                @Html.ValidationMessageFor(model => model.data.BirthDate)
+                                <span class="msgBDateError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                                <div id="msgbirthdate" class="msgBDateError hidden"
+                                     style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Mobile No.<span style="color:red;">*</span></label>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="has-feedback">
+                                <div class="input-group phone-number">
+                                    <div id="isdCodeId" class="input-group-addon has-feedback msgMobile">+1</div>
+                                    @Html.TextBoxFor(model => model.data.PhoneNo, new { @id = "cellPhone", @class = "form-control msgMobile", @maxlength = "10", @type = "text", @placeholder = "Phone", @required = "required" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.data.PhoneNo)
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div style="text-align: center;">
+                                    @Html.CheckBoxFor(model => model.data.sendSMS) Send SMS?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Gender<span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="col-sm-5">
+                            @Html.DropDownListFor(model => model.data.Gender,
+                            new List<SelectListItem>() { new SelectListItem { Value = "", Text = "--SELECT--"},
+                                                            new SelectListItem { Value = "Male", Text = "Male"},
+                                                            new SelectListItem { Value = "Female", Text = "Female"}
+                            }, new { @class = "form-control", @required = "required" })
+                        </div>
+                        <div class="col-sm-5">
+                            @Html.ValidationMessageFor(model => model.data.Gender)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="form-display-table-cell">
+                            <label for="">Address<span style="color:red;">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.data.Street, new { @class = "form-control textcap", @type = "text", @maxlength="120", @placeholder = "Street", @required = "required" })
+                            <span style="color:green">None PO. Box Address</span> <br />
+                            @Html.ValidationMessageFor(model => model.data.Street)
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.data.ZipCode, new { @id = "ZipCode", @class = "form-control", @type = "text", @placeholder = "Zip Code", @maxlength = "5", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.data.ZipCode)
+                            <div id="msgdata_zipcode" class="msgEmailError"
+                                 style="width: 100%; text-align: center; font-size: 14px; color: #ff000a;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-2">
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(model => model.data.City, new { @class = "form-control", @type = "text", @placeholder = "City", @maxlength = "60", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.data.City)
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.data.Country, new { @class = "form-control", @id = "country", @type = "text", @Value = "USA", @readonly = "true" })
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.data.State, new { @class = "form-control", style = "max-width: 100%;", @placeholder = "State", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.data.State)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.TextBoxFor(model => model.data.StateAbbr, new { @class = "form-control", style = "max-width: 100%; ", @readonly = "true" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label for="">ID<span style="color:red;">*</span></label>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="col-sm-4">
+                            @Html.DropDownListFor(model => model.data.IDType, Model.IDTypeDropDownList, new { @class = "form-control", @type = "text", @placeholder = "ID Type", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.data.IDType)
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.data.IDNo, new { @class = "form-control", @type = "text", @placeholder = "ID No", @maxlength = "20", @required = "required", @disabled = "true" })
+                            @Html.ValidationMessageFor(model => model.data.IDNo)
+                        </div>
+                        <div class="col-sm-2">
+                            <label>Expiry Date</label>
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(model => model.data.ExpiryDate, new { @class = "form-control", @type = "text", @placeholder = "mm/dd/yyy", @maxlength = "10", @required = "required", @disabled = "true" })
+                            @Html.ValidationMessageFor(model => model.data.ExpiryDate)
+                            <div id="msgdata_ExpiryDate" class="msgExpiryDateError hidden"
+                                 style="width: 100%; text-align: center; font-size: 12px; color: #ff000a; padding: 5px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* - Image Upload Modal Corner - *@
+            <div style="padding: 15px; position: relative;">
+                <button id="btnUpImg" type="button">
+                    Upload Image File
+                </button>
+                <i style="font-size: 13px; color: black;">attach image for profile portrait</i>
+
+                <div id="UpImgTray" class="modalUpImgHide">
+                    <div style="width: 450px; height: 294px">
+                        <div style="color: white; background-color: red; width: 100%; padding: 5px; position: relative;">
+                            Image Upload
+                            <button id="btnXImgUp" type="button" title="Cancel">
+                                x
+                            </button>
+                        </div>
+
+                        <div style="background-color: #e4efeb; padding: 10px;">
+                            <div id="divSelfPort" class="imgUpShow">
+                                <div style="border: 1px solid gray; padding-top: 4px; margin: 0px auto; display: block; height: 140px; width: 140px; position: relative;">
+                                    <img id="selfPortrait" src="../Images/glyphicon-user.PNG" style="max-width: 138px; max-height: 138px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 5px; overflow: hidden;"/>
+                                </div>
+                                <center>
+                                    <b>Self-portrait</b>
+                                    <input id="slfprt" type="file" name="slfprt" accept="image/*" style="border: 1px solid gray;">
+
+                                </center>
+                            </div>
+                            <div id="divValID1" class="imgUpHide">
+                                <div style="width: 49%; display: inline-block;">
+                                    <div style="border: 1px solid gray; padding-top: 4px; margin: 0px auto; display: block; height: 140px; width: 140px;">
+                                        <center>
+                                            <img id="selfPortrait1F" src="../Images/glyphicon-user.PNG" style="max-width: 128px; max-height: 135px; " />
+                                        </center>
+                                    </div>
+                                    Valid ID 1(front) - <i>optional</i>
+                                    <input id="slfprt1F" type="file" name="slfprt" accept="image/*" style="border: 1px solid gray; box-sizing:border-box; width: 100%;">
+                                </div>
+                                <div style="width: 49%; display: inline-block;">
+                                    <div style="border: 1px solid gray; padding-top: 4px; margin: 0px auto; display: block; height: 140px; width: 140px;">
+                                        <center>
+                                            <img id="selfPortrait1B" src="../Images/glyphicon-user.PNG" style="max-width: 128px; max-height: 135px; " />
+                                        </center>
+                                    </div>
+                                    Valid ID 1(back) - <i>optional</i>
+                                    <input id="slfprt1B" type="file" name="slfprt" accept="image/*" style="border: 1px solid gray; box-sizing:border-box; width: 100%;">
+                                </div>
+                            </div>
+                            <div id="divValID2" class="imgUpHide">
+                                <div style="width: 49%; display: inline-block;">
+                                    <div style="border: 1px solid gray; padding-top: 4px; margin: 0px auto; display: block; height: 140px; width: 140px;">
+                                        <center>
+                                            <img id="selfPortrait2F" src="../Images/glyphicon-user.PNG" style="max-width: 128px; max-height: 135px; " />
+                                        </center>
+                                    </div>
+                                    Valid ID 2(front) - <i>optional</i>
+                                    <input id="slfprt2F" type="file" name="slfprt" accept="image/*" style="border: 1px solid gray; box-sizing:border-box; width: 100%;">
+                                </div>
+                                <div style="width: 49%; display: inline-block;">
+                                    <div style="border: 1px solid gray; padding-top: 4px; margin: 0px auto; display: block; height: 140px; width: 140px;">
+                                        <center>
+                                            <img id="selfPortrait2B" src="../Images/glyphicon-user.PNG" style="max-width: 128px; max-height: 135px; " />
+                                        </center>
+                                    </div>
+                                    Valid ID 2(back) - <i>optional</i>
+                                    <input id="slfprt2B" type="file" name="slfprt" accept="image/*" style="border: 1px solid gray; box-sizing:border-box; width: 100%;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding: 5px 15px; position: absolute; bottom: 0px; width: 444px;">
+                            @*<button id="btnGoSelfPort" type="button" class="btnGoTo" style="background-color:tomato;">
+                            Self Portrait
+                        </button>
+                        <button id="btnGoValID1" type="button" class="btnGoTo" style="background-color: gray;">
+                            Valid ID 1
+                        </button>
+                        <button id="btnGoValID2" type="button" class="btnGoTo" style="background-color: gray;">
+                            Valid ID 2
+                        </button>*@
+                            <button id="btnvrfyImgs" type="button" class="btnGoTo" style="background-color: red; float: right;">
+                                CONFIRM
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                @*---------------------------------------*@
+
+            <div class="form-group clearfix">
+                <div class="col-md-12">
+                    <label id="termAndConditionNotSelect">&nbsp;</label>
+                    <p>
+                        <strong style="padding-top:0px;">
+                            By clicking on "Sign Up" you are hereby accepting MLhuillier's Users Agreement and Privacy Policy.
+                            @*<a class="page-link" href="javascript:void(0);" onclick="openUrlSecurityNewTab(this,'AggrementTermsAndConditionSignup.action?document=Signup')" data-useragree="@Url.Action("getServer","Register")">
+                            User Agreement
+                        </a> and
+                        <a class="page-link" href="javascript:void(0);" onclick="openUrlSecurityNewTab(this,'AggrementTermsAndConditionSignup.action?document=Privacy_Policy')" data-useragree="@Url.Action("getServer","Register")">
+                            Privacy Policy
+                        </a>.*@
+                        </strong>
+                    </p>
+                    <div id="MLpolicyAgreement" class="custom_checkbox optTermAndConditionRadioSpan" style="margin-bottom: 30px; display: table; position: relative; padding: 5px 0;">
+                        @*<input type="checkbox" name="privacyPolicyAgreement" id="privacyPolicyAgreement" style="display: table-cell; vertical-align: middle; width: 40px;">*@
+                        <div style="display: table-cell; width: 35px; vertical-align: top">
+                            <div id="displayPolicyTrigger"
+                                    style="height: 24px; width: 24px; border-radius: 12px; border: 1px solid red; cursor: pointer; position: absolute;">
+                                <span id="displayPolicyChecker" class="hidden" style="position: absolute; top: -6px; left: 3px; font-size: 26px; color: green; user-select: none;">✔</span>
+                                @Html.CheckBoxFor(model => model.privacyPolicyAgreement, new { @id = "privacyPolicyAgreement", @style = "display: none; width:40px", })
+                            </div>
+                        </div>
+                        <div style="display:table-cell;">
+                            <label for=" opttermandcondition" style="padding: 0px; text-align: justify;">
+                                I have read and agree to Mlhuillier’s Privacy Policy and Terms and Conditions and agree to receive electronic communications
+                                and to share my information with M Lhuillier.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <center>
+                    <div id="google-recaptcha" style="display: inline-block;">
+                        <div class="g-recaptcha" id="recaptcha" data-sitekey="6Ld_nRYUAAAAAFgzd-VYaiOODoUq6YA8BOhNoP0J"></div>
+                    </div>
+                </center>
+            </div>
+            <div class="col-md-12 clearfix">
+                <div class="send-money__steps-btn" style="text-align: right;">
+                    <button class="btn btn-red" id="btnSignUp" type="button" data-register="@Url.Action("Captcha","Register")">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="confirm-data" style="display:none">
+            <div class="container" style="padding-top: 30px;">
+                <div style="margin-bottom: 30px; display: table; width: 100%;">
+                    <div class="col-sm-10">
+                        <h4 style="margin-top: 0px; font-size: 22px; font-weight: 600;">Confirm Personal Information</h4>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="btnEdit-data" type="button" style="color: green; border: none; background: none; border-bottom: 1px solid green;">
+                            <span class="glyphicon glyphicon-edit" style="font-size: 24px;"></span>
+                            Edit
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        Email Address
+                    </div>
+                    <div class="col-sm-4">
+                        Name
+                    </div>
+                    <div class="col-sm-4">
+                        Date of Birth
+                    </div>
+                </div>
+                <div class="clearfix" style="color:red">
+                    <div class="col-sm-4">
+                        <p class="text-info" id="lbl-emailAddress"></p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-info textcap" id="lbl-Name"></p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-info" id="lbl-bDate"></p>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        Mobile No.
+                    </div>
+                
+                </div>
+
+                <div class="clearfix" style="color:red">
+                    <div class="col-sm-4">
+                        <p class="text-info" id="lbl-mobile"></p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-info" id="lbl-pCountry"></p>
+                    </div>
+                </div>
+                <div class="clearfix col-sm-offset-10 col-sm-2" style="text-align: left; margin-bottom: 10px;">
+                    <button class="btn-success btn" id="btnSubmitReg" style="width: 90px;" type="submit">Finish</button>
+                </div>
+            </div>
+        </div>
+    }
+    <div style="display: table; text-align: right; padding: 30px 0; background-color: #eee; width: 100%; padding: 15px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+        @Html.ActionLink("Go to Login Page", "Login", "Account") If you already have an account.
+    </div>
+</div>
+
+<div id="mainUIDisabler" class="imgUpHide">
+
+</div>
+
+<script>
+    $(document).ready(function ()
+    {
+        $('#register-form').on('keyup keypress', function (e) {
+            var keyCode = e.keyCode || e.which;
+            if (keyCode === 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+    })
+    
+</script>

@@ -1,0 +1,613 @@
+﻿@model PayNearMe.Models.BeneficiaryModel
+
+@{ ViewBag.Title = "Add Beneficiary"; }
+
+<div class="" id="bodySection" style="margin: 0 auto; width: 100%;">
+    <div class="page">
+        <div id="f1_upload_process" style="display: none"></div>
+        <div class="page-body dynamic-pages">
+            <div class="page-desc beneficiaries">
+                <div class="page-title bg-info">
+                    <h1> <span class="title__icon">Beneficiaries</span> </h1>
+                </div>
+                <div class="layout-border">
+
+                    <div id="add_newbeneficiarymain" style="">
+
+
+                        <div class=" step-content step-content__one" id="addbeneficiaryform" style="display: block;">
+                            <div class="add-new-benefi">
+                                <div class="page-title-secondry">
+                                    <div class="mar-adjust">
+                                        <div class="row">
+                                            <div class="col-md-12 hero-text-title">
+                                                <h2 id="beneHeadingMsg">Add New Beneficiary</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="divider hero-text-title--devider"></div>*@
+                                <div class="beneficiary-information well-lg clearfix">
+                                    @*<div class="col-md-12">
+                                            <h3>Beneficiary Information</h3>
+                                        </div>*@
+                                    <div class="col-md-12">
+                                        <div class="form-group clearfix" id="errorMsgDivContainer" style="display: none;">
+                                            <p class="errorMsgDiv" id="errorMsgDiv"></p>
+                                        </div>
+                                    </div>
+
+                                    @* ------------------N A M E --------------------*@
+                                </div>
+                                <div class="divider light-bg"></div>
+                                <form id="BeneForm">
+                                    <div class="beneficiary-information__sec-two  well-lg form-horizontal clearfix">
+                                        <div class="col-md-12 form-group">
+                                            <div class="row">
+                                                <div class="row-custom required-field clearfix">
+
+                                                    <div class="col-sm-2">
+                                                        <div class="form-display-table-cell">
+                                                            <label for="">Name</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <div class="required-field-block form-group has-feedback clearfix  ">
+                                                                    @Html.TextBoxFor(model => model.firstName, new { @class = "form-control", @type = "text", id = "firstName", @placeholder = "First Name", @required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.firstName)
+                                                                    <div class="required-icon" data-original-title="" title=""><div class="text">*</div></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <div class=" required-field-block form-group clearfix has-feedback required-field">
+                                                                    @Html.TextBoxFor(model => model.midlleName, new { @class = "form-control", @type = "text", id = "middleName", @placeholder = "Middle Name" })
+                                                                    @Html.ValidationMessageFor(model => model.midlleName)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <div class=" required-field-block form-group clearfix has-feedback required-field">
+                                                                    @Html.TextBoxFor(model => model.lastname, new { @class = "form-control", @type = "text", id = "lastName", @placeholder = "Last Name", @required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.lastname)
+                                                                    <div class="required-icon" data-original-title="" title=""><div class="text">*</div></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="row-custom required-field clearfix">
+                                                    <div class="col-sm-2">
+                                                        <div class="form-display-table-cell">
+                                                            <label for="">Address</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <div class="required-field-block form-group has-feedback clearfix  ">
+                                                                    @Html.TextBoxFor(model => model.street, new { @class = "form-control", @type = "text", id = "street", @placeholder = "Street", @required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.street)
+                                                                    <div class="required-icon" data-original-title="" title=""><div class="text">*</div></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="row">
+
+                                                            <div class="col-xs-12">
+                                                                <div class=" required-field-block form-group clearfix has-feedback required-field">
+                                                                    @Html.TextBoxFor(model => model.city, new { @class = "form-control", @type = "text", id = "city", @placeholder = "City", @required = "required" })
+                                                                    <div class="required-icon" data-original-title="" title=""><div class="text">*</div></div>
+                                                                    @Html.ValidationMessageFor(model => model.city)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <div class=" required-field-block form-group clearfix has-feedback required-field">
+                                                                    @Html.TextBoxFor(model => model.zipcode, new { @class = "form-control", @type = "text", id = "zipcode", @placeholder = "Zip Code", @required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.zipcode)
+                                                                    <div class="required-icon" data-original-title="" title=""><div class="text">*</div></div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-3 col-sm-offset-2">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class=" required-field-block form-group clearfix has-feedback required-field">
+                                                                @Html.TextBoxFor(model => model.country, new { @class = "form-control", @type = "text", id = "country", @placeholder = "Country", @required = "required" })
+                                                                <div class="required-icon" data-original-title="" title=""><div class="text">*</div></div>
+                                                                @Html.ValidationMessageFor(model => model.country)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="row-custom required-field clearfix">
+                                                    <div class="col-sm-2">
+                                                        <div class="form-display-table-cell">
+                                                            <label for="">Date Of Birth</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-10">
+                                                        <div class="row">
+                                                            <div class="col-xs-4">
+                                                                <div class="required-field-block form-group has-feedback clearfix  ">
+                                                                    @Html.TextBoxFor(model => model.dateOfBirth, new { @class = "form-control", @type = "text", id = "dateOfBirth", @placeholder = "mm/dd/yyyy", @required = "required", maxlength = "10" })
+                                                                    @Html.ValidationMessageFor(model => model.dateOfBirth)
+                                                                    <div id="msgdateOfBirth" class="msgBDateError hidden"
+                                                                         style="width: 100%; text-align: center; font-size: 14px; color: #b94a48; padding: 5px;">
+                                                                    </div>
+                                                                    <div class="required-icon" data-original-title="" title=""><div class="text">*</div></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="row-custom required-field clearfix">
+                                                    <div class="col-sm-2">
+                                                        <div class="form-display-table-cell">
+                                                            <label for="">Gender</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <div class="row">
+                                                            <div class="col-xs-4">
+                                                                <div class="required-field-block form-group has-feedback clearfix">
+                                                                    @Html.DropDownListFor(model => model.gender,
+                                                                                            new List<SelectListItem>() { new SelectListItem { Value = "", Text = "-- Select --"},
+                                                                                            new SelectListItem { Value = "Male", Text = "Male"},
+                                                                                                new SelectListItem { Value = "Female", Text = "Female"}},
+                                                                                            new { @class = "form-control", @required = "required", @id = "rcvrgender" })
+                                                                    @Html.ValidationMessageFor(model => model.gender)
+                                                                    <div class="required-icon" data-original-title="" title=""><div class="text">*</div></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="row-custom required-field clearfix">
+
+                                                    <div class="col-sm-2">
+                                                        <div class="form-display-table-cell">
+                                                            <label for="">Relation</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-10">
+                                                        <div class="row">
+                                                            <div class="col-xs-4">
+                                                                <div class="required-field-block form-group has-feedback clearfix  ">
+                                                                    @Html.TextBoxFor(model => model.relation, new { @class = "form-control", @type = "text", id = "relation", @placeholder = "Relation", @required = "required" })
+                                                                    @Html.ValidationMessageFor(model => model.relation)
+                                                                    <div class="required-icon" data-original-title="" title=""><div class="text">*</div></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!---Mobile fields--->
+
+                                            <div class="row">
+                                                <div class="row-custom  clearfix">
+                                                    <div class="col-sm-2">
+                                                        <div class="form-display-table-cell required-field">
+                                                            <label for="">Phone</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-10 clearfix">
+                                                        <div class="row">
+                                                            <div class="col-xs-4 col-sm-4 clearfix">
+                                                                <div class="form-group clearfix">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-addon has-feedback" id="isdCodeId">+63</div>
+                                                                        @Html.TextBoxFor(model => model.phoneNo, new { @class = "form-control", @type = "text", id = "phoneNo", @placeholder = "Phone Number", @required = "required", @maxlength = "10" })
+                                                                    </div>
+                                                                    @Html.ValidationMessageFor(model => model.phoneNo)
+                                                                    <div id="msgphoneNo" class="msgPhoneError hidden"
+                                                                         style="width: 100%; text-align: center; font-size: 14px; color: #b94a48; padding: 5px;">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            @*-----------    S M S     C H E C K    V A L I D A T I O N    ------------*@
+                                                            <div id="smsContainer" style="display: none; color: #b94a48;">
+                                                                <label for="">Please Input Phone Number!</label>
+                                                            </div>
+                                                            @*------------    S M S     C H E C K    V A L I D A T I O N    ------------*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="divider light-bg"></div>
+
+
+                                        @*---------- E M A I L   C O N T A I N E R --------------------*@
+
+                                        <div><div class="row-4"></div></div>
+                                        <div class="col-md-12 clearfix">
+                                            <div class="btn-container space-top2x" style="float:right">
+                                                <button type="button" class="btn btn-cancel" id="cancelAddBenefieryR">Cancel</button>
+                                                @* <button type="submit" class="btn btn-success" id="continue">Continue</button>*@
+                                                <button type="button" class="btn btn-success" id="continueAdd">Continue</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                        <!-- for payer selection  ADD BENE HERE-->
+                    </div>
+
+
+                    @*------------------------------------------------------- B E N E F I C I A R Y      I N F O -----------------------------------------------*@
+                    <div id="BeneInfo" style="display:none">
+                        <div id="" style="">
+                            @using (Html.BeginForm("Submit", "Beneficiary", FormMethod.Post, new { id = "BeneConf" }))
+                            {
+                            <!-- for payer selection  add bene here-->
+                                <div class="payer-selection" id="cashPickUpScren" style="">
+                                    <div class="beneficiary-information-edit well-lg clearfix">
+                                        <div class="col-md-12 clearfix">
+                                            <div class="row">
+                                                <div class="col-xs-10">
+                                                    <h1>Beneficiary Information</h1>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <button class="btn-link edit-btn pull-right" id="edit" type="button"><span class="edit-btn--icon"><span class="edit-btn--text">Edit</span></span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-11 col-xs-offset-1">
+                                                <div class="beneficiary-information-icon">
+                                                    <div class="form-group clearfix" style="font-size:16px">
+                                                        <div class="row-sm-3">
+                                                            <div class="col-sm-4">
+                                                                <label for="">Firstname</label>
+                                                                <p class="text-info space-bottom0  wordwrap" id="Bfname"></p>
+                                                                @Html.TextBoxFor(model => model.firstName, new { @class = "text-info tForBorder", @type = "text", id = "Bfname1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="">Middlename</label>
+                                                                <p class="text-info wordwrap" id="Bmname"></p>
+                                                                @Html.TextBoxFor(model => model.midlleName, new { @class = "text-info tForBorder", @type = "text", id = "Bmname1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="">Lastname</label>
+                                                                <p class="text-info wordwrap" id="Blname"></p>
+                                                                @Html.TextBoxFor(model => model.lastname, new { @class = "text-info tForBorder", @type = "text", id = "Blname1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row-sm-3">
+                                                            <div class="col-sm-4">
+                                                                <label for="">City</label>
+                                                                <p class="text-info space-bottom0  wordwrap" id="Bcity"></p>
+                                                                @Html.TextBoxFor(model => model.city, new { @class = "text-info tForBorder", @type = "text", id = "Bcity1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="">Country</label>
+                                                                <p class="text-info wordwrap" id="Bcountry"></p>
+                                                                @Html.TextBoxFor(model => model.country, new { @class = "text-info tForBorder", @type = "text", id = "Bcountry1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+
+                                                            <div class="col-sm-4">
+                                                                <label for="">Street</label>
+                                                                <p class="text-info wordwrap" id="Bstreet"></p>
+                                                                @Html.TextBoxFor(model => model.street, new { @class = "text-info tForBorder", @type = "text", id = "Bstreet1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="row-sm-3">
+                                                            <div class="col-sm-4">
+                                                                <label for="">Zipcode</label>
+                                                                <p class="text-info space-bottom0 wordwrap" id="Bzipcode"></p>
+                                                                @Html.TextBoxFor(model => model.zipcode, new { @class = "text-info tForBorder", @type = "text", id = "Bzipcode1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="">Date Of Birth</label>
+                                                                <p class="text-info space-bottom0 wordwrap" id="BdateOfBirth"></p>
+                                                                @Html.TextBoxFor(model => model.dateOfBirth, new { @class = "text-info tForBorder", @type = "text", id = "BdateOfBirth1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+
+                                                            <div class="col-sm-4">
+                                                                <label for="">Phone</label>
+                                                                <p class="text-info space-bottom0 wordwrap" id="Bphone"></p>
+                                                                @Html.TextBoxFor(model => model.phoneNo, new { @class = "text-info tForBorder", @type = "text", id = "Bphone1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="row-sm-3">
+                                                            <div class="col-sm-4">
+                                                                <label for="">Gender</label>
+                                                                <p class="text-info space-bottom0 wordwrap" id="Bgender"></p>
+                                                                @Html.TextBoxFor(model => model.gender, new { @class = "text-info tForBorder", @type = "text", id = "Bgender1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label for="">Relation</label>
+                                                                <p class="text-info space-bottom0 wordwrap" id="Brelation"></p>
+                                                                @Html.TextBoxFor(model => model.relation, new { @class = "text-info tForBorder", @type = "text", id = "Brelation1", @required = "required", @readonly = "readonly" })
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" payer-information well-lg clearfix" id="payerinformation">
+                                        <div class="col-md-12">
+                                            <div class="btn-container" style="float:right">
+                                                <button id="finishing" type="button" class="btn btn-success">Finish</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- for Account Credit end here  -->
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="ajxModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-content" style="text-align:center;width:50%">
+        <div class="panel-heading panel-modal-heading">
+            MESSAGE
+        </div>
+        <div class="panel-body panel-modal-body">
+            <p id="ajxMsg"></p>
+            @Html.ActionLink("Okay", "Benefeciaries", "Benefeciary", new { @class = "btn btn-success" })
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        var dateOfBirth;
+
+        $('#btnSuccessOkay').click(function (e) {
+            $('#ajxModal').hide();
+        });
+
+        $('#finishing').click(function (e) {
+            var datos = $('#BeneConf').serialize();
+            ajxloadtoggle();
+            $.ajax(
+            {
+                async: true,
+                type: 'POST',
+                url: '/benefeciary/submit',
+                data: datos,
+                cache: false,
+                success: function (result) {
+                    $('#ajxModal').show();
+                    $('p#ajxMsg').html(result);
+                    ajxloadtoggle();
+                },
+                error: function (errMsg) {
+                    alert('Something went wrong while trying to process request. Please try again...');
+                    ajxloadtoggle();
+                }
+            });
+        });
+
+
+        $('input#dateOfBirth')
+          .keydown(function (e) {
+              inputValid('dateOfBirth', 'msgBDateError')
+              var currentInput = $(this).val();
+              if ((!isNumber(e) && !isBackSpace(e) && !isArrowKeys(e) && !isTab(e) && !isDelete(e) && !isSelectAll(e))
+                  || ((e.keyCode == 48 || e.keyCode == 96) && currentInput.length == 1 && currentInput[0] == '0')
+                  || currentInput.length > 10)
+                  e.preventDefault();
+              else if ((currentInput.length == 2 || currentInput.length == 5) && !isBackSpace(e))
+                  $('input#dateOfBirth').val(currentInput + '/');
+          })
+          .focusout(function (e) {
+              var bDateVal = $(this).val();
+              dateOfBirth = false;
+
+              if (bDateVal == '') {
+                  inputInvalid('dateOfBirth', 'msgBDateError', '');//'Birth Date Required!');
+              }
+              else if (bDateVal[2] != '/' || bDateVal[5] != '/') {
+                  $(this).val('');
+                  inputInvalid('dateOfBirth', 'msgBDateError', 'Invalid date format');
+              }
+              else if (bDateVal.length < 10
+                    || parseInt(bDateVal.slice(0, 2)) > 12 //if month > 12
+                    || parseInt(bDateVal.slice(3, 5)) < 01 //if days < 01
+                    || parseInt(bDateVal.slice(3, 5)) > 31 //if days > 31
+                      ) {
+                  inputInvalid('dateOfBirth', 'msgBDateError', 'Invalid date format');
+              }
+              else if (parseInt((new Date().getFullYear()) -
+                       parseInt(bDateVal.slice(6))) < 18)
+              { inputInvalid('dateOfBirth', 'msgBDateError', 'You must be over 17 years old'); }
+              else if (parseInt((new Date().getFullYear()) -
+                       parseInt(bDateVal.slice(6))) > 200)
+              { inputInvalid('dateOfBirth', 'msgBDateError', 'Is this correct?'); }
+              else {
+                  inputValid('dateOfBirth', 'msgBDateError');
+                  dateOfBirth = true;
+              }
+          });
+
+
+        $('#continueAdd').click(function () {
+            if ($('#BeneForm').valid()) {
+                //alert($('#province').val());
+                //$('#beneficiaryPayCurrency').text($('#firstName').val());
+
+                $('#Bfname').text($('#firstName').val());
+                $('#Bmname').text($('#middleName').val());
+                $('#Blname').text($('#lastName').val());
+                $('#Bcity').text($('#city').val());
+                $('#Bprovince').text($('#province').val());
+                $('#Bcountry').text($('#country').val());
+                $('#BdateOfBirth').text($('#dateOfBirth').val());
+                $('#Bgender').text($('#rcvrgender').val());
+                $('#Bzipcode').text($('#zipcode').val());
+                $('#Brelation').text($('#relation').val());
+                $('#Bphone').text($('#phoneNo').val());
+                $('#Bstreet').text($('#street').val());
+
+                $('#Bfname1').val($('#firstName').val());
+                $('#Bfname1').val($('#firstName').val());
+                $('#Bmname1').val($('#middleName').val());
+                $('#Blname1').val($('#lastName').val());
+                $('#Bcity1').val($('#city').val());
+                $('#Bstreet1').val($('#street').val());
+                // $('#Bprovince1').val($('#province').val());
+                $('#Bcountry1').val($('#country').val());
+                $('#BdateOfBirth1').val($('#dateOfBirth').val());
+                $('#Bgender1').val($('#rcvrgender').val());
+                $('#Bzipcode1').val($('#zipcode').val());
+                $('#Brelation1').val($('#relation').val());
+                $('#Bphone1').val($('#phoneNo').val());
+                $('#BpaymentCurrency1').val($('#paymentCurrency').val());
+                $('#BreceptionMethod1').val($('#receptionMethod').val());
+                $('#Bcountry2').val($('#destinationCountry').val());
+                $('#rcvrEmail1').val($('#rcvrEmail').val());
+
+                //rcvrEmail
+
+                $('#add_newbeneficiarymain').hide();
+                $('#BeneInfo').show();
+            }
+            //$('#paymentmethod').val($('#receptionMethod').val());
+        });
+
+        $('#cancelAddBenefieryR').click(function ()
+        {
+           
+            $("#BeneficiaryMainId").show();
+            $("#addBenficiaryPartial").html('');
+            $("#addBenficiaryPartial").css("margin-top", "0px");
+        });
+
+        $('input[name^="checkboxForEmail"]').click(function (e) {
+            if ($(this).is(":checked")) {
+                $("#emailcontainer").show();
+                $("#emailAddress").focus();
+            }
+            else {
+                $("#emailcontainer").hide();
+            }
+        });
+
+        $('input[name^="checkboxForSms"]').click(function (e) {
+            if ($(this).is(":checked")) {
+                if ($('#phoneNo').val() == "") {
+                    $("#smsContainer").show();
+                    $('#phoneNo').css({ "border-color": "#b94a48", "box-shadow": "none" });
+                }
+            } else {
+                $('#phoneNo').css({ "border-color": "#ccc" });
+                $("#smsContainer").hide();
+            }
+        });
+
+        $('input#zipcode')
+        .keydown(function (e) {
+            if ((!isNumber(e) && !isBackSpace(e) && !isArrowKeys(e) && !isTab(e) && !isDelete(e) && !isSelectAll(e))
+                || ($(this).val().length > 9 && !isBackSpace(e)))
+                e.preventDefault();
+        })
+        .focusout(function () {
+            if ($(this).val() == "") {
+                $(this).css({ "border-color": "#b94a48", "box-shadow": "none" });
+                zipcode = false;
+            }
+            else {
+                $(this).css({ "border-color": "#ccc" });
+                zipcode = true;
+            }
+        });
+
+        $('input#rcvrEmail')
+      .keydown(function (e) {
+          inputValid('rcvrEmail', 'msgEmailError');
+          if ((e.shiftKey && (e.keyCode == 50 || e.keyCode == 189))   
+             || !e.shiftKey && (e.keyCode == 110 || e.keyCode == 190)) 
+              return;
+          else if (isPaste(e) || (!isLetter(e) && !isNumber(e) && !isArrowKeys(e) && !isBackSpace(e) && !isDelete(e) && !isTab(e)))
+              e.preventDefault();
+      })
+      .focusout(function (e) {
+          var currInput = $(this).val(),
+                atIndex = currInput.indexOf('@@'),
+            checkDomain = currInput.slice(atIndex),
+            checkDomDot = checkDomain.indexOf('.');
+
+          if (currInput == '') {
+              email = false;
+              inputInvalid('rcvrEmail', 'msgEmailError', '');
+          }
+          else if (atIndex == -1 || atIndex == 0 || checkDomDot < 2         
+                 || currInput.split('').reverse().join('').indexOf('.') < 2) { 
+              inputInvalid('rcvrEmail', 'msgEmailError', 'E-mail Address is not valid');
+              email = false;
+          }
+          else {
+              inputValid('rcvrEmail', 'msgEmailError');
+              email = true;
+          }
+      });
+
+
+        $('#edit').click(function () {
+            $('#BeneInfo').hide();
+            $('#add_newbeneficiarymain').show();
+        });
+
+
+    });
+</script>

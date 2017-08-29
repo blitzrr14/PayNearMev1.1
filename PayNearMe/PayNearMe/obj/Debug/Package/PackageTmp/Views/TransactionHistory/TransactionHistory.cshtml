@@ -1,0 +1,239 @@
+﻿@model PayNearMe.Models.PendingTransaction
+@{
+    ViewBag.Title = "TransactionsctionHistory";
+}
+
+
+@using (Ajax.BeginForm("Transaction", "TransactionHistory", new AjaxOptions { HttpMethod = "Post" }))
+{
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title></title>
+        @*<script src="js/jquery-1.9.1.js"></script>
+            <script type="text/javascript" src="js/jquery.freezeheader.js"></script>
+            <script language="javascript" type="text/javascript">*@
+        @*$(document).ready(function () {
+                $("#table1").freezeHeader({ 'height': '250px' });
+                $("#table2").freezeHeader();
+                $("#tbex1").freezeHeader();
+                $("#tbex2").freezeHeader();
+                $("#tbex3").freezeHeader();
+                $("#tbex4").freezeHeader();
+            })*@
+        @*</script>*@
+    </head>
+    <body>
+
+
+
+
+        <div class="page-body dynamic-pages">
+            <div class="container">
+                <div class="page-desc transaction-history">
+                    <div class="page-title bg-info">
+                        <h1> <span class="title__icon">Transaction History</span> </h1>
+                    </div>
+                    <div class="layout-border">
+                        <div class="transaction-history__desc well-lg clearfix">
+                            <form id="SearchCriteriaUsingDTAction" name="SearchCriteriaUsingDTAction">
+                                <div class="form-group clearfix">
+                                    <div class="col-md-6">
+                                        <div class="form-group row clearfix">
+                                            <div class="col-sm-4 ">
+                                                <div class="form-display-table-cell ">
+                                                    <label for="inputSuccess2">Transaction Number</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+
+
+                                                @Html.TextBoxFor(Model => Model.kptn, new { @class = "form-control block", @type = "text", @id = "block" })
+                                                @*<input type="text" id="block" class="form-control"/>*@
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row clearfix">
+                                            <div class="col-sm-4">
+                                                <div class="form-display-table-cell ">
+                                                    <label for="inputSuccess2">Beneficiary</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+
+
+                                                @*<select name="BeneficiarySelection" class="form-control">
+                                                        <option value="-1">-- Select --</option>
+                                                        <option value="HANNA - M Lhuillier CashPickup">HANNA - M Lhuillier CashPickup</option>
+                                                        <option value="RicRyan - M Lhuillier CashPickup">RicRyan - M Lhuillier CashPickup</option>
+                                                    </select>*@
+
+                                                @*@Html.DropDownList("List", Model.benelist.ToString())*@
+                                                @*@Html.DropDownList("","");*@
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row clearfix">
+                                            <div class="col-sm-4">
+                                                <div class="form-display-table-cell ">
+                                                    <label for="inputSuccess2">Transaction Status</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+
+
+                                                <select name="Tx_Status" id="Tx_Status" class="form-control">
+                                                    <option value="-1">-- Select --</option>
+                                                    <option value="PAID">PAID</option>
+                                                    <option value="VOID">VOID</option>
+                                                </select>
+
+
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-md-offset-1">
+                                        <div class="date-range well hero-text-title">
+                                            <h5 class="space-bottom2x">Date Range</h5>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-6">
+                                                    <div class="custom_radio ">
+                                                        <input type="radio" id="id-this-week" name="This">
+                                                        <label for="id-this-week"> <span class="radio"></span> <span class="radio-text">This Week</span></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+
+
+                                                    <div class="custom_radio ">
+                                                        <input type="radio" id="id-last-week" name="This">
+                                                        <label for="id-last-week"> <span class="radio"></span> <span class="radio-text">Today</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-6">
+                                                    <div class="custom_radio">
+                                                        <input type="radio" id="id-this-month" name="This">
+                                                        <label for="id-this-month"> <span class="radio"></span> <span class="radio-text">This Month</span></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="custom_radio ">
+                                                        <input type="radio" id="id-last-month" name="This">
+                                                        <label for="id-last-month"> <span class="radio"></span> <span class="radio-text">Last Month</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-6">
+                                                    <div class="custom_radio last">
+                                                        <input type="radio" id="id-no-date-range" name="This">
+                                                        <label for="id-no-date-range"> <span class="radio"></span> <span class="radio-text">No Date Range</span></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="custom_radio last">
+                                                        <input type="radio" id="id-between-dates" name="This">
+                                                        <label for="id-between-dates"> <span class="radio"></span> <span class="radio-text">Between Dates</span></label>
+                                                    </div>
+                                                </div>
+                                                <div class="between-dates-open form-horizontal clearfix" style="display: none;">
+                                                    <div class="col-sm-6 between-dates--left">
+                                                        <label class="control-label col-sm-4">From</label>
+                                                        <div class="col-sm-8">
+                                                            <div class="">
+                                                                <input name="enter_from_date" type="text" id="enter_from_date" maxlength="10" placeholder=" mm/dd/yyyy" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 between-dates--right">
+                                                        <label class="control-label col-sm-4">To</label>
+                                                        <div class="col-sm-8">
+                                                            <div class="">
+                                                                <input name="enter_to_date" type="text" id="enter_to_date" maxlength="10" placeholder=" mm/dd/yyyy" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-group clearfix">
+                                <div class="col-md-offset-9 clearfix">
+                                    <div class="btn-container">
+                                        <button type="button" class="btn btn-reset ">Reset</button>
+                                        <button class="btn btn-success search-btn">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="transaction-history-table">
+                                <div class="col-md-12 clearfix">
+                                    <div class="search-result well">
+                                        <p class="space-bottom0">
+                                            @Html.DisplayFor(Model => Model.Count) Items Found. Displaying all items
+                                        </p>
+                                    </div>
+
+                                    <table id="table1" class="responsive-table table text-center space-bottom0">
+                                        <thread>
+                                            <tr>
+                                                <th bgcolor="#ff000a"><b>KPTN</b></th>
+                                                <th bgcolor="#ff000a"><b>Control Number</b></th>
+                                                <th bgcolor="#ff000a"><b>Date</b></th>
+                                                <th bgcolor="#ff000a"><b>First Name</b></th>
+                                                <th bgcolor="#ff000a"><b>Last Name</b></th>
+                                                <th bgcolor="#ff000a"><b>Amount</b></th>
+                                                <th bgcolor="#ff000a"><b>Status</b></th>
+                                            </tr>
+                                        </thread>
+                                        <tbody>
+
+
+                                            @for (int i = 0; i < Model.table.Rows.Count; i++)
+                                            {
+                                                <tr class="gridAlternada">
+                                                    <td>@Model.table.Rows[i][0].ToString()</td>
+                                                    <td>@Model.table.Rows[i][1].ToString()</td>
+                                                    <td>@Model.table.Rows[i][2].ToString()</td>
+                                                    <td>@Model.table.Rows[i][3].ToString()</td>
+                                                    <td>@Model.table.Rows[i][4].ToString()</td>
+                                                    <td>@Model.table.Rows[i][5].ToString()</td>
+                                                    <td>@Model.table.Rows[i][6].ToString()</td>
+                                                </tr>
+                                            }
+                                            @*</tbody>*@
+                                        </tbody>
+                                    </table>
+
+
+                                    <div class="col-md-offset-9 space-top1x">
+                                        <div class=" btn-container">
+                                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-download-alt"></span> Download pdf </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+}
+
+

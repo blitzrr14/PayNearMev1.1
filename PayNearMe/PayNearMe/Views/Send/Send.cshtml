@@ -1,0 +1,487 @@
+﻿@model PayNearMe.Models.SendModel
+@{
+    ViewBag.Title = "Send";
+}
+
+
+<div class="page">
+    <div id="f1_upload_process" style="display: none"></div>
+    <!-- including body part -->
+
+    <div class="page-body">
+        <div class="container">
+            <!--Send Money page Title-->
+           
+            <div class="page-title hero-text-info">
+                <h1>
+                    <span class="page-title__icon"> <img class="img-responsive" alt="hero-text-icon" src="../Images/hero-text-icon.png"> </span>
+                    <span class="page-title__cont text-info">Send Money</span>
+
+                </h1>
+                <div>
+                    <p style="color:red;font-size:20px">@Model.Error</p>
+            
+                </div>
+            </div>
+            <!--Send Money page Title End-->
+            <div class="page-desc">
+                <!--Send Money Steps-->
+                <div class="send-money-steps">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <!-- Step 1 -->
+                        <div class="panel panel-default step-one">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h2 class="panel-title " id="step1">
+                                    <a id="beneficiarybodytitle" role="button" data-toggle="collapse" data-parent="#accordion" href="#beneficiarybody" aria-expanded="true" aria-controls="beneficiarybody">
+                                        <span class="steps-title active">
+                                            <span class="step-icon ">Beneficiary</span>
+                                            <span class="step-counter">
+                                                Step 1  <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" id="iconchange">
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </h2>
+                            </div>
+                            <div id="beneficiarybody" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                   
+                                    <div id="BeneficiaryMainId">
+                                        <div class="vertical-devider select-beneficiary" id="defaultbeneficiary">
+                                            <div class="col-md-6 ">
+                                                <div class="form-group mar-adjust">
+                                                    <div class="row">
+                                                        <div class="col-xs-6  col-md-5 ">
+                                                            <label class="control-label">Exchange Rate</label>
+                                                        </div>
+                                                        <div class="col-xs-6  col-md-7 curency-container">
+                                                            <div class="text-highlight  text-right exchangeRate">
+                                                                1 USD = @Model.trans.ExchangeRate PHP
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mar-adjust">
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <div class="form-display-table-cell">
+                                                                <label class="">Beneficiary</label>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            @Html.DropDownList("receiverName", Model.beneficiarylist, new { @class = "form-control", @required = "required", @id = "beneId" })
+                                                            <div class="beneficiary-btn-cont">
+                                                                @*<button class="btn btn-link add-beneficiary--btn" onclick="showBeneficiaryForm();"><span class="add-beneficiary--icon">Add New Beneficiary</span></button>*@
+                                                                <button class="btn btn-link add-beneficiary--btn" id="beneficiaryformR"><span class="add-beneficiary--icon">Add New Beneficiary</span> </button>
+                                                            </div>
+                                                            <div class="beneficiary-btn-cont" id="AdditionalField"></div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mar-adjust currency-detail">
+                                                    <div class="row clearfix">
+                                                        <div class="col-xs-5 currency-detail--left">
+                                                            <label for="usd" class=" label-small">Send Amount</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBoxFor(model => model.trans.Principal, new { @class = "form-control ", @id = "sendingAmount", @styles = "text-align:left;", @type = "number", @onKeyPress = "if(this.value.length==7) return false;" })
+                                                                @Html.ValidationMessageFor(model => model.trans.Principal)
+                                                                <div class="input-group-addon" id="usd">USD</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-2 currency-detail--mid">
+                                                            <label for="usd">&nbsp;</label>
+                                                            <div class="equal-sign text-center ">=</div>
+                                                        </div>
+                                                        <div class="col-xs-5 currency-detail--right">
+                                                            <label for="received" class="label-small">Beneficiary Receives</label>
+                                                            <div class="input-group">
+                                                                @Html.TextBoxFor(model => model.trans.POAmountPHP, new { @class = "form-control", @id = "recipientReceivestextId", @maxlength = "7", @styles = "text-align:left;", @type = "number", @readonly = "true" })
+                                                                <div class="input-group-addon" id="exchangeCurrency">PHP</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mar-adjust clearfix">
+                                                    <div class="row">
+                                                        <div class="col-md-12 ">
+                           
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mar-adjust clearfix">
+                                                    <div class="col-sm-12">
+                                                        <p class="small text-right">
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class=" mar-adjust clearfix">
+                                                    <div class="row">
+                                                        <div class="two-column-table table-value-right">
+                                                            <h3>Transfer Summary</h3>
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="table-data-label text-left" colspan="2">
+                                                                            <span class="table-data-label__spcl benef-icon-blue"> To:</span><span class="table-data-value__spcl bold-text" id="beneName"> </span>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="table-data-label">Send Amount</td>
+                                                                        <td class="table-data-value" id="youRSend"><span id="sendtext"></span> USD</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="table-data-label">Charge</td>
+                                                                        <td class="table-data-value bold-text" id="sFee"><span id="serviceFee"></span> USD</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="table-data-label">Exchange Rate </td>
+                                                                        <td class="table-data-value exchangeRate" id="exRate">
+                                                                            <div>1 USD = <span id="exchangeRate1">@Model.trans.ExchangeRate</span> PHP</div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr class=" info">
+                                                                        <td class="table-data-label bold-text">Total</td>
+                                                                        <td class="table-data-value bold-text" id="totalAmt"><span id="totAmount"></span> USD</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="table-data-label">Beneficiary Receives</td>
+                                                                        <td class="table-data-value" id="RecipientReceives"> <span id="recieve"> </span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="table-data-label">Payer</td>
+                                                                        <td class="table-data-value" id="payerStep1">MLHUILLIER</td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="send-money__steps-btn">
+                                                                <button class="btn btn-success" type="button" id="continue1">Continue</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <!-- Beneficiary Form -->
+
+                                    </div>
+                                </div>
+                                <div id="addBenficiaryPartial">
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+
+                @using (Html.BeginForm("Submit", "Send", FormMethod.Post, new { id = "SendOrder" }))
+                {
+                    @Html.AntiForgeryToken()
+                        <div class="panel panel-default step-three">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                                <h2 class="panel-title step-three" id="step3">
+                                    <a id="confirmationtitle" class="collapsed"  data-parent="#accordion" href="#confirmationbody" aria-expanded="false" aria-controls="confirmationbody">
+                                    @*<a id="confirmationtitle">*@
+                                        <span class="steps-title">
+                                            <span class="step-icon ">Confirmation </span>
+                                            <span class="step-counter">
+                                                Step 2  <span class="glyphicon glyphicon-chevron-down" aria-hidden="true">
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </a>
+                                </h2>
+                            </div>
+                            <div id="confirmationbody" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body">
+                                    <div id="confirmationMainDivId">
+                                        <div class="step-three__confirmation-message" id="holdTransactionMsgDiv">
+                                          @*//  <span class="glyphicon glyphicon-remove" aria-hidden="true" onclick="$(this).parent().hide();"></span>*@
+                                            <p id="holdTransactionMsg">Please pay this transaction at 7-Eleven before 11:59PM today. This transaction becomes invalid if not paid by 11:59PM</p>
+                                        </div>
+                                        <div class="step-three__receipt-header clearfix">
+                                            <h4 class="space-top2x text-center">This Is Not A Receipt</h4>
+                                            <div class="mar-adjust clearfix">
+                                                <div class="row">
+                                                    <div class="col-sm-3 hide">
+                                                    </div>
+                                                    <div class="col-sm-9 col-sm-offset-3">
+                                                        <div class="step-three__receipt-date">
+                                                            <p>
+                                                                Date : @DateTime.Now
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="vertical-devider">
+                                            <div class="col-md-6 ">
+                                                <div class="mar-adjust clearfix">
+                                                    <div class="row">
+                                                        <div class="two-column-table table-value-right">
+                                                            <h3><span class="pre-receipt__icon">Pre-Receipt</span></h3>
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th class="table-data-label text-left">Concept</th>
+                                                                        <th class="table-data-value">Amount</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="table-data-label">Send Amount</td>
+                                                                        <td class="table-data-value">@Html.TextBoxFor(model => model.trans.Principal, "0.0", new { @id = "confirmSendingAmount", @style = "text-align:right;border:none", @readonly = "true" }) USD</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="table-data-label">Service Fee</td>
+                                                                        <td class="table-data-value" id="transferFeeStep3">@Html.TextBoxFor(model => model.trans.Charge, new { @id = "confirmSendingCharge", @style = "text-align:right;border:none", @readonly = "true" }) USD</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="table-data-label">Exchange Rate </td>
+                                                                        <td class="table-data-value" id="eRateStep3">@Html.TextBoxFor(model => model.trans.ExchangeRate, new { @Value = Model.trans.ExchangeRate, @id = "exchangeRate", @style = "text-align:right;border:none", @readonly = "true" }) PHP</td>
+                                                                    </tr>
+                                                                    <tr >
+                                                                        <td class="table-data-label bold-text">Total</td>
+                                                                        <td class="table-data-value bold-text">@Html.TextBoxFor(model => model.trans.Total, "0.00", new { @id = "confirmSendingTotal", @style = "text-align:right;border:none", @readonly = "true" }) USD</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td class="table-data-label">Beneficiary Receives</td>
+                                                                        <td class="table-data-value">@Html.TextBoxFor(model => model.trans.POAmountPHP, new { @id = "amountPO", @style = "text-align:right;border:none" }) PHP</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group clearfix">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <p id="promoCodeErrorShowDivId"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="step-three__contact-info">
+                                                        <div class="row">
+                                                            <ul class=" clearfix">
+                                                                <li class="query-icon"></li>
+                                                                <li class="text-highlight"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Tel: (888) 872 5317</li>
+                                                             
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class=" mar-adjust clearfix">
+                                                    <div class="row">
+                                                       
+                                                        <div class="two-column-table table-value-right">
+                                                            <h3>
+                                                                <span class="benef-icon-green">Beneficiary Information</span>
+                                                            </h3>
+                                                            <table class="table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="table-data-label">Beneficiary Name</td>
+                                                                        <td class="table-data-value bold-text">@Html.TextBox("Name", "", new { @id = "beneNameStep3", @style = "text-align:right;border:none", @class = "col-md-12", @readonly = "true" })</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="table-data-label">Address </td>
+                                                                        <td class="table-data-value bold-text">@Html.TextBox("Address", "", new { @id = "beneAddressStep3", @style = "text-align:right;border:none", @class = "col-md-12", @readonly = "true" })</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="table-data-label col-md-4">Phone Number</td>
+                                                                        <td class="table-data-value bold-text">@Html.TextBox("PhoneNo", "", new { @id = "benePhoneStep3", @style = "text-align:right;border:none", @class = "col-md-12", @readonly = "true" })</td>
+                                                                    </tr>
+                                                                    <tr class="">
+                                                                        <td class="table-data-label">Payer</td>
+                                                                        <td class="table-data-value bold-text" id="payerNameStep3">MLHUILLIER</td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                            @*<div>@Html.HiddenFor(model => model.sendercustid, new { @id = "sendercustid", @Value = Model.sendercustid })</div>*@
+                                                            <div>@Html.HiddenFor(model => model.receiver, new { @id = "receiverCustID" })</div>
+                                                            <div class="send-money__steps-btn" style="text-align:right">
+                                                                <button data-style="slide-left" class="btn btn-success" id="sendoutOrderConfirm" type="button">
+                                                                    <span class="ladda-label">Confirm Transaction</span>
+                                                                  
+                                                                </button>
+                                                                <button class="btn btn-success" id="editSendout" type="button" style="margin-left:20px">
+                                                                    <span class="ladda-label">Edit Transaction</span>
+
+                                                                </button>
+                                                            </div>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+
+
+                                        </div>
+                                    </div>
+                                    <!--Confirmation Reciept-->
+                                   
+                                </div>
+                            </div>
+                        </div>
+                }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+  
+   
+    <div id="myModalSuccess" class="modal">
+
+
+        @*<div class="modal-header"></div>*@
+        <div class="modal-content">
+
+            <div class="panel-heading panel-modal-heading">
+                SUCCESS
+               @*<span style="font-size:inherit" class="close" id="closeModal">&times;</span>*@
+            </div>
+            <div class="panel-body panel-modal-body">
+                <span style="font-size:15px">Your order was sucessfully created! Click the button below to view your PayNearMe PayCode.</span>
+                <br />
+                <br />
+                <span style="font-size:15px">To complete your payment, take the PayCode to the nearest participating <a href="http://www.paynearme.com/en/payment-locations/?site_identifier=@Model.siteIdentifier" target="_blank">7-Eleven location</a>, hand it to the cashier, and tell them you want to "make a cash payment" for <span id="amountSuccess"> </span> USD.</span>
+                <br />
+                <br />
+                <span style="font-size:15px">The cashier will process the transaction and hand you a receipt.</span>
+                <br />
+                <br />
+                <a id="linkPNM" href="" target="_blank" style="color:blue"><img src=" ~/images/paynearme%20web%20button_7-11.png" style="width:200px;height:50px;border:0;"></a>
+                <br />
+                <br />
+              
+            </div>
+
+        </div>
+        @*<div class="modal-footer"></div>*@
+
+    </div>
+
+    <div id="myModalFailed" class="modal">
+
+
+        @*<div class="modal-header"></div>*@
+        <div class="modal-content">
+
+            <div class="panel-heading panel-modal-heading">
+                FAILED
+                @*<span style="font-size:inherit" class="close" id="closeModal">&times;</span>*@
+            </div>
+            <div class="panel-body panel-modal-body" style="text-align:center">
+                <span style="font-size:15px" id="contentFail"></span>
+                <br />
+                <br />
+                <span style="align-content:center">@Html.ActionLink("Okay", "Send", "Send", new { @class="btn btn-success"})</span>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#beneficiaryformR").click(function ()
+        {
+            ajxloadtoggle();
+            $.ajax({
+                url: '@Url.Action("AddBeneficiary", "Benefeciary")',
+                type: 'POST',
+                success: function (data) {
+
+                    $("#addBenficiaryPartial").html(data);
+                    $("#addBenficiaryPartial").css("margin-top", "-70px");
+                    $("#BeneficiaryMainId").hide();
+                    ajxloadtoggle();
+                },
+                error: function (response) {
+                    errModal("There was a problem on your request, please try again! Thank You!");
+                    ajxloadtoggle();
+                }
+            });
+        });
+
+        $("#sendoutOrderConfirm").click(function () {
+            ajxloadtoggle();
+            var model = $("#SendOrder").serialize();
+            $.ajax({
+                url: '@Url.Action("Submit", "Send")',
+                type: 'POST',
+                data: model,
+                success: function (data) {
+                   
+                    if (data.respcode == "ok") {
+                        successModal(data.trackingUrl,data.amount);
+                    }
+                    else
+                    {
+                        failModal(data.message);
+                     
+                    }
+                    ajxloadtoggle();
+
+                },
+                error: function (response) {
+                    failModal("There was a problem on your request, please try again! Thank You!");
+                    ajxloadtoggle();
+                }
+            });
+        });
+
+        $("#editSendout").click(function ()
+        {
+            $('#beneficiarybody').slideDown();
+            $('#confirmationbody').slideUp();
+        });
+
+        $("#linkPNM").click(function ()
+        {
+            
+            window.location.href = '@Url.Action("Send", "Send")';
+        });
+    
+    });
+    function errModal(message) {
+        $("#modContent").html(message);
+        $("#myModal").show();
+    }
+
+    function successModal(trackingURL,amount)
+    {
+        $("#linkPNM").attr("href", trackingURL);
+        $("#myModalSuccess").show();
+        $("#amountSuccess").text(amount);
+    }
+
+    function failModal(message) {
+        $("#contentFail").html(message);
+        $("#myModalFailed").show();
+    }
+</script>

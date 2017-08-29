@@ -1,0 +1,212 @@
+﻿@model PayNearMe.Models.BenefeciariesModel
+@{
+    ViewBag.Title = "Benefeciaries";
+}
+
+<html>
+<body style="min-width: 590px;">
+
+    <div class="" id="bodySection" style="margin: 0 auto; width: 100%;">
+        <div class="page">
+            <form action="sessionExpired.action" id="sessionExpired" name="sessionExpired" method="POST"></form>
+            <div id="f1_upload_process" style="display: none"></div>
+            <div class="page-body dynamic-pages">
+                <div class="page-desc beneficiaries">
+                    <div class="page-title bg-info">
+                        <h1> <span class="title__icon">Beneficiaries</span> </h1>
+                    </div>
+
+                   
+
+                    <div class="layout-border">
+
+                        @if (Session["ErrorMessage"] != null)
+                        {
+                            <br />
+                            <div>
+                                <h6> <span class="title__icon" style="color:red">@Session["ErrorMessage"].ToString()</span> </h6>
+                            </div>
+
+                            @(Session["ErrorMessage"] = null)
+
+                        }
+
+                        <div class="beneficiaries-list well-lg clearfix" id="BeneList" style="display: block;">
+
+                            <div class=" form-group clearfix">
+                                <div class="col-md-6">
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div style="float:right">
+                                        <span class="add-beneficiary--icon"></span>
+                                        @Html.ActionLink("Add New Benefeciary", "Index", "Benefeciary", null, new { @class = "btn-link add-beneficiary--btn", @id = "addBeneInBeneList" })
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            @if (Model != null) 
+                            {
+                                 <div class="row-custom clearfix">
+
+                               @foreach (var receiver in Model.benefeciaries) 
+                               {
+                                  
+                                      <div class="col-md-6 Cash_Pickup Active">
+                                    <div class="two-column-table">
+                                        <table class="table table-hover" style="font-size:12px">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2" class="table-data-label bg-info text-center">
+                                                        <span class="table-data-value__spcl table__header-icon benef-icon-white" style="justify-content: center; font-size:12px">
+                                                            @receiver.HeaderName - @receiver.Payer
+
+                                                        </span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="table-data-label" style="width:170px;">Name</td>
+                                                    <td class="table-data-value">@receiver.Name</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-data-label">Address </td>
+                                                    <td class="table-data-value">@receiver.Address</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="table-data-label">Phone</td>
+                                                    <td class="table-data-value">@receiver.Phone</td>
+                                                </tr>
+                                               
+                                                <tr>
+                                                    <td class="table-data-label">Payer</td>
+                                                    <td class="table-data-value">@receiver.Payer</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td class="table-data-label">&nbsp;</td>
+                                                    <td class="table-data-value">&nbsp;</td>
+                                                </tr>
+
+                                                <tr class="table__btn-row">
+                                                    <td colspan="2" class="table__btn-group">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="5">
+
+                                                            <tbody>
+                                                                <tr>
+
+                                                                    <td><button class="btn btn-link table-btn" data-CustID="@receiver.ReceiverCustID" onclick="deActiviateRec(this)"><span class="benef-list-btn--text">Deactivate</span></button></td>
+
+                                                                    <td><button class="btn btn-link table-btn benef-list-btn--text" type="button" onclick="editBeneficiary(this,'@receiver.ReceiverCustID')" data-edit="@Url.Action("SelectBeneficiary", "Benefeciary")">Edit</button>
+                                                                   
+                                                                    <td>@Html.ActionLink("Send Money", "Send", "Send", null,new { @class = "btn btn-link table-btn benef-list-btn--text" })</td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                               
+                               }
+
+                              
+
+                            </div>
+                            }
+
+                           
+                        </div>
+                        @*------------------------------------------------------- B E N E F I C I A R Y      L I S T -----------------------------------------------*@
+
+                    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="modal" id="deActvtModal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-content" style="text-align:center;width:50%">
+            <div class="panel-heading panel-modal-heading">
+                MESSAGE
+            </div>
+            <div class="panel-body panel-modal-body" id="modalCustID" data-CustID="none">
+                <p>Are you sure you want to deactivate this beneficiary?</p> 
+                <button class="btn btn-success" id="btnYesModal">Yes</button>
+                <button class="btn btn-success" id="btnCancelModal">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+    function editBeneficiary(button,receivercustID) {
+        var x = { receiverCustID: receivercustID }
+        ajxloadtoggle();
+        $.ajax({
+            url: $(button).attr("data-edit"),
+            data: x,
+            type: 'POST',
+            success: function (data) {
+                ajxloadtoggle();
+                $("#contentBody").html(data);
+            },
+            error: function (response) {
+                ajxloadtoggle();
+                alert("There was a problem on your request, please try again! Thank You!");
+            }
+        });
+    }
+   
+    function deActiviateRec(button)
+    {
+        var value = $(button).attr("data-CustID");
+        $('#deActvtModal').show();
+        $('#modalCustID').attr("data-CustID",value);
+    }
+
+    $(document).ready(function ()
+    {
+        $('#btnCancelModal').click(function ()
+        {
+            $('#deActvtModal').hide();
+            $('#modalCustID').attr("data-CustID", "");
+        });
+
+        $('#btnYesModal').click(function ()
+        {
+            var value = $('#modalCustID').attr("data-CustID");
+            var data = { receiverCustID: value };
+            ajxloadtoggle();
+            $.ajax({
+                url: "../api/WebService/json/deActivateBeneficiary/?ReceiverCustID=" + value,
+                type: 'POST',
+                success: function (resp) {
+                    if (resp) {
+                        alert("Successfully deactivated receiver.");
+                    }
+                    else
+                    {
+                        alert("There was a problem on deactivating receiver. Please try again! Thank You!");
+                    }
+                    ajxloadtoggle();
+                    window.location.href= '@Url.Action("Benefeciaries", "Benefeciary")'
+                },
+                error: function (response) {
+                    alert("There was a problem on your request, please try again! Thank You!");
+                    ajxloadtoggle();
+                }
+            });
+        });
+    });
+</script>

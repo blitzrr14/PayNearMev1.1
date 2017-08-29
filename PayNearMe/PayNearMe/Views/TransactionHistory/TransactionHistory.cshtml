@@ -1,0 +1,307 @@
+﻿@model PayNearMe.Models.TransactionHistory
+@{
+    ViewBag.Title = "TransactionsctionHistory";
+}
+
+
+@using (Ajax.BeginForm("ViewTransaction", "TransactionHistory", new AjaxOptions { HttpMethod = "Post" }, new { @id = "trans-history-form" }))
+{
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title></title>
+ 
+    </head>
+    <body>
+
+
+
+
+        <div class="page-body dynamic-pages">
+            <div class="container">
+                <div class="page-desc transaction-history">
+                    <div class="page-title bg-info">
+                        <h1> <span class="title__icon">Transaction History</span> </h1>
+                    </div>
+                    <div class="layout-border">
+                        <div class="transaction-history__desc well-lg clearfix">
+                            <form id="SearchCriteriaUsingDTAction" name="SearchCriteriaUsingDTAction">
+                                <div class="form-group clearfix">
+                                    @*-------------------------------------------------------*@
+                                    @*<div id="info">*@
+                                    <div class="col-md-6" id="info">
+                                        <div class="form-group row clearfix">
+                                            <div class="col-sm-4 ">
+                                                <div class="form-display-table-cell ">
+                                                    <label for="inputSuccess2">Transaction Number</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+
+
+                                                @Html.TextBoxFor(model => model.kptn, new { @class = "form-control block", @type = "text", @id = "block" })
+                                               
+
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group row clearfix">
+                                            <div class="col-sm-4">
+                                                <div class="form-display-table-cell ">
+                                                    <label for="inputSuccess2">Transaction Status</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+
+
+                                             
+                                                @Html.DropDownListFor(model => model.Status, new List<SelectListItem> 
+                                                                    { new SelectListItem { Text = "--Select--",Value="", Selected = true }, 
+                                                                        new SelectListItem { Text = "PAID",Value="Confirm", }, 
+                                                                        new SelectListItem { Text = "VOID",Value="Void" } ,
+                                                                        new SelectListItem { Text = "OPEN",Value="Open" }},
+                                                                        new { @class = "form-control", @name = "Tx_Status", @id = "Tx_Status" })
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*</div>*@
+                                    @*-------------------------------------------------------*@
+
+
+
+                                    <div class="col-md-5 col-md-offset-1">
+                                        <div class="date-range well hero-text-title">
+                                            <h5 class="space-bottom2x">Date Range</h5>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-6">
+
+
+                                                    <div class="custom_radio">
+
+                                                        @if (Model.This == 2)
+                                                        {<input type="radio" checked="checked" id="id-today" value="2" name="This"> }
+                                                        else
+                                                        { <input type="radio" id="id-today" value="2" name="This"> }
+                                                        
+                                                        <label for="id-today"> <span class="radio"></span> <span class="radio-text">Today</span></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="custom_radio">
+                                                        @if (Model.This == 3)
+                                                        {<input type="radio" checked="checked" id="id-this-month" value="3" name="This"> }
+                                                        else
+                                                        { <input type="radio" id="id-this-month" value="3" name="This">}
+
+                             
+                                                        <label for="id-this-month"> <span class="radio"></span> <span class="radio-text">This Month</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row clearfix">
+
+                                                <div class="col-sm-6">
+                                                    <div class="custom_radio ">
+
+                                                        @if (Model.This == 4)
+                                                        {<input type="radio" id="id-last-month" checked="checked" value="4" name="This"> }
+                                                        else
+                                                        { <input type="radio" id="id-last-month" value="4" name="This">}
+                                                      
+                                                        <label for="id-last-month"> <span class="radio"></span> <span class="radio-text">Last Month</span></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="custom_radio last">
+                                                        @if (Model.This == 5)
+                                                        { <input type="radio" id="id-between-dates" value="5" checked="checked" name="This"> }
+                                                        else
+                                                        {  <input type="radio" id="id-between-dates" value="5" name="This">}
+                                             
+                                                        <label for="id-between-dates"> <span class="radio"></span> <span class="radio-text">Specific Date</span></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if (Model.This == 5) 
+                                            {
+                                               <div class="between-dates-open form-horizontal clearfix" style="display:block" id="daterange"> 
+
+                                                <div class="col-sm-6 between-dates--left">
+                                                    <label class="control-label col-sm-4">Month</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="">
+                                                            
+                                                            @Html.DropDownListFor(model => model.monthValue, Model.month, new { @class = "form-control", @type = "text", @id = "month", @maxlength = "10", @placeholder = "Month", @name = "enter_from_date" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 between-dates--right">
+                                                    <label class="control-label col-sm-4">Year</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="">
+                                                            @Html.TextBoxFor(model => model.yearValue, new { @class = "form-control", @type = "text", @id = "year", @maxlength = "10", @placeholder = "Year", @name = "enter_to_date" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                            else 
+                                            {
+                                             <div class="between-dates-open form-horizontal clearfix" style="display:none" id="daterange"> 
+
+                                                <div class="col-sm-6 between-dates--left">
+                                                    <label class="control-label col-sm-4">Month</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="">
+                                                            
+                                                            @Html.DropDownListFor(model => model.monthValue, Model.month, new { @class = "form-control", @type = "text", @id = "month", @maxlength = "10", @placeholder = "Month", @name = "enter_from_date" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 between-dates--right">
+                                                    <label class="control-label col-sm-4">Year</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="">
+                                                            @Html.TextBoxFor(model => model.yearValue, new { @class = "form-control", @type = "text", @id = "year", @maxlength = "10", @placeholder = "Year", @name = "enter_to_date" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                         
+                                            
+                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="form-group clearfix">
+                                <div class="col-md-offset-9 clearfix">
+                                    <div class="btn-container">
+                                        @*<button type="button" class="btn btn-reset" id="btnReset">Reset</button>*@
+                                        <button type="submit" class="btn btn-success search-btn" value="View" name="action:View">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if (Model != null)
+                            {
+
+                                <div class="transaction-history-table">
+                                    <div class="col-md-12 clearfix">
+                                        <div class="search-result well">
+                                            <p class="space-bottom0">
+                                                @Html.DisplayFor(x => x.Count) Items Found. Displaying all items
+                                            </p>
+                                        </div>
+
+                                        <div id="generatePDF">
+                                            
+
+                                            @*<div class="table-responsive ">*@
+                                                @if (Model.tl != null)
+                                                { 
+                                                <table id="table1" class="table" style="font-size: 11px;text-align: center;">
+                                                   
+                                                        <tr class="table-column">
+                                                            <th>Transaction Date</th>
+                                                            <th>Reference No.</th>
+                                                            <th>Beneficiary Name</th>
+                                                            <th>Amount (USD)</th>
+                                                            <th>Charge (USD)</th>
+                                                            <th>Payout Amount (PHP)</th>
+                                                            <th>Tracking URL</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    
+                                                    <tbody>
+                                                        @foreach (var x in Model.tl)
+                                                        {
+                                                            <tr>
+                                                                <td>@x.TransDate</td>
+                                                                <td><a data-url=@Ajax.ActionLink(x.kptn, "TransactionDetails", "TransactionDetails", new { x.kptn }, new AjaxOptions { HttpMethod = "POST" })</td>
+                                                                <td>@x.RFullName</td>
+                                                                <td>@x.principal</td>
+                                                                <td>@x.charge</td>
+                                                                <td>@x.poamount</td>
+                                                                <td><a href="@x.trackingURL" target="_blank">Link</a></td>
+                                                                <td>@x.Status</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                                }
+                                            @*</div>*@
+                                        </div>
+
+
+                                        <div class="col-md-offset-9 space-top1x">
+                                            <div class=" btn-container">
+                                                @*<button type="button" id="downloadPDF" class="btn btn-success" onclick="location.href='@Url.Action("Createpdftransact", "GeneratePDF", new { Model.kptn, Model.This, Model.monthValue, Model.yearValue })'"><span class="glyphicon glyphicon-download-alt"></span> Download PDF</button>*@
+
+                                                <button type="submit" id="downloadPDF1" class="btn btn-success" value="Download" name="action:Download"><span class="glyphicon glyphicon-download-alt"></span> Download PDF</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>
+}
+
+<script>
+
+    $(document).ready(function ()
+    {
+        $('#downloadPDF').click(function ()
+        {
+            var data = $('#trans-history-form').serialize();
+            ajxloadtoggle();
+            $.ajax({
+                url: '@Url.Action("downloadPDF", "TransactionHistory")',
+                type: 'POST',
+                data: data,
+                success: function (data) {
+
+                    if (data.respcode == "1") {
+                        errModal(data.message);
+                    }
+                    else {
+                        errModal(data.message);
+
+                    }
+                    ajxloadtoggle();
+
+                },
+                error: function (response) {
+                    errModal("There was a problem on your request, please try again! Thank You!");
+                    ajxloadtoggle();
+                }
+            });
+
+        });
+
+
+    });
+
+    function errModal(message)
+    {
+        $("#modContent").html(message);
+        $("#myModal").show();
+    }
+
+</script>
+
+

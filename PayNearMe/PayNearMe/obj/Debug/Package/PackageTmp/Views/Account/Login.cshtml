@@ -1,0 +1,108 @@
+﻿@model PayNearMe.Models.LoginViewModel
+@{ViewBag.Title = "Log In";}
+
+<section id="login" class="clearfix">
+@using (Html.BeginForm("Submit", "Account", FormMethod.Post, new { id = "register-form" }))
+ {
+    @Html.AntiForgeryToken()
+    <div class="col-md-12 clearfix form-group main-login" onload="hideNav()">
+        <div class="col-md-6 log-container text-center">
+            <div class="col-md-12 form-group">
+
+                <div class="title-a">
+                    <span>Already have an account?</span>
+                </div>
+                <br />
+                <div class="col-md-12" style="padding-bottom:13%">
+                    <div class="col-md-2">
+                        <span class="span-sign">Email </span>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => Model.EmailAddress, new { @style = "width:90%", @required="required" })
+                       
+                    </div>
+                </div>
+
+                <div class="col-md-12" style="padding-bottom:8%">
+                    <div class="col-md-2">
+                        <span class="span-sign">Password </span>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.PasswordFor(model => Model.Password, new { @style = "width:90%", @required = "required" })
+                    </div>
+                </div>
+                <br /> <button class="btn btn-red size18" type="button" id="btnLoginAjx">Login</button>
+                <br /> @Html.ActionLink("Verify Email-Address", "Authenticate", "Register", null, new { @style="color:blue;font-size:14px; font-weight: 700;"})
+                
+            </div>
+            <div class="col-md-12">
+                <div class="title-a">
+                    <span>If not, then sign up now!</span>
+                </div>
+                <br /> @Html.ActionLink("Sign Up to Send Money Now", "Register", "", new { @class = "btn btn-red size18" })
+                <span class="span-sign">
+                    <br /> If you don't have a valid Login and Password
+                    <br /> please register.
+                </span>
+            </div>
+        </div>
+    </div>
+}
+
+    <div class="modal" id="ajxLoginModal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-content" style="text-align:center;width:50%">
+            <div class="panel-heading panel-modal-heading">
+                MESSAGE
+            </div>
+            <div class="panel-body panel-modal-body">
+                <p id="ajxLoginMsg"></p>
+                <button class="btn btn-success" id="btnLoginSuccessOkay">Okay</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function ()
+    {
+        $('#btnLoginSuccessOkay').click(function(e) {
+            $('#ajxLoginModal').hide();
+        });
+
+        $('#btnLoginAjx').click(function (e) {
+
+            if ($('#register-form').valid())
+            {
+                var datos = $('#register-form').serialize();
+                ajxloadtoggle();
+                $.ajax({
+                   async: true,
+                   type: 'POST',
+                   url: '@Url.Action("Submit", "Account")',
+                   data: datos,
+                   cache: false,
+                   success: function (json) {
+                       ajxloadtoggle();
+                       var resp = $.parseJSON(json);
+
+                       if (resp.respcode == 1) {
+                           window.location.href = '@Url.Action("Index", "Home")';
+                       }
+                       else if(resp.respcode == 2)
+                       {
+                           window.location.href = '@Url.Action("Authenticate", "Register")';
+                       }
+                       else {
+                           $('#ajxLoginModal').show();
+                           $('p#ajxLoginMsg').html(resp.message);
+                       }
+                   },
+                    error: function (errMsg) {
+                        ajxloadtoggle();
+                        alert('Something went wrong while trying to process request. Please try again...');
+                   }
+               });
+            }
+        });
+    });
+</script>

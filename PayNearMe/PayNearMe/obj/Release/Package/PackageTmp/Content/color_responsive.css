@@ -1,0 +1,215 @@
+﻿@charset "utf-8";
+/* CSS Document */
+.btn-default{ border:1px solid #0000fe; color:#0000fe; background-color: transparent;}
+.btn-default:hover, .btn-default.focus, .btn-default:focus, .btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default.focus:active, .btn-default:active:focus, .btn-default:active:hover, .open > .dropdown-toggle.btn-default.focus, .open > .dropdown-toggle.btn-default:focus, .open > .dropdown-toggle.btn-default:hover {
+background-color: #0000fe;color: #fff;}
+
+.btn-success{ background-color:#0000fe;color: #fff;  }
+.btn-success:hover, .btn-success.focus, .btn-success:focus, .btn-success.active.focus, .btn-success.active:focus, .btn-success.active:hover, .btn-success.focus:active, .btn-success:active:focus, .btn-success:active:hover, .open > .dropdown-toggle.btn-success.focus, .open > .dropdown-toggle.btn-success:focus, .open > .dropdown-toggle.btn-success:hover {
+background-color: #0000fe;color: #fff;}
+
+.btn-forgetpassword{ /* background-color:#0094d6;*/color: #fff;  }
+.btn-forgetpassword:hover, .btn-forgetpassword.focus, .btn-forgetpassword:focus, .btn-forgetpassword.active.focus, .btn-forgetpassword.active:focus, .btn-forgetpassword.active:hover, .btn-forgetpassword.focus:active, .btn-forgetpassword:active:focus, .btn-forgetpassword:active:hover, .open > .dropdown-toggle.btn-forgetpassword.focus, .open > .dropdown-toggle.btn-forgetpassword:focus, .open > .dropdown-toggle.btn-forgetpassword:hover {
+/*background-color: #0096d5; color: #fff;*/}
+
+.btn-reset{ background-color:#0000fe;color: #fff;  }
+.btn-reset:hover, .btn-reset.focus, .btn-reset:focus, .btn-reset.active.focus, .btn-reset.active:focus, .btn-reset.active:hover, .btn-reset.focus:active, .btn-reset:active:focus, .btn-reset:active:hover, .open > .dropdown-toggle.btn-reset.focus, .open > .dropdown-toggle.btn-reset:focus, .open > .dropdown-toggle.btn-reset:hover {
+background-color: #0000fe;color: #fff;}
+
+.btn-replace{ background-color:#0000fe;color: #fff;  }
+.btn-replace:hover, .btn-replace.focus, .btn-replace:focus, .btn-replace.active.focus, .btn-replace.active:focus, .btn-replace.active:hover, .btn-replace.focus:active, .btn-replace:active:focus, .btn-replace:active:hover, .open > .dropdown-toggle.btn-replace.focus, .open > .dropdown-toggle.btn-replace:focus, .open > .dropdown-toggle.btn-replace:hover {
+background-color: #0000fe;color: #fff;}
+
+.btn-cancel{ background-color:#0000fe; color:#fff; }
+.btn-cancel:hover, .btn-cancel.focus, .btn-cancel:focus, .btn-cancel.active.focus, .btn-cancel.active:focus, .btn-cancel.active:hover, .btn-cancel.focus:active, .btn-cancel:active:focus, .btn-cancel:active:hover, .open > .dropdown-toggle.btn-cancel.focus, .open > .dropdown-toggle.btn-cancel:focus, .open > .dropdown-toggle.btn-cancel:hover {
+background-color: #0000fe;color: #fff;}
+
+.btn-query{ background-color:#0000fe;color: #fff;  }
+.btn-query:hover, .btn-query.focus, .btn-query:focus, .btn-query.active.focus, .btn-query.active:focus, .btn-query.active:hover, .btn-query.focus:active, .btn-query:active:focus, .btn-query:active:hover, .open > .dropdown-toggle.btn-query.focus, .open > .dropdown-toggle.btn-query:focus, .open > .dropdown-toggle.btn-query:hover {
+background-color: #0000fe;color: #fff;}
+
+.btn-info{ background-color:#0000fe; color:#fff; }
+.btn-info:hover, .btn-info.focus, .btn-info:focus, .btn-info.active.focus, .btn-info.active:focus, .btn-info.active:hover, .btn-info.focus:active, .btn-info:active:focus, .btn-info:active:hover, .open > .dropdown-toggle.btn-info.focus, .open > .dropdown-toggle.btn-info:focus, .open > .dropdown-toggle.btn-info:hover {
+background-color: #0094d6;color: #fff;}
+
+.btn-primary{ background-color:#fff; color:#575756; border:1px solid #c9c9c9; }
+.btn-primary:hover, .btn-primary.focus, .btn-primary:focus, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary.focus:active, .btn-primary:active:focus, .btn-primary:active:hover, .open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus, .open > .dropdown-toggle.btn-primary:hover {
+background-color:#0000fe; color:#fff;border:1px solid transparent; }
+
+
+.table{ border-color:#575756;}
+.btn-link{ color:#0000fe; padding:0px;}
+.btn-link:focus, .btn-link:hover {
+    background-color: transparent;
+    color: #0000fe;
+    text-decoration: none;
+}
+
+
+
+.btn-warning{}
+.btn-danger{}
+
+.quick-send-btn{border:1px solid #0000fe; color:#0000fe; background-color: transparent;}
+.table__btn-group .table-btn{color:#0000fe;}
+
+.text-muted{}
+.text-primary{}
+.text-highlight{color:#ff000a;font-size:29px;}
+.text-success{ color:#0000fe;}
+.text-info{ color:#ff000a;}
+.text-warning{ color:#8a6d3b;}
+.text-danger{ color:#ee2e24;} 
+
+.bg-primary{ background-color:#bac7d8; color:#333;}
+.bg-success{background-color:#ff000a;color: #fff;}
+.bg-info{background-color:#ff000a; color:#fff;}
+.bg-warning{background-color:#8a6d3b; color:#fff;}
+.bg-danger{background-color:#ee2e24;color:#fff;}
+
+.dashboard .exchange-rate__value.text-info{color:#ff000a;}
+
+
+
+.hero-text-info h1 .text-info, .hero-text-info h1, .hero-text-info h2, .hero-text-info h3, .hero-text-info h4, .hero-text-info h5, .hero-text-info h6{ color:#575756 !important;}
+
+.hero-text-banner h1, .hero-text-banner h2, .hero-text-banner h3, .hero-text-banner h4, .hero-text-banner h5, .hero-text-banner h6{color:#083674;} 
+
+
+.hero-text-title h1, .hero-text-title h2, .hero-text-title h3, .hero-text-title h4, .hero-text-title h5, .hero-text-title h6{color:#575756;}
+.hero-text-primary h1, .hero-text-primary h2, .hero-text-primary h3, .hero-text-primary h4, .hero-text-primary h5, .hero-text-primary h6{color:#bac7d8;}
+.hero-text-warning h1, .hero-text-warning h2, .hero-text-warning h3, .hero-text-warning h4, .hero-text-warning h5, .hero-text-warning h6{color:#8a6d3b;}
+.hero-text-danger h1, .hero-text-danger h2, .hero-text-danger h3, .hero-text-danger h4, .hero-text-danger h5, .hero-text-danger h6{color:#ee2e24;}
+
+.devider-bg-info{ background-color:#083674;}
+.devider-bg-primary{ background-color:#58585b;}
+.devider-hero-title{background-color:#1e4670;}
+
+
+a.page-link{color:#0000fe;}
+.step-counter .glyphicon-chevron-up{ color:#fff;}
+.steps-title.active .glyphicon-chevron-up, .steps-title.disable .glyphicon-chevron-up{color: #ffffff;}
+
+.has-success .glyphicon-ok {
+    color: #0000fe;
+}
+
+.upload-document__form .glyphicon-arrow-up{ color:#fff;}
+
+.page-title--main h1{}
+.page-title .page-title__cont.text-highlight{color:#0000fe;} 
+/*.glyphicon {color:#0000fe;}*/
+.glyphicon-remove{ color:#0000fe;}
+.table .table-data-value {color:#1e4670;}
+.table .table-data-value.bg-info {color: #fff;}
+.custom_radio input[type="radio"] + label .radio, .custom_checkbox label::before {box-shadow: 0 0 1px 1px #ff000a; -webkit-box-shadow: 0 0 1px 1px #ff000a;}
+
+
+.steps-title.active, .steps-title.disable{ background:#ff000a; color:#fff;}
+.steps-title.disable *{ opacity:0.5;}
+.steps-title.active h2, .steps-title.disable h2{ color:#fff;}
+
+.add-new-sending-method .bank-icon{ background-image:url("../Images/add-new-sending-method-icon-1.png");}
+.add-new-sending-method .card-icon{ background-image:url("../Images/add-new-sending-method-icon-2.png") ;}
+
+.page-notofication__cont{ background:  url("../Images/notification-icon.png") no-repeat left top;}
+.page-notofication__icon{ background-image:url(../Images/notification-icon.png);}
+
+
+.edit-btn .edit-btn--icon{ background:url("../Images/edit-btn.png") no-repeat left top;  background-size:contain;}
+.send-money-steps__one .steps-icon--white{background:url("../Images/beneficiary-icon.png") no-repeat scroll left center;padding: 5px 0 5px 45px;}
+.add-beneficiary--icon{ background:url(../Images/add-beneficiary-icon.png) no-repeat left center; background-size:contain;}
+
+.add-card--icon{background:url("../Images/add-card-icon-small.png") no-repeat left center;}
+.add-bank-account--icon{background:url("../Images/add-bank-account-icon-small.png") no-repeat left center;}
+
+.money-back-gura{ background:url("../Images/mone-back-guran-icon.png") no-repeat scroll left top; background-size: contain;}
+
+
+
+.sending-method__list-image--bestvalue {padding-top: 40px;background: url(" ../Images/best-value-icon.png") no-repeat scroll center top;}
+.sending-method__list-image--fast-sending{background: url("../Images/fast-icon.png") no-repeat scroll center top;padding-top: 32px;}
+.page-footer__content{ border-color:#575756;}
+ 
+
+.beneficiary-information-edit .beneficiary-information-icon{ background-image:url("../Images/benefi-icon-big.png");}
+
+
+.table-btn--icon.deactive{ background-image:url(../Images/deactive-cross-icon-blue.png); }
+.table-btn--icon.edit{ background-image: url(../Images/edit-icon-blue.png); }
+.table-btn--icon.send-money{ background-image:url(../Images/send-money-icon-blue.png);}
+
+
+.first-message--content{ background-image: url(../Images/first-message-icon.png); }
+.transaction-detail__desc .transaction-no{ border-color:#0000fe;}
+.set-up-profile__decs  .doc-verfication-msg__link{border-color:#0000fe;}
+.modal-content{border-color:#ff000a; }
+
+.carousel-inner  .item-detail__caption{ background-image:url(../Images/banner-detail-icon.png);}
+.set-up-profile .carousel-inner  .item-detail__caption{background-image:url(../Images/set-up-profile-banner-icon.png);}
+.login-module .carousel-inner  .item-detail__caption{background-image:url(../Images/login-banner-icon.png);}
+
+.login-module .item-detail__bottom--left h2{color:#0000fe; margin-bottom:0px;}
+.login-module .carousel-inner .item-detail__bottom--left .login-signup-icon{ background-image:url(../Images/login-banner-icon-2.png)}
+
+.quick-link--icon.icon-add-bank{ background-image: url(../Images/quick-icon-set-1.png);}
+.quick-link--icon.icon-add-card{ background-image: url(../Images/quick-icon-set-2.png);}
+.quick-link--icon.icon-add-benef{ background-image: url(../Images/quick-icon-set-3.png);}
+.quick-link--icon.icon-send-money{ background-image: url(../Images/quick-icon-set-4.png);}
+
+.sending-method__list  .custom_radio input[type="radio"] + label strong.bank-icon{ background-image:url("../Images/logo-sei@2x.png"); }
+.sending-method__list  .custom_radio input[type="radio"] + label strong.card-icon{ background-image:url("../Images/small-card-icon.png"); }
+.set-up-profile__decs .doc-verfication-msg__cont{background-image:url(../Images/doc-verification-icon.png);}
+
+.sending-method-col__icon.icon--bank{ background-image:url("../Images/veryfy-bank-account-icon.png");}
+.sending-method-col__icon.icon--credit-card{background-image:url("../Images/add-card-icon.png");}
+.sending-method-col__icon.icon--credit-card{background-image:url("../Images/add-card-icon.png");}
+
+
+	/*changed according to wlp rules @Anurag */
+	a.page-link{color: #0000fe;}
+	.add-beneficiary--icon{color: #0000fe;}
+
+
+	a { color: #0000fe;   text-decoration: none;}
+	.btn-link{color: #0000fe;}
+	
+	a.text-success{color: #0094d6;   text-decoration: none;}
+	.benef-list-btn--text{ color: #0000fe;}
+	
+.send-money__applogies-message .first-message--content {background-image: url("../../Images/us-flag.png");}
+.send-moeny-module .carousel-inner .item.bg-login{ background-image:url(../Images/send-money-banner-bg.png);}
+
+.page-footer-micro { background: #ff000a;}
+.banner-dashboard  .banner-detail--title {color:#fff;}
+.banner-dashboard  .banner-detail--desc{color:#fff;}
+.send-money-steps--offer-btn strong{color:#ff000a;}
+
+
+.step-one .steps-title .step-icon {background: url( ../Images/beneficiary-gray.png)no-repeat scroll left center;}
+.step-two .steps-title .step-icon { background: url( ../Images/payment-icon-gray.png)no-repeat scroll left center;}
+.step-three .steps-title .step-icon { background: url( ../Images/confirmation-icon.png)no-repeat scroll left center;}
+.step-one .steps-title.active .step-icon, .step-one .steps-title.disable .step-icon {background: url( ../Images/beneficiary-icon.png)no-repeat scroll left center;background-size: contain;}
+.step-two .steps-title.active .step-icon, .step-two .steps-title.disable .step-icon {background: url( ../Images/payment-icon-white.png)no-repeat scroll left center;}
+.step-three .steps-title.active .step-icon, .step-three .steps-title.disable .step-icon {background: url( ../Images/confirmation-icon.png)no-repeat scroll left center;}
+
+
+.benef-icon-blue {background: url(../Images/benefi-icon-blue.png) no-repeat left center;}
+.dynamic-pages .page-title .title__icon{background-image:url(../Images/sign-up-title-icon.png);}
+.dynamic-pages .beneficiaries .page-title .title__icon{  background-image:url(../Images/add-benef-title-icon.png);}
+.dynamic-pages .sending-method .page-title .title__icon{  background-image:url(../Images/sending-method-title-icon.png);}
+.dynamic-pages .verify-bank-account .page-title .title__icon{background-image:url(../Images/verify-bank-account.png);}
+.dynamic-pages .ulink-card .page-title .title__icon, .dynamic-pages .ulink-card-steps .page-title .title__icon {background-image:url(../Images/register-ulink-card-icon.png);}
+.dynamic-pages .register-computer .page-title .title__icon{background-image:url(../Images/register-computer-icon.png);}
+.dynamic-pages .transaction-detail .page-title .title__icon{background-image:url(../Images/transaction-detail-icon.png);}
+ .dynamic-pages  .cancel-transaction .page-title .title__icon{background-image:url(../Images/cancel-transaction.png);}
+ 
+ .dynamic-pages .ulink-card-manage-pin .page-title .title__icon{background-image:url(../Images/ulink-manage-pin-icon.png);}
+ .dynamic-pages .ulink-card-summary .page-title .title__icon{background-image:url(../Images/ulink-card-summary.png);}
+ .dynamic-pages .ulink-card-activity .page-title .title__icon{background-image:url(../Images/ulink-card-activity.png);}
+ .dynamic-pages .ulink-card-profile .page-title .title__icon{background-image:url(../Images/ulink-card-profile.png);}
+.dynamic-pages .ulink-alert-setup .page-title .title__icon{background-image:url(../Images/ulink-card-alert-setup.png);}
+.dynamic-pages .set-up-profile .page-title .title__icon{background-image:url(../Images/set-up-profile-icon.png);}
+.dynamic-pages .success-transaction .page-title .title__icon{background-image:url(../Images/send-money-successfu-ltransaction-icon.png);}
+.dynamic-pages .upload-documents .page-title .title__icon {background-image: url("../Images/upload-documents.png");}
+

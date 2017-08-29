@@ -1,0 +1,134 @@
+﻿@model PayNearMe.Models.SendModel
+@{
+    ViewBag.Title = "GenerateBarcode";
+}
+@Html.AntiForgeryToken()
+@using (Html.BeginForm("RetrieveBarcode", "Barcode", FormMethod.Post, new { id = "" }))
+                        {
+    @Html.AntiForgeryToken()
+<div class="success-transaction__desc well-lg clearfix">
+
+    <div class="col-md-12 ">
+        <h2 class="text-success success-transaction--title text-info clearfix"><span class="title-main">Successful Transaction </span> <span id="rePrintId" class="title-reprint"></span> @*<span class="title-inprogress" id="transStatus">Pending</span>*@</h2>
+    </div>
+
+    <div class=" row-custom clearfix">
+        <div class="col-md-6">
+            <div class="success-transaction--table success-transaction--table-left">
+
+                <div class=" row form-group  clearfix">
+                    <div class="col-md-3 col-sm-3">
+                        <div class="form-display-table-cell">
+                            <label for="">Transaction No</label>
+                        </div>
+
+                    </div>
+                    <div class="col-md-9 col-sm-9">
+                        @*<div class="transaction-no text-center" id="txNumber" style="padding-left:10px;">*@
+                        <div id="txNumber" style="padding-left:10px;">
+                            <img src="@Model.ImageUrl">
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="table-header table-data-label  bg-info vertical-devider text-left" colspan="2">
+                                <span class="table-header__left"> Date Available </span>
+                                <span class="table-header__right" id="txPayableDate"></span>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td class="table-data-label" style="width:170px;">Send Amount </td>
+                            <td class="table-data-value" id="transferAmontId"></td>
+                        </tr>
+                        <tr>
+                            <td class="table-data-label">Service Fee</td>
+                            <td class="table-data-value" id="afterConfirmTxSfeeId"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-data-label">Total</td>
+                            <td class="table-data-value" id="afterConfirmTotalAmt"></td>
+                        </tr>
+
+                        <tr class="ConfirmReceiptAfterDiscount" style="display: none;">
+                            <td class="table-data-label">Discount</td>
+                            <td class="table-data-value" id="afterConfirmDiscountOnSFee"></td>
+                        </tr>
+
+                        <tr class="ConfirmReceiptAfterDiscount" style="display: none;">
+                            <td class="table-data-label">Net Transfer Fee</td>
+                            <td class="table-data-value" id="afterConfirmDiscountedSFee"></td>
+                        </tr>
+
+                        <tr class="ConfirmReceiptAfterDiscount" style="display: none;">
+                            <td class="table-data-label">Total After Discount               </td>
+                            <td class="table-data-value" id="afterConfirmDiscountTotalAmt"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-data-label">Exchange Rate </td>
+                            <td class="table-data-value bold-text" id="afterConfirmExrate"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="table-data-label">Total to Beneficiary</td>
+                            <td class="table-data-value" id="afterConfirmAmtReceived"> </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="success-transaction--table success-transaction--table-right">
+                <table class="table ">
+
+                    <tbody>
+                        <tr>
+                            <td style="width:170px;" class="table-data-label bg-info">Beneficiary Name</td>
+                            <td class="table-data-label bg-info" id="beneNameOnConfirmReceipt"></td>
+                        </tr>
+                        <tr>
+                            <td class="table-data-label">Reception Method</td>
+                            <td class="table-data-value" id="receptionMethOnConfirmReceipt"></td>
+                        </tr>
+                        <tr>
+                            <td>Payer Name</td>
+                            <td id="pNameOnConfirmReceipt"></td>
+                        </tr>
+
+                        <tr class="beneAccountCreditTr" style="display: none">
+                            <td>Account Number</td>
+                            <td id="beneAccountNo"></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+        <div class=" required-field-block form-group clearfix has-feedback required-field">
+            @Html.TextBoxFor(model => model.Id, new { @class = "form-control", @type = "text", id = "id", @placeholder = "ID" })
+            @Html.ValidationMessageFor(model => model.Id)
+        </div>
+
+        <!--             for alert configuration to stay connected with Bene while transaction -->
+        <div class="col-md-12 clearfix row"><p class="step-three__notification space-bottom0">*Set up your beneficiarys&nbsp;<a href="javascript:void(0);" id="alertsetupId" onclick="">alert.</a>&nbsp;</p></div>
+    </div>
+
+    <div class="col-md-12 clearfix">
+        <div class="btn-container">
+            <button type="submit" class="btn btn-success" onclick="showDailog();">Print Receipt</button>
+            <div style="padding: 8px;text-align: left;"></div>
+        </div>
+    </div>
+</div>
+}
+

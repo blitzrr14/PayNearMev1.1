@@ -1,0 +1,190 @@
+﻿/*.editHtml {
+    width:100% !important; 
+}*/
+
+.formFormat {
+    margin:auto
+}
+
+.gender {
+    width:35% !important;
+}
+
+.page-title {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding:10px 30px;
+}
+.layout-border {
+    padding: 30px 50px !important;
+}
+
+.page-title-secondry {
+    padding: 0 15px;
+}
+
+.imgItem {
+    width:100%;
+    height:auto;
+}
+
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 10%; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    /*padding: 1px;
+    border: 1px solid #888;*/
+    padding: 0 !important;
+    border: 0 !important;
+    width: 50%;
+}
+
+.modal-session 
+{
+    width: 20% !important;
+}
+
+
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.panel-modal-heading {
+    background-color: red;
+    color:white;
+    border-color:black;
+    font-size:large;
+}
+
+.panel-modal-body {
+   border-color: red;
+    color: black; 
+    background-color:white;
+}
+
+@media (max-width: 991px) { .gender { width:100% !important; } }
+
+/*--- Image Upload Feature ---*/
+
+#btnUpImg {
+    background-color: red; 
+    color: white; 
+    border-radius: 15px; 
+    outline: none; 
+    padding: 5px 10px; 
+    border: none;
+}
+
+#btnUpImg:hover {
+    background-color: darkred;
+}
+/*mainUIDisabler css animation*/
+#mainUIDisabler {    
+    background-color: rgba(0,0,0,0.5);
+    height: 100%; width: 100%;
+    position: absolute; 
+    left: 0px; 
+    top: 0px; 
+    z-index: 1038;
+}
+
+.imgUpHide {    
+    display: none;
+}
+
+.imgUpShow {    
+    display: normal;
+}
+/*-------------------*/
+/*modal css animation*/
+#UpImgTray {
+    position: absolute;
+    background-color: white; 
+    border-radius: 5px;     
+    transform: translateX(-50%);
+    overflow: hidden;
+    transition-duration: 0.5s;
+}
+
+.modalUpImgShow {    
+    left: 50%;
+    top: -100px;
+    width: 450px; 
+    z-index: 1039;
+    height: 300px;
+    border: 3px solid red;
+}
+
+.modalUpImgHide{
+    border: none;
+    left: 160px;
+    top: 28px;
+    width: 0px;
+    height: 0px;
+    /*z-index: -1;*/
+}
+/*------------------*/
+#btnXImgUp{
+    position: absolute;
+    right: 7px;
+    top: 3px;
+    width: 30px;
+    text-align: center;    
+    -webkit-user-select: none;
+    -moz-user-select: none;    
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    border: none;
+    border-radius: 15px;
+    background-color: darkred;
+    color: white;
+    outline: none;
+}
+
+#btnXImgUp:hover {
+    background-color: #B11;
+}
+
+.btnGoTo {
+    border: none;
+    color: white; 
+    outline: none; 
+    border-radius: 10px; 
+    padding: 5px 10px;
+}
+
+.naming, .textcap {
+    text-transform: capitalize;
+}
+/*-------------------------------------------------------------------------------------------*/
+

@@ -1,0 +1,496 @@
+﻿@model PayNearMe.Models.RegisterModel
+
+@{ ViewBag.Title = "Sign Up"; }
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+
+<div class="main-form">
+    <div class="page-title page-inner" style="background-color:#ff0000; color:#fff; margin-bottom: 0px;">
+        <span class="" style="font-size: 32px; font-weight: 500;">
+            Sign up
+        </span>
+    </div>
+
+    @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { id = "register-form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="layout-border clearfix" id="signup-data">
+            <div class="container">
+                <h2 style="margin-top: 0px; font-size: 24px; font-weight: 600;">Personal Information</h2>
+                <p>
+                    This service is currently available only for money transfers originated from the United States.
+                </p>
+            </div>
+
+            <!--           server side error display start -->
+            <div class="form-group clearfix" id="errorMsgDivContainer" style="display: block;">
+                <div class="col-md-12 ">
+                    <div class="errorMsgDiv" style="color: red">
+                        <p class="duplicateUserMsg" id="duplicateUserMsg"></p>
+                        <p id="errorMsgDiv">
+                            @if (Model.errorMessage != "" || Model.errorMessage != String.Empty)
+                            {
+                                @Model.errorMessage
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--           server side error display end -->
+
+            <div class="space-bottom0 clearfix">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-sm-4 ">
+                            <div class="form-display-table-cell">
+                                <label>Email Address</label>
+                                @*@Html.LabelFor(model => model.data.emailAddress)*@
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form-group has-feedback" id="passvalidate">
+                                @Html.TextBoxFor(model => model.data.UserID, new
+                           {
+                               @class = "form-control",
+                               @type = "email",
+                               placeholder = "Email Address",
+                               @maxlength = "50",
+                               @autofocus = "",
+                               @required = "required"
+                           })
+                                <span class="msgEmailError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                                <div id="msgdata_UserID" class="msgEmailError hidden"
+                                     style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="space-bottom0 clearfix">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-sm-4 ">
+                            <div class="form-display-table-cell">
+                                <label>Password</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form-group has-feedback" id="passvalidate">
+                                @Html.TextBoxFor(model => model.password, new { @maxlength = "20", @id = "password", @name = "password", @class = "form-control", placeholder = "Password", type = "password" })
+                                <span class="msgPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                                <div id="msgpassword" class="msgPassError hidden"
+                                     style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8 col-md-12 pull-right">
+                            <div class="form-group has-feedback" id="confPassvalidate">
+                                @Html.TextBoxFor(model => model.password, new { @maxlength = "20", @id = "confirm_password", @name = "password", @class = "form-control", placeholder = "Confirm Password", type = "password" })
+                                <span class="msgConfPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                                <div id="msgconfirm_password" class="msgConfPassError hidden"
+                                     style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-sm-4 ">
+                        <div class="form-display-table-cell">
+                            <label>Name</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 clearfix">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group clearfix">
+                                    @Html.TextBoxFor(model => model.data.firstName, new { @class = "form-control naming", @maxlength = "30", @type = "text", @placeholder = "First", @required = "required" })
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group ph-sm clearfix" id="middlevalidate">
+                                    @Html.TextBoxFor(model => model.data.middleName, new { @class = "form-control naming", @maxlength = "30", @type = "text", @placeholder = "Middle (Optional)" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-5 col-sm-offset-4 col-md-offset-0">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="required-field-block form-group clearfix has-feedback" id="lastvalidate">
+                            @Html.TextBoxFor(model => model.data.lastName, new { @class = "form-control naming", @maxlength = "30", @type = "text", @placeholder = "Last", @required = "required" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="row space-bottom0 clearfix">
+                    <div class="form-group form-horizontal clearfix">
+                        <div class="col-sm-4">
+                            <div class="form-display-table-cell">
+                                <label class="" for=""> Birth Date</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 clearfix">
+                            <div class="has-feedback" id="validdob">
+                                @Html.TextBoxFor(model => model.data.BirthDate, new
+                                   {
+                                       @class = "form-control",
+                                       @maxlength = "10",
+                                       @type = "text",
+                                       @placeholder = "mm/dd/yyyy",
+                                       @id = "birthdate",
+                                       @required = "required"
+                                   })
+                                <span class="msgBDateError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                                <div id="msgbirthdate" class="msgBDateError hidden"
+                                     style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="form-group clearfix">
+                        <div class="col-sm-4">
+                            <div class="form-display-table-cell">
+                                <label for="">Mobile No.</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-8  clearfix">
+                            <div class="has-feedback">
+                                <div class="input-group phone-number">
+                                    <div id="isdCodeId" class="input-group-addon has-feedback msgMobile">+1</div>
+                                    @Html.TextBoxFor(model => model.data.PhoneNo, new { @id = "cellPhone", @class = "form-control msgMobile", @maxlength = "10", @type = "text", @placeholder = "Phone", @required = "required" })
+                                </div>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="form-group clearfix">
+                        <div class="col-sm-4">
+                            <div class="form-display-table-cell">
+
+                                <label for="">Gender</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group clearfix">
+                                @Html.DropDownListFor(model => model.data.Gender,
+                                                       new List<SelectListItem>() { new SelectListItem { Value = "Male", Text = "Male"},
+                                                                                    new SelectListItem { Value = "Female", Text = "Female"  }},
+                                                       new { @class = "form-control", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.data.Gender)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="form-group form-horizontal clearfix ">
+                        <div class="col-sm-4">
+                            <div class="form-display-table-cell">
+                                <label for="">Address</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 clearfix">
+                            <div class="">
+                                <div class="">
+                                    @Html.TextBoxFor(model => model.data.Street, new { @class = "form-control", @type = "text", @placeholder = "Street", @required = "required" })
+                                    <span style="color:red">  No PO. Box Address</span>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="form-group form-horizontal clearfix ">
+                        <div class="col-sm-6 clearfix">
+                            <div class="">
+                                <div class="">
+                                    @Html.TextBoxFor(model => model.data.ZipCode, new { @id="ZipCode", @class = "form-control", @type = "text", @placeholder = "Zip Code", @maxlength = "9", @required = "required" })
+                                </div>
+                                <div id="msgdata_zipcode" class="msgEmailError"
+                                     style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 clearfix">
+                            <div class="">
+                                <div class="">
+                                    @Html.TextBoxFor(model => model.data.City, new { @class = "form-control", @type = "text", @placeholder = "City", @maxlength = "60", @readonly = "true" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="form-group form-horizontal clearfix ">
+
+                        <div class="col-sm-8 col-sm-offset-4 clearfix">
+                            <div class="">
+                                <div class="">
+                                    <input class="form-control" name="country" id="country" type="text" value="USA" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="form-group form-horizontal clearfix ">
+
+                        <div class="col-sm-12 clearfix">
+                            <div class="">
+                                <div class="">
+                                    @Html.TextBoxFor(model => model.data.State, new { @class = "form-control", style = "max-width: 100%;", @placeholder = "State", @readonly = "true" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group clearfix">
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="form-group form-horizontal clearfix ">
+                            <div class="col-sm-4">
+                                <div class="form-display-table-cell">
+                                    <label for="">ID</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-8 clearfix">
+                                <div class="">
+                                    <div class="">
+                                        @Html.TextBoxFor(model => model.data.IDType, new { @class = "form-control", @type = "text", @placeholder = "ID Type", @required = "required" })
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="form-group form-horizontal clearfix ">
+                            <div class="col-sm-6 clearfix">
+                                <div class="">
+                                    <div class="">
+                                        @Html.TextBoxFor(model => model.data.IDNo, new {@class = "form-control", @type = "text", @placeholder = "ID Number", @maxlength = "9", @required = "required" })
+                                    </div>
+                                    <div id="msgdata_zipcode" class="msgEmailError"
+                                         style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 clearfix">
+                                <div class="">
+                                    <div class="">
+                                        @Html.TextBoxFor(model => model.data.ExpiryDate, new { @class = "form-control", @type = "text", @placeholder = "Expiry Date", @maxlength = "60", @required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          
+            </div>
+
+           
+                @* - Image Upload Modal Corner - *@
+                <div style="padding: 15px; position: relative;">
+                    <button id="btnUpImg" type="button">
+                        Upload Image File
+                    </button>
+                    <i style="font-size: 13px; color: black;">attach images for profile portrait and valid government issued ID*</i>
+
+                    <div id="UpImgTray" class="modalUpImgHide">
+                        <div style="width: 450px;">
+                            <div style="color: white; background-color: red; width: 100%; padding: 5px; position: relative;">
+                                Image Upload
+                                <button id="btnXImgUp" type="button">
+                                    x
+                                </button>
+                            </div>
+                            <div style="border: 1px solid red; padding: 20px 5px; height: 270px; clear: right;">
+                                <div style="display: inline-block; margin: 0px 5px; float: right; padding: 12px 0;">
+                                    <div style="height: 180px;">
+                                        <div style="border: 1px solid gray; padding: 0px 5px; margin: 5px 5px; display: inline-block; width: 120px; box-sizing: border-box;">
+                                            <center>
+                                                <img id="selfPortrait" src="../Images/glyphicon-user.PNG" style="max-width: 109px; max-height: 150px;" />
+                                            </center>
+                                        </div>
+                                        <br />
+                                        <center>Self Portrait</center>
+                                        <br />
+                                    </div>
+                                    <button id="btnvrfyImgs" type="button"
+                                            style="border: none; background-color: red; color: white; outline: none; width: 100%; border-radius: 10px; padding: 5px 10px;">
+                                        @*Verify Images*@
+                                        Confirm
+                                    </button>
+                                </div>
+                                <div style="background-color: rgba(115,115,115,0.1); float: left; display: inline-block; width: 280px; padding: 5px 10px; height: 230px; font-size: 14px;">
+
+                                    Self-portrait*
+                                    <input id="slfprt" type="file" name="slfprt" accept="image/*" style="margin-bottom: 10px;">
+
+                                    @*
+                            Government issued ID*
+                            <input id="govtid" type="file" accept="image/*" style="margin-bottom: 10px;">
+
+                            Other valid ID <i style="font-size: 12px;">(optional)</i>
+                            <input id="othrid" type="file" accept="image/*" style="margin-bottom: 10px;">
+
+                            Another valid ID <i style="font-size: 12px;">(optional)</i>
+                            <input id="athrid" type="file" accept="image/*">
+                                    *@
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+         
+
+           
+
+            <div class="form-group clearfix">
+                <div class="col-md-12">
+                    <label id="termAndConditionNotSelect">&nbsp;</label>
+                    <p>
+                        <strong style="padding-top:0px;">
+                            By clicking on "Sign Up" you are hereby accepting MLhuillier's
+                            <a class="page-link" href="javascript:void(0);" onclick="openUrlSecurityNewTab(this,'AggrementTermsAndConditionSignup.action?document=Signup')" data-useragree="@Url.Action("getServer","Register")">
+                                User Agreement
+                            </a> and
+                            <a class="page-link" href="javascript:void(0);" onclick="openUrlSecurityNewTab(this,'AggrementTermsAndConditionSignup.action?document=Privacy_Policy')" data-useragree="@Url.Action("getServer","Register")">
+                                Privacy Policy
+                            </a>.
+                        </strong>
+                    </p>
+                    <div id="MLpolicyAgreement" class="custom_checkbox optTermAndConditionRadioSpan" style="margin-bottom: 30px; display: table; position: relative; padding: 5px 0;">
+                        @*<input type="checkbox" name="privacyPolicyAgreement" id="privacyPolicyAgreement" style="display: table-cell; vertical-align: middle; width: 40px;">*@
+                        <div style="display: table-cell; width: 35px; vertical-align: top">
+                            <div id="displayPolicyTrigger"
+                                 style="height: 24px; width: 24px; border-radius: 12px; border: 1px solid red; cursor: pointer; position: absolute;">
+                                <span id="displayPolicyChecker" class="hidden" style="position: absolute; top: -6px; left: 3px; font-size: 26px; color: green; user-select: none;">✔</span>
+                                @Html.CheckBoxFor(model => model.privacyPolicyAgreement, new { @id = "privacyPolicyAgreement", @style = "display: none; width:40px", })
+                            </div>
+                        </div>
+                        <div style="display:table-cell;">
+                            <label for=" opttermandcondition" style="padding: 0px; text-align: justify;">
+                                I have read and agree to Mlhuillier’s Privacy Policy and Terms and Conditions and agree to receive electronic communications
+                                and to share my information with M Lhuillier.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <center>
+                    <div id="google-recaptcha" style="display: inline-block;">
+                        <div class="g-recaptcha" id="recaptcha" data-sitekey="6Ld_nRYUAAAAAFgzd-VYaiOODoUq6YA8BOhNoP0J"></div>
+                    </div>
+                </center>
+            </div>
+            <div class="col-md-12 clearfix">
+                <div class="send-money__steps-btn" style="text-align: right;">
+                    <button class="btn btn-red" id="btnSignUp" type="button" data-register="@Url.Action("Captcha","Register")">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="confirm-data" style="display:none">
+            <div class="container" style="padding-top: 30px;">
+                <div style="margin-bottom: 30px; display: table; width: 100%;">
+                    <div class="col-sm-10">
+                        <h4 style="margin-top: 0px; font-size: 22px; font-weight: 600;">Confirm Personal Information</h4>
+                    </div>
+                    <div class="col-sm-2">
+                        <button id="btnEdit-data" type="button" style="color: green; border: none; background: none; border-bottom: 1px solid green;">
+                            <span class="glyphicon glyphicon-edit" style="font-size: 24px;"></span>
+                            Edit
+                        </button>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        Email Address
+                    </div>
+                    <div class="col-sm-4">
+                        Name
+                    </div>
+                    <div class="col-sm-4">
+                        Birth Date
+                    </div>
+                </div>
+                <div class="clearfix" style="color:red">
+                    <div class="col-sm-4">
+                        <p class="text-info" id="lbl-emailAddress"></p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-info" id="lbl-Name"></p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-info" id="lbl-bDate"></p>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="col-sm-4">
+                        Mobile Phone
+                    </div>
+                    <div class="col-sm-4">
+                        Preferred Country
+                    </div>
+                </div>
+
+                <div class="clearfix" style="color:red">
+                    <div class="col-sm-4">
+                        <p class="text-info" id="lbl-mobile"></p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-info" id="lbl-pCountry"></p>
+                    </div>
+                </div>
+                <div class="clearfix col-sm-offset-10 col-sm-2" style="text-align: left; margin-bottom: 10px;">
+                    <button class="btn-success btn" style="width: 90px;" type="submit">Finish</button>
+                </div>
+            </div>
+        </div>
+    }
+    <div style="display: table; text-align: right; padding: 30px 0; background-color: #eee; width: 100%; padding: 15px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+        @Html.ActionLink("Go to Login Page", "Login", "Account") If you already have an account.
+    </div>
+</div>
+
+<div id="mainUIDisabler" class="imgUpHide">
+
+</div>
