@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AESEncrypt">
+      <HintPath>C:\Users\Administrator\Desktop\PayNearMe\PayNearMe\bin\AESEncrypt.dll</HintPath>
+    </Reference>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <HintPath>..\packages\Crystal.Reports.Essentials.13.0.20.2399\lib\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
       <Private>True</Private>
@@ -210,6 +213,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Controllers\BenefeciaryController.cs" />
+    <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -222,6 +226,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CreateOrderReponse.cs" />
     <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\ForgotPasswordModel.cs" />
     <Compile Include="Models\Helper\HiResDateTime.cs" />
     <Compile Include="Models\Helper\MersenneTwister.cs" />
     <Compile Include="Models\Reports\MobileTransReport.cs">
@@ -397,6 +402,7 @@
     <Content Include="Views\Benefeciary\EditBeneficiary.cshtml" />
     <Content Include="Views\Shared\AddBeneficiary.cshtml" />
     <Content Include="Views\Barcode\RetrieveBarcode.cshtml" />
+    <Content Include="Views\ForgotPassword\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -2,52 +2,55 @@
 @{ViewBag.Title = "Log In";}
 
 <section id="login" class="clearfix">
-@using (Html.BeginForm("Submit", "Account", FormMethod.Post, new { id = "login-form" }))
- {
-    @Html.AntiForgeryToken()
-    <div class="col-md-12 clearfix form-group main-login" onload="hideNav()">
-        <div class="col-md-6 log-container text-center">
-            <div class="col-md-12 form-group">
-
-                <div class="title-a">
+    @using (Html.BeginForm("Submit", "Account", FormMethod.Post, new { id = "login-form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-12 main-login clearfix" onload="hideNav()">
+            <div class="col-md-6 clearfix log-container">
+                <div class="title-a col-md-12 form-group" style="text-align: center;">
                     <span>Already have an account?</span>
                 </div>
-                <br />
-                <div class="col-md-12" style="padding-bottom:13%">
-                    <div class="col-md-2" style="margin-top:3%">
-                        <span class="span-sign">Email </span>
+                <div class="col-md-12 clearfix form-group">
+                    <div class="col-md-3">
+                        <label style="font-weight: 800">E-mail</label>
                     </div>
                     <div class="col-md-9">
-                        @Html.TextBoxFor(model => Model.EmailAddress, new { @style = "width:90%", @required="required" })
-                       
+                        @Html.TextBoxFor(model => Model.EmailAddress, new { @style = "width:100%; text-align: center;", @required = "required" })
                     </div>
                 </div>
 
-                <div class="col-md-12" style="padding-bottom:8%">
-                    <div class="col-md-2" style="margin-top:3%">
-                        <span class="span-sign">Password </span>
+                <div class="col-md-12 clearfix form-group">
+                    <div class="col-md-3">
+                        <label style="font-weight: 800">Password</label>
                     </div>
                     <div class="col-md-9">
-                        @Html.PasswordFor(model => Model.Password, new { @style = "width:90%", @required = "required" })
+                        @Html.PasswordFor(model => Model.Password, new { @style = "width:100%; text-align: center;", @required = "required" })
                     </div>
                 </div>
-                <br /> <button class="btn btn-red size18" type="button" id="btnLoginAjx">Login</button>
-                @*<br />*@ @*@Html.ActionLink("Verify Email-Address", "Authenticate", "Register", null, new { @style="color:blue;font-size:14px; font-weight: 700;"})*@
-                
-            </div>
-            <div class="col-md-12">
-                <div class="title-a">
-                    <span>If not, then sign up now!</span>
+                <div class="col-md-12 clearfix form-group" style="text-align: right;">
+                    <div class="col-md-12">
+                        <div style="display: inline-block; border-right: 1px solid black; padding-right: 10px; margin-right: 10px;">
+                            <label>
+                                @Html.ActionLink("Forgot Password", "Index", "ForgotPassword", null, new { @style = "color:blue;font-size:14px; font-weight: 700;" })
+                            </label>
+                        </div>
+                        <button class="btn btn-red size18" type="button" id="btnLoginAjx">Login</button>
+                    </div>
                 </div>
-                <br /> @Html.ActionLink("Sign Up to Send Money Now", "Register", "", new { @class = "btn btn-red size18" })
-                <span class="span-sign">
-                    <br /> If you don't have a valid Login and Password
-                    <br /> please register.
-                </span>
+
+                <div class="col-md-12 clearfix" style="text-align: center;">
+                    <div class="title-a">
+                        <span>If not, then sign up now!</span>
+                    </div>
+                    @Html.ActionLink("Sign Up to Send Money Now", "Register", "", new { @class = "btn btn-red size18" })
+                    <span class="span-sign">
+                        <br /> If you don't have a valid Login E-mail and Password
+                        <br /> please register.
+                    </span>
+                </div>
             </div>
         </div>
-    </div>
-}
+    }
 
     <div class="modal" id="ajxLoginModal" data-backdrop="static" data-keyboard="false">
         <div class="modal-content" style="text-align:center;width:50%">
@@ -65,8 +68,6 @@
 <script>
     $(document).ready(function ()
     {
-      
-
         $('#login-form').on('keyup keypress', function (e) {
             var keyCode = e.keyCode || e.which;
             if (keyCode === 13) {
@@ -76,7 +77,6 @@
         });
 
         $('#btnLoginAjx').click(function (e) {
-
             if ($('#login-form').valid())
             {
                 var datos = $('#login-form').serialize();
@@ -88,7 +88,7 @@
                    data: datos,
                    cache: false,
                    success: function (json) {
-                       
+                       ajxloadtoggle();
                        var resp = $.parseJSON(json);
 
                        if (resp.respcode == 1) {
@@ -99,7 +99,7 @@
                            window.location.href = '@Url.Action("Authenticate", "Register")';
                        }
                        else {
-                           ajxloadtoggle();
+
                            errModal(resp.message);
                        }
                    },

@@ -17,7 +17,6 @@ using System.Collections;
 using System.Configuration;
 using System.Web.Script.Serialization;
 using PayNearMe.Controllers.api;
-using PayNearMe.Models;
 using CrystalDecisions.Shared;
 using System.IO;
 

@@ -51,7 +51,7 @@
                     <img src="~/Images/logo_en.png" style="margin-bottom: 10px;padding-top: 10px;">
                 </div>
 
-                @if (ViewBag.Title != "Log In" && ViewBag.Title != "Sign Up" && ViewBag.Title != "Authenticate")
+                @if (ViewBag.Title != "Log In" && ViewBag.Title != "Sign Up" && ViewBag.Title != "Authenticate" && ViewBag.Title != "Forgot Password")
                 { 
                     <div id="navbar-login">
                         <div class="navbar-collapse collapse" style="height: 1px;">
@@ -201,7 +201,7 @@
 @RenderSection("styes", required: false)
 </html>
 
-@if (ViewBag.Title != "Log In" && ViewBag.Title != "Sign Up")
+@if (ViewBag.Title != "Log In" && ViewBag.Title != "Sign Up" && ViewBag.Title != "Forgot Password")
 {
 <script>
 // 5mins popup
