@@ -256,9 +256,9 @@
                             fpMsgBox(data.message);
                         else if (data.code == 1) {
                             fpMsgBox(data.message);
-                            setTimeout(function () {
+                            $('#fpmsgbtn').click(function () {
                                 window.location.replace("/");
-                            }, 5000);
+                            });
                         }
                         else {
                             alert(data.message);

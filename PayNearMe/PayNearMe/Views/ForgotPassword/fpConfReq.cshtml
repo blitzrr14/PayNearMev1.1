@@ -45,21 +45,21 @@
         outline: red;
     }
 
-        .fpBtn:hover {
-            -webkit-background: linear-gradient(pink, red, red, red, red, darkred);
-            -moz-background: linear-gradient(pink, red, red, red, red, darkred);
-            -ms-background: linear-gradient(pink, red, red, red, red, darkred);
-            -o-background: linear-gradient(pink, red, red, red, red, darkred);
-            background: linear-gradient(pink, red, red, red, red, darkred);
-        }
+    .fpBtn:hover {
+        -webkit-background: linear-gradient(pink, red, red, red, red, darkred);
+        -moz-background: linear-gradient(pink, red, red, red, red, darkred);
+        -ms-background: linear-gradient(pink, red, red, red, red, darkred);
+        -o-background: linear-gradient(pink, red, red, red, red, darkred);
+        background: linear-gradient(pink, red, red, red, red, darkred);
+    }
 
-        .fpBtn:active {
-            -webkit-background: linear-gradient(darkred, red, red, red, red, red);
-            -moz-background: linear-gradient(darkred, red, red, red, red, red);
-            -ms-background: linear-gradient(darkred, red, red, red, red, red);
-            -o-background: linear-gradient(darkred, red, red, red, red, red);
-            background: linear-gradient(darkred, red, red, red, red, red);
-        }
+    .fpBtn:active {
+        -webkit-background: linear-gradient(darkred, red, red, red, red, red);
+        -moz-background: linear-gradient(darkred, red, red, red, red, red);
+        -ms-background: linear-gradient(darkred, red, red, red, red, red);
+        -o-background: linear-gradient(darkred, red, red, red, red, red);
+        background: linear-gradient(darkred, red, red, red, red, red);
+    }
 
     .fpDataHolder {
         transition-duration: 1s;
@@ -99,42 +99,44 @@
 </div>
 <div class="fpBody col-md-12">
     <h2>Let's retrieve your account!</h2>
-    Please fill in all the fields shown.
+    <div>
+        Please fill in all the fields shown.
 
-    @using (Html.BeginForm("fpChangePassword", "ForgotPassword", FormMethod.Post, new { id = "ForgotPassword-Form", enctype = "multipart/form-data", @class = "fpDataContainer" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.TextBoxFor(model => model.email, new { @style = "display: none;"})
-        @Html.TextBoxFor(model => model.securityCode, new { @style = "display: none;" })
-        
-        <div id="newpassView" class="clearfix form-group">
-            <div id="newpassInnerView" class="fpInner">
-                <div class="col-sm-5" style="padding-top: 15px;">
-                    New Password :
-                </div>
-                <div class="col-sm-7">
-                    @Html.TextBoxFor(model => model.fpNewPassword, new { id="fpNewPassword", @style = "font-size: 30px; width: 100%; text-align: center;", @placeholder = "new password", @type = "password" })
-                    <span class="msgPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
-                    <div id="msgfpNewPassword" class="msgPassError hidden"
-                         style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+        @using (Html.BeginForm("fpChangePassword", "ForgotPassword", FormMethod.Post, new { id = "ForgotPassword-Form", enctype = "multipart/form-data", @class = "fpDataContainer", style = "min-height: auto;" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.TextBoxFor(model => model.email, new { @style = "display: none;" })
+            @Html.TextBoxFor(model => model.securityCode, new { @style = "display: none;" })
+
+            <div id="newpassView" class="clearfix form-group">
+                <div id="newpassInnerView" class="fpInner">
+                    <div class="col-sm-5" style="padding-top: 15px;">
+                        New Password :
                     </div>
-                </div>
-                <div class="col-sm-5" style="padding-top: 15px;">
-                    Confirm New Password :
-                </div>
-                <div class="col-sm-7">
-                    @Html.TextBoxFor(model => model.fpConfirmPassword, new { id = "fpConfirmPassword", @style = "font-size: 30px; width: 100%; text-align: center;", @placeholder = "confirm new password", @type = "password" })
-                    <span class="msgConfPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
-                    <div id="msgfpConfirmPassword" class="msgConfPassError hidden"
-                         style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(model => model.fpNewPassword, new { id = "fpNewPassword", @style = "font-size: 30px; width: 100%; text-align: center;", @placeholder = "new password", @type = "password" })
+                        <span class="msgPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                        <div id="msgfpNewPassword" class="msgPassError hidden"
+                             style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-7 col-sm-offset-5 text-right">
-                    <button type="submit" class="fpBtn" title="Confirm New Password">Change Password</button>
+                    <div class="col-sm-5" style="padding-top: 15px;">
+                        Confirm New Password :
+                    </div>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(model => model.fpConfirmPassword, new { id = "fpConfirmPassword", @style = "font-size: 30px; width: 100%; text-align: center;", @placeholder = "confirm new password", @type = "password" })
+                        <span class="msgConfPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                        <div id="msgfpConfirmPassword" class="msgConfPassError hidden"
+                             style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                        </div>
+                    </div>
+                    <div class="col-sm-7 col-sm-offset-5 text-right">
+                        <button type="submit" class="fpBtn" title="Confirm New Password">Change Password</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 
 <div id="fpMsgModal" class="hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; z-index: 2001;">
@@ -149,24 +151,6 @@
         </center>
     </div>
 </div>
-
-<script>
-    $(function () {
-        var respcode = @(ViewBag.respCode);
-
-        if ( respcode == '1')
-        {
-            fpMsgBox('@(ViewBag.message)');
-        }
-        else 
-        {
-            fpMsgBox('@(ViewBag.message)');
-            setTimeout(function () {
-                window.location.replace("/ForgotPassword/Index");
-            }, 5000);
-        }
-    });
-</script>
 
 <script>
     $(document).ready(function () {
@@ -253,7 +237,7 @@
                             fpMsgBox(data.message);
                             setTimeout(function () {
                                 window.location.replace("/");
-                            }, 5000);
+                            }, 3000);
                         }
                         else {
                             alert(data.message);
