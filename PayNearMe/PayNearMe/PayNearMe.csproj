@@ -403,6 +403,7 @@
     <Content Include="Views\Shared\AddBeneficiary.cshtml" />
     <Content Include="Views\Barcode\RetrieveBarcode.cshtml" />
     <Content Include="Views\ForgotPassword\Index.cshtml" />
+    <Content Include="Views\ForgotPassword\fpConfReq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,284 @@
+﻿@model PayNearMe.Models.ForgotPasswordModel
+@{ ViewBag.Title = "Forgot Password"; }
+<style>
+    .fpHeader {
+        border: 2px solid #ff1c1c;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: red;
+        padding-top: 15px;
+        min-width: 630px;
+    }
+
+    .fpBody {
+        border: 2px solid lightgrey;
+        border-top: none;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 15px;
+        min-width: 630px;
+    }
+
+    .fpDataContainer {
+        width: 600px;
+        margin: 0 auto;
+        font-size: 14px;
+        font-weight: lighter;
+        position: relative;
+        min-height: 290px;
+    }
+
+    .fpBtn {
+        -webkit-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+        -moz-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+        -ms-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+        -o-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+        background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+        margin-top: 10px;
+        color: white;
+        border-radius: 5px;
+        border-top-color: #ff3F3F;
+        border-left-color: #ff3F3F;
+        border-right-color: #E70000;
+        border-bottom-color: #E70000;
+        padding: 5px;
+        outline: red;
+    }
+
+        .fpBtn:hover {
+            -webkit-background: linear-gradient(pink, red, red, red, red, darkred);
+            -moz-background: linear-gradient(pink, red, red, red, red, darkred);
+            -ms-background: linear-gradient(pink, red, red, red, red, darkred);
+            -o-background: linear-gradient(pink, red, red, red, red, darkred);
+            background: linear-gradient(pink, red, red, red, red, darkred);
+        }
+
+        .fpBtn:active {
+            -webkit-background: linear-gradient(darkred, red, red, red, red, red);
+            -moz-background: linear-gradient(darkred, red, red, red, red, red);
+            -ms-background: linear-gradient(darkred, red, red, red, red, red);
+            -o-background: linear-gradient(darkred, red, red, red, red, red);
+            background: linear-gradient(darkred, red, red, red, red, red);
+        }
+
+    .fpDataHolder {
+        transition-duration: 1s;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        margin: 0 auto;
+    }
+
+    .fpHide {
+        width: 0%;
+        left: 50%;
+        z-index: -1;
+    }
+
+    .fpShow {
+        width: 100%;
+        left: 0%;
+        z-index: 1;
+    }
+
+    .fpInner {
+        transition-duration: 1s;
+        width: 600px;
+    }
+
+    .fpInnerHide {
+        transform: translateX(-50%);
+    }
+
+    .fpInnerShow {
+        transform: translateX(0%);
+    }
+</style>
+<div class="fpHeader">
+    <h2 class="col-md-12" style="color: white;"><b>Forgot Password</b></h2>
+</div>
+<div class="fpBody col-md-12">
+    <h2>Let's retrieve your account!</h2>
+    Please fill in all the fields shown.
+
+    @using (Html.BeginForm("fpChangePassword", "ForgotPassword", FormMethod.Post, new { id = "ForgotPassword-Form", enctype = "multipart/form-data", @class = "fpDataContainer" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.TextBoxFor(model => model.email, new { @style = "display: none;"})
+        @Html.TextBoxFor(model => model.securityCode, new { @style = "display: none;" })
+        
+        <div id="newpassView" class="clearfix form-group">
+            <div id="newpassInnerView" class="fpInner">
+                <div class="col-sm-5" style="padding-top: 15px;">
+                    New Password :
+                </div>
+                <div class="col-sm-7">
+                    @Html.TextBoxFor(model => model.fpNewPassword, new { id="fpNewPassword", @style = "font-size: 30px; width: 100%; text-align: center;", @placeholder = "new password", @type = "password" })
+                    <span class="msgPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                    <div id="msgfpNewPassword" class="msgPassError hidden"
+                         style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                    </div>
+                </div>
+                <div class="col-sm-5" style="padding-top: 15px;">
+                    Confirm New Password :
+                </div>
+                <div class="col-sm-7">
+                    @Html.TextBoxFor(model => model.fpConfirmPassword, new { id = "fpConfirmPassword", @style = "font-size: 30px; width: 100%; text-align: center;", @placeholder = "confirm new password", @type = "password" })
+                    <span class="msgConfPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                    <div id="msgfpConfirmPassword" class="msgConfPassError hidden"
+                         style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                    </div>
+                </div>
+                <div class="col-sm-7 col-sm-offset-5 text-right">
+                    <button type="submit" class="fpBtn" title="Confirm New Password">Change Password</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="fpMsgModal" class="hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; z-index: 2001;">
+    <div class="col-md-12" style="background: red; font-size: 18px; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px; padding: 5px; border: 1px solid red;">
+        Message
+    </div>
+    <div class="col-md-12" style="background: white; border-bottom: 2px solid red; border-right: 1px solid red; border-left: 1px solid red; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+        <div id="msgContainer" class="col-md-12" style="text-align: center; margin: 5px;">Please Wait...</div>
+        <br />
+        <center>
+            <button id="fpmsgbtn" onclick="hideModals()" class="fpBtn">- OK -</button>
+        </center>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var respcode = @(ViewBag.respCode);
+
+        if ( respcode == '1')
+        {
+            fpMsgBox('@(ViewBag.message)');
+        }
+        else 
+        {
+            fpMsgBox('@(ViewBag.message)');
+            setTimeout(function () {
+                window.location.replace("/ForgotPassword/Index");
+            }, 5000);
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        var fpPassIndicator = false,
+            fpConfirmPass = false,
+            fpNewPassword = false;
+        $('input#fpNewPassword').focusout(function (e) {
+            var currInput = $(this).val(),
+                upperLetter = false,
+                smallLetter = false,
+                hasNumber = false;
+            fpPassIndicator = false;
+            fpConfirmPass = false;
+            fpNewPassword = false;
+
+            if (currInput == "")
+                inputInvalid('fpNewPassword', 'msgPassError', 'Password field is required');
+            else if (currInput.length < 8)
+                inputInvalid('fpNewPassword', 'msgPassError', 'Password should be atleast 8 characters long');
+            else {
+                for (var count = 0; (count < currInput.length && (!smallLetter || !hasNumber || !upperLetter)) ; count++) {
+                    if (!isNaN(currInput[count]))
+                    { hasNumber = true; }
+                    else if (currInput[count] == currInput[count].toUpperCase())
+                    { smallLetter = true; }
+                    else if (currInput[count] == currInput[count].toLowerCase())
+                    { upperLetter = true; }
+                }
+
+                if (smallLetter && hasNumber && upperLetter) {
+                    inputValid('fpNewPassword', 'msgPassError');
+                    fpPassIndicator = true;
+                    fpNewPassword = true;
+                }
+                else {
+                    fpPassIndicator = false;
+                    fpNewPassword = false;
+                    inputInvalid('fpNewPassword', 'msgPassError', 'Password must contain atleast 1 lowercase letter, 1 uppercase letter & 1 digit number');
+                }
+            }
+
+            if (fpPassIndicator) {
+                if ($('input#fpConfirmPassword').val() != $('input#fpNewPassword').val()) {
+                    inputInvalid('fpConfirmPassword', 'msgConfPassError', 'Password mismatch');
+                }
+                else {
+                    inputValid('fpConfirmPassword', 'msgConfPassError');
+                }
+            }
+            else {
+                $('.msgConfPassError').addClass('hidden');
+            }
+        });
+
+        $('input#fpConfirmPassword').keyup(function (e) {
+            if (fpPassIndicator) {
+                if (($(this).val() != $('input#fpNewPassword').val()) || $(this).val() == "" || $('input#fpNewPassword').val() == "") {
+                    fpConfirmPass = false;
+                    inputInvalid('fpConfirmPassword', 'msgConfPassError', 'Password mismatch');
+                }
+                else {
+                    fpConfirmPass = true;
+                    inputValid('fpConfirmPassword', 'msgConfPassError');
+                    $('span.msgPassError').removeClass('glyphicon-remove');
+                    $('span.msgPassError').removeClass('glyphicon-ok');
+                }
+            }
+        });
+
+        $('form#ForgotPassword-Form').submit(function (e) {
+            e.preventDefault();
+
+            if (fpPassIndicator && fpConfirmPass && fpNewPassword) {
+                ajxloadtoggle("Confirming new password...");
+                $.ajax({
+                    url: '../ForgotPassword/fpChangePassword',
+                    type: "POST",
+                    data: $('form#ForgotPassword-Form').serialize(),
+                    success: function (data) {
+                        if (data.code == 0)
+                            fpMsgBox(data.message);
+                        else if (data.code == 1) {
+                            fpMsgBox(data.message);
+                            setTimeout(function () {
+                                window.location.replace("/");
+                            }, 5000);
+                        }
+                        else {
+                            alert(data.message);
+                            ajxloadtoggle();
+                        }
+                    },
+                    error: function (error) {
+                        alert("Something went wrong, Please try again!");
+                        ajxloadtoggle();
+                    }
+                });
+            }
+        });
+    });
+
+    var globalEncCID = "", globalEncFN = "";
+
+    function fpMsgBox(msg) {
+        $('#fpMsgModal').removeClass('hidden');
+        document.getElementById('msgContainer').innerHTML = msg;
+    }
+
+    function hideModals() {
+        ajxloadtoggle('Loading...');
+        ajxloadtoggle();
+        $('#fpMsgModal').addClass('hidden')
+    }
+</script>
