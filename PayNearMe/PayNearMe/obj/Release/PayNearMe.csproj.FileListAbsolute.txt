@@ -679,6 +679,7 @@ D:\Khe Project\KP8\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security
 D:\Khe Project\KP8\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Google.xml
 D:\Khe Project\KP8\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Khe Project\KP8\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+<<<<<<< HEAD
 D:\WORK\Git\PayNearMev1.1\PayNearMe\PayNearMe\bin\Images\logo_en.png
 D:\WORK\Git\PayNearMev1.1\PayNearMe\PayNearMe\bin\Controllers\api\WebServiceController.cs
 D:\WORK\Git\PayNearMev1.1\PayNearMe\PayNearMe\bin\PayNearMe.dll.config
@@ -750,3 +751,75 @@ D:\WORK\Git\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Micros
 D:\WORK\Git\PayNearMev1.1\PayNearMe\PayNearMe\obj\Release\PayNearMe.csprojResolveAssemblyReference.cache
 D:\WORK\Git\PayNearMev1.1\PayNearMe\PayNearMe\obj\Release\PayNearMe.dll
 D:\WORK\Git\PayNearMev1.1\PayNearMe\PayNearMe\obj\Release\PayNearMe.pdb
+=======
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Images\logo_en.png
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Controllers\api\WebServiceController.cs
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\PayNearMe.dll.config
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\PayNearMe.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\PayNearMe.pdb
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Antlr3.Runtime.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\CrystalDecisions.CrystalReports.Engine.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\CrystalDecisions.ReportSource.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\CrystalDecisions.Shared.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\CrystalDecisions.Web.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\EntityFramework.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\EntityFramework.SqlServer.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Json.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\MySql.Data.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Newtonsoft.Json.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Owin.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Net.Http.Formatting.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Helpers.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Http.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Http.WebHost.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Mvc.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Optimization.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Razor.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.WebPages.Deployment.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.WebPages.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.WebPages.Razor.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\WebGrease.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Json.pdb
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Newtonsoft.Json.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Net.Http.Formatting.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Http.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Http.WebHost.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Helpers.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Mvc.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Optimization.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.Razor.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.WebPages.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.WebPages.Deployment.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\System.Web.WebPages.Razor.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Antlr3.Runtime.pdb
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\EntityFramework.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\EntityFramework.SqlServer.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\obj\Release\PayNearMe.csprojResolveAssemblyReference.cache
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\obj\Release\PayNearMe.dll
+C:\Users\TULA16096675\Desktop\GitHub Repo\PayNearMev1.1\PayNearMe\PayNearMe\obj\Release\PayNearMe.pdb
+>>>>>>> 85e1f1809f9b87f10b9d59904530a7a1ac08cc33

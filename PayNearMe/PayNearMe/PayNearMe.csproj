@@ -353,6 +353,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ChangePassword.js" />
+    <Content Include="Scripts\ForgotPassword.js" />
     <Content Include="Scripts\Home.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -403,6 +404,8 @@
     <Content Include="Views\Shared\AddBeneficiary.cshtml" />
     <Content Include="Views\Barcode\RetrieveBarcode.cshtml" />
     <Content Include="Views\ForgotPassword\Index.cshtml" />
+    <Content Include="Views\ForgotPassword\fpConfReq.cshtml" />
+    <Content Include="Views\Shared\_Agreement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

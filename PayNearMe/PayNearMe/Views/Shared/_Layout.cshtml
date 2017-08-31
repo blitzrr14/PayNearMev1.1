@@ -45,51 +45,47 @@
 </head>
 <body onload="noBack()" onpageshow="if (event.persisted) noBack();">
    
-        <header class="navbar navbar-default  navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <img src="~/Images/logo_en.png" style="margin-bottom: 10px;padding-top: 10px;">
-                </div>
-
-                @if (ViewBag.Title != "Log In" && ViewBag.Title != "Sign Up" && ViewBag.Title != "Authenticate" && ViewBag.Title != "Forgot Password")
-                { 
-                    <div id="navbar-login">
-                        <div class="navbar-collapse collapse" style="height: 1px;">
-                            <ul class="nav navbar-nav">
-
-                                @if (ViewBag.Title != "Home") { 
-                                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                }
-
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Send Money <i class="fa fa-chevron-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("Send Money", "Send", "Send")</li>
-                                        <li>@Html.ActionLink("Transaction History", "Transaction", "TransactionHistory")</li>
-                                        <li>@Html.ActionLink("Beneficiaries", "Benefeciaries","Benefeciary")</li>
+    <header class="navbar navbar-default  navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <img src="~/Images/logo_en.png" style="margin-bottom: 10px;padding-top: 10px;">
+            </div>
+            @if (ViewBag.Title != "Log In" && ViewBag.Title != "Sign Up" && ViewBag.Title != "Authenticate" && ViewBag.Title != "Forgot Password")
+            { 
+                <div id="navbar-login">
+                    <div class="navbar-collapse collapse" style="height: 1px;">
+                        <ul class="nav navbar-nav">
+                            @if (ViewBag.Title != "Home") { 
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            }
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Send Money <i class="fa fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Send Money", "Send", "Send")</li>
+                                    <li>@Html.ActionLink("Transaction History", "Transaction", "TransactionHistory")</li>
+                                    <li>@Html.ActionLink("Beneficiaries", "Benefeciaries","Benefeciary")</li>
                                        
 
-                                    </ul>
+                                </ul>
 
-                                </li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" aria-expanded="false">My Account <i class="fa fa-chevron-down"></i></a>
-                                    <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("Edit Profile", "Index", "Profile")</li>
-                                        <li>@Html.ActionLink("Change Password", "ChangePassword", "Profile")</li>
-                                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-                                    </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" aria-expanded="false">My Account <i class="fa fa-chevron-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Edit Profile", "Index", "Profile")</li>
+                                    <li>@Html.ActionLink("Change Password", "ChangePassword", "Profile")</li>
+                                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                                </ul>
 
-                                </li>
-                            </ul>
-                        </div>
+                            </li>
+                        </ul>
                     </div>
-                }
-            </div>
-        </header>
+                </div>
+            }
+        </div>
+    </header>
     
-<div class="container">
-
+    <div class="container">
         <div class="modal" id="modal-inactivity" data-backdrop="static" data-keyboard="false">
             <div class="modal-content" style="text-align:center;width:50%">
                 <div class="panel-heading panel-modal-heading">
@@ -104,79 +100,66 @@
             </div>
         </div>
 
-    <div id="myModal" class="modal">
-
-
-        @*<div class="modal-header"></div>*@
-        <div class="modal-content">
-
-            <div class="panel-heading panel-modal-heading">
-                MESSAGE:
-                <span style="font-size:inherit" class="close" id="closeModal">&times;</span>
+        <div id="myModal" class="modal">
+            @*<div class="modal-header"></div>*@
+            <div class="modal-content">
+                <div class="panel-heading panel-modal-heading">
+                    MESSAGE:
+                    <span style="font-size:inherit" class="close" id="closeModal">&times;</span>
+                </div>
+                <div class="panel-body panel-modal-body">
+                    <p id="modContent"></p>
+                </div>
             </div>
-            <div class="panel-body panel-modal-body">
-                <p id="modContent"></p>
-            </div>
-
+            @*<div class="modal-footer"></div>*@
         </div>
-        @*<div class="modal-footer"></div>*@
 
-    </div>
-
-    @if (Session["ErrorMessage"] != null)
-    {
-        <div id="myModalErrorHandle" class="modal" style="display:block">
-
-
-        @*<div class="modal-header"></div>*@
-        <div class="modal-content">
-
-            <div class="panel-heading panel-modal-heading">
-                MESSAGE: 
-                <span style="font-size:inherit" class="close" id="closeModalmessage">&times;</span>
-            </div>
-            <div class="panel-body panel-modal-body">
-                <p >@Session["ErrorMessage"].ToString()</p>
-            </div>
-
-        </div>
-               @{
-        if (Convert.ToBoolean(Session["fromLogin"]))
+        @if (Session["ErrorMessage"] != null)
         {
-            Session.Clear();
-        }
-        else
-        {
-            Session["ErrorMessage"] = null;
-        }
+            <div id="myModalErrorHandle" class="modal" style="display:block">
+            @*<div class="modal-header"></div>*@
+            <div class="modal-content">
+                <div class="panel-heading panel-modal-heading">
+                    MESSAGE: 
+                    <span style="font-size:inherit" class="close" id="closeModalmessage">&times;</span>
+                </div>
+                <div class="panel-body panel-modal-body">
+                    <p >@Session["ErrorMessage"].ToString()</p>
+                </div>
+            </div>
+                   @{
+            if (Convert.ToBoolean(Session["fromLogin"]))
+            {
+                Session.Clear();
+            }
+            else
+            {
+                Session["ErrorMessage"] = null;
+            }
                     
                    
-                }
+                    }
   
     
 
-        @*<div class="modal-footer"></div>*@
+            @*<div class="modal-footer"></div>*@
 
-        </div>
-    }
- 
-
-   
-            <div id="contentBody">
-                @RenderBody()
             </div>
-    
-  
-    <div class="col-md-12" style="margin: 10px 0px;; position: relative;">
-        <div style="background-color: rgba(255,0,10,0.9); display: inline-block; border-left: 5px solid rgba(255,0,10,0.9); border-right: 5px solid rgba(255,0,10,0.9); border-bottom: 5px solid rgba(255,0,10,0.9); height: 50px; border-radius: 30px; position: absolute;">
-            <img src="~/Images/icon-phone.png" style="height: 100%;">
+        }
+        <div id="contentBody" style="min-width: 500px;">
+            @RenderBody()
         </div>
-        <div style="display: inline-block; margin-left: 60px; padding: 6px; font-weight: 700;">
-            Toll Free: (844) 456-2543 <br />
-            Email: support@mlhuillierusa.com
+  
+        <div class="col-md-12" style="margin: 10px 0px;; position: relative;">
+            <div style="background-color: rgba(255,0,10,0.9); display: inline-block; border-left: 5px solid rgba(255,0,10,0.9); border-right: 5px solid rgba(255,0,10,0.9); border-bottom: 5px solid rgba(255,0,10,0.9); height: 50px; border-radius: 30px; position: absolute;">
+                <img src="~/Images/icon-phone.png" style="height: 100%;">
+            </div>
+            <div style="display: inline-block; margin-left: 60px; padding: 6px; font-weight: 700;">
+                Toll Free: (844) 456-2543 <br />
+                Email: support@mlhuillierusa.com
+            </div>
         </div>
     </div>
-</div>
 
     <footer class="footer-r">
         <div class="inner">
@@ -195,13 +178,17 @@
             </div>
         </div>
     </div>
+    @if (ViewBag.Title == "Sign Up")
+    {
+        @Html.Partial("_Agreement")
+    }
 
 </body>
 @RenderSection("scripts", required: false)
 @RenderSection("styes", required: false)
 </html>
 
-@if (ViewBag.Title != "Log In" && ViewBag.Title != "Sign Up" && ViewBag.Title != "Forgot Password")
+@if (ViewBag.Title != "Log In" && ViewBag.Title != "Sign Up" && ViewBag.Title != "Forgot Password" && ViewBag.Title != "Error")
 {
 <script>
 // 5mins popup

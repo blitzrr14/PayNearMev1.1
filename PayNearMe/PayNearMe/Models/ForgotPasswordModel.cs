@@ -24,6 +24,11 @@ namespace PayNearMe.Models
     public class ForgotPasswordModelResponse
     {
         public ForgotPasswordModel userData { get; set; }
+        public ForgotPasswordModelResponse() 
+        {
+            ForgotPasswordModel userData = new ForgotPasswordModel();
+            this.userData = userData;
+        }
         public Int32 code { get; set; }
         public String message { get; set; }
         public String encCID { get; set; }
