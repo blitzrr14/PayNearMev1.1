@@ -1,0 +1,91 @@
+﻿@model PayNearMe.Models.ForgotPasswordModel
+@{ ViewBag.Title = "Forgot Password"; }
+
+<div class="fpHeader">
+    <h2 class="col-md-12" style="color: white;"><b>Forgot Password</b></h2>
+</div>
+<div class="fpBody col-md-12">
+    <h2>Let's retrieve your account!</h2>
+    Please fill in all the fields shown.
+    
+    @using (Html.BeginForm("fpChangePassword", "ForgotPassword", FormMethod.Post, new { id = "ForgotPassword-Form", enctype = "multipart/form-data", @class = "fpDataContainer" }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="emailView" class="clearfix form-group fpDataHolder fpShow">
+            <div id="emailInnerView" class="fpInner fpInnerShow">
+                <div class="col-sm-5" style="padding-top: 15px;">
+                    What is your e-mail address ?
+                </div>
+                <div class="col-sm-7">
+                    @Html.TextBoxFor(model => model.email, new { @style = "width: 100%; text-align: center; text-transform: lowercase;", @placeholder = "e-mail address" })
+                    @Html.ValidationMessageFor(model => model.email)
+                </div>
+                <div class="col-sm-7 col-sm-offset-5 text-right">
+                    <button id="btnSendConfirmationCode" class="fpBtn" title="Request For A Code"
+                            type="button" onclick="checkEmail($('#email'))">
+                        Verify E-mail Address
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="codeView" class="clearfix form-group fpDataHolder fpHide">
+            <div id="codeInnerView" class="fpInner fpInnerHide">
+                <div class="col-sm-8" style="padding-top: 15px;">
+                    Please input confimation code sent to you via email
+                </div>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(model => model.securityCode, new { @style = "width: 100%; text-align: center; text-transform: uppercase;", @placeholder = "security code", @maxlength = 4 })
+                </div>
+                <div class="col-sm-7 col-sm-offset-5 text-right">
+                    <div style="border-right: 1px solid black; padding-right: 10px; padding-bottom: 5px; margin-right: 5px; display: inline-block;">
+                        <a title="Didn't receive any email? Click to resend"
+                           onclick="checkEmail($('#email'))" style="cursor: pointer;">
+                            Resend Code
+                        </a>
+                    </div>
+                    <button type="button" class="fpBtn" title="Apply request" onclick="checkCode($('#email'), $('#securityCode'))" style="text-align: justify;">Verify Code</button>
+                </div>
+            </div>
+        </div>
+        <div id="newpassView" class="clearfix form-group fpDataHolder fpHide">
+            <div id="newpassInnerView" class="fpInner fpInnerHide">
+                <div class="col-sm-5" style="padding-top: 15px;">
+                    New Password :
+                </div>
+                <div class="col-sm-7">
+                    @Html.TextBoxFor(model => model.fpNewPassword, new { @style = "font-size: 30px; width: 100%; text-align: center;", @placeholder = "new password", @type = "password" })
+                    <span class="msgPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                    <div id="msgfpNewPassword" class="msgPassError hidden"
+                         style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                    </div>
+                </div>
+                <div class="col-sm-5" style="padding-top: 15px;">
+                    Confirm New Password :
+                </div>
+                <div class="col-sm-7">
+                    @Html.TextBoxFor(model => model.fpConfirmPassword, new { @style = "font-size: 30px; width: 100%; text-align: center;", @placeholder = "confirm new password", @type = "password" })
+                    <span class="msgConfPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                    <div id="msgfpConfirmPassword" class="msgConfPassError hidden"
+                         style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                    </div>
+                </div>
+                <div class="col-sm-7 col-sm-offset-5 text-right">
+                    <button type="submit" class="fpBtn" title="Confirm New Password">Change Password</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="fpMsgModal" class="hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; z-index: 2001;">
+    <div class="col-md-12" style="background: red; font-size: 18px; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px; padding: 5px; border: 1px solid red;">
+        Message
+    </div>
+    <div class="col-md-12" style="background: white; border-bottom: 2px solid red; border-right: 1px solid red; border-left: 1px solid red; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+        <div id="msgContainer" class="col-md-12" style="text-align: center; margin: 5px;">Please Wait...</div>
+        <br />
+        <center>
+            <button id="fpmsgbtn" onclick="hideModals()" class="fpBtn">- OK -</button>
+        </center>
+    </div>
+</div>

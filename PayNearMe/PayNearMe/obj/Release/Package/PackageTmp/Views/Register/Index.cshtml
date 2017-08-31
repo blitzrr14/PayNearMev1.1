@@ -344,7 +344,10 @@
                     <label id="termAndConditionNotSelect">&nbsp;</label>
                     <p>
                         <strong style="padding-top:0px;">
-                            By clicking on "Sign Up" you are hereby accepting MLhuillier's Users Agreement and Privacy Policy.
+                            By clicking on "Sign Up" you are hereby accepting MLhuillier's
+                            <a id="_UAPLink" style="cursor: pointer;" onclick="showUAP()">
+                                <b>Users Agreement and Privacy Policy</b>
+                            </a><b>.</b>
                             @*<a class="page-link" href="javascript:void(0);" onclick="openUrlSecurityNewTab(this,'AggrementTermsAndConditionSignup.action?document=Signup')" data-useragree="@Url.Action("getServer","Register")">
                             User Agreement
                         </a> and
@@ -453,15 +456,22 @@
 
 <script>
     $(document).ready(function ()
-    {
-        $('#register-form').on('keyup keypress', function (e) {
+    {   $('#register-form').on('keyup keypress', function (e) {
             var keyCode = e.keyCode || e.which;
             if (keyCode === 13) {
                 e.preventDefault();
                 return false;
             }
         });
-
     })
-    
+
+    function showUAP() {
+        ajxloadtoggle()
+        $('#UAP-body').removeAttr('style');
+        setTimeout(function () {
+            $('#UAP-body').removeClass('UAP-hide');
+            $('#UAP-body').addClass('UAP-show');
+        }, 1);
+        
+    }
 </script>

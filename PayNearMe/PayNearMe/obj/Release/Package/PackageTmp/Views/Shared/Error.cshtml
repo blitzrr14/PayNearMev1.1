@@ -1,9 +1,67 @@
 ﻿@model PayNearMe.Models.ErrorModel
-@{
-    ViewBag.Title = "Error";
-}
-
-<h1 class="text-danger">Error: @Model.ErrorCode </h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-<h4 class="text-danger">@Model.ErrorMessage</h4>
-
+@{ ViewBag.Title = "Error"; }
+<style>
+    .fpHeader {
+        border: 2px solid #ff1c1c;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: red;
+        padding-top: 15px;
+        min-width: 630px;
+    }
+    .fpBody {
+        border: 2px solid lightgrey;
+        border-top: none;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 25px;
+        min-width: 630px;
+        min-height: 200px;
+    }
+    .fpBtn {
+        -webkit-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+        -moz-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+        -ms-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+        -o-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+        background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+        margin-top: 10px;
+        color: white;
+        border-radius: 5px;
+        border-top-color: #ff3F3F;
+        border-left-color: #ff3F3F;
+        border-right-color: #E70000;
+        border-bottom-color: #E70000;
+        padding: 5px;
+        outline: red;
+    }
+    .fpBtn:hover {
+        -webkit-background: linear-gradient(pink, red, red, red, red, darkred);
+        -moz-background: linear-gradient(pink, red, red, red, red, darkred);
+        -ms-background: linear-gradient(pink, red, red, red, red, darkred);
+        -o-background: linear-gradient(pink, red, red, red, red, darkred);
+        background: linear-gradient(pink, red, red, red, red, darkred);
+    }
+    .fpBtn:active {
+        -webkit-background: linear-gradient(darkred, red, red, red, red, red);
+        -moz-background: linear-gradient(darkred, red, red, red, red, red);
+        -ms-background: linear-gradient(darkred, red, red, red, red, red);
+        -o-background: linear-gradient(darkred, red, red, red, red, red);
+        background: linear-gradient(darkred, red, red, red, red, red);
+    }
+</style>
+@*<h1 class="text-danger">Error: @Model.ErrorCode </h1>*@
+<div class="fpHeader">
+    <h2 class="col-md-12" style="color: white;"><b>Error</b></h2>
+</div>
+<div class="fpBody col-md-12">
+    <h2>An error occurred while processing your request.</h2>
+    <h4>@Html.Raw((String)@Model.ErrorMessage)</h4>
+    @if (@Model.ErrorCode == "fp")
+    {
+        <div style="display: inline-block; padding: 6px 8px 3px 0; border-right: 1px solid gray; margin-right: 5px;">
+            <a href="/ForgotPassword/Index">> Go to Forgot Password</a>
+        </div>
+    }
+    <a href="/">Back to home</a>
+    
+</div>

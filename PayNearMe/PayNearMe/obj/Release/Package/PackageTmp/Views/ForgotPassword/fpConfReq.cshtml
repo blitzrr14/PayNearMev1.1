@@ -1,0 +1,175 @@
+﻿@model PayNearMe.Models.ForgotPasswordModel
+@{ ViewBag.Title = "Forgot Password"; }
+
+<div class="fpHeader">
+    <h2 class="col-md-12" style="color: white;"><b>Forgot Password</b></h2>
+</div>
+<div class="fpBody col-md-12">
+    <h2>Let's retrieve your account!</h2>
+    <div>
+        Please fill in all the fields shown.
+
+        @using (Html.BeginForm("fpChangePassword", "ForgotPassword", FormMethod.Post, new { id = "ForgotPassword-Form", enctype = "multipart/form-data", @class = "fpDataContainer", style = "min-height: auto;" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.TextBoxFor(model => model.email, new { @style = "display: none;" })
+            @Html.TextBoxFor(model => model.securityCode, new { @style = "display: none;" })
+
+            <div id="newpassView" class="clearfix form-group">
+                <div id="newpassInnerView" class="fpInner">
+                    <div class="col-sm-5" style="padding-top: 15px;">
+                        New Password :
+                    </div>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(model => model.fpNewPassword, new { id = "fpNewPassword", @style = "font-size: 30px; width: 100%; text-align: center;", @placeholder = "new password", @type = "password" })
+                        <span class="msgPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                        <div id="msgfpNewPassword" class="msgPassError hidden"
+                             style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                        </div>
+                    </div>
+                    <div class="col-sm-5" style="padding-top: 15px;">
+                        Confirm New Password :
+                    </div>
+                    <div class="col-sm-7">
+                        @Html.TextBoxFor(model => model.fpConfirmPassword, new { id = "fpConfirmPassword", @style = "font-size: 30px; width: 100%; text-align: center;", @placeholder = "confirm new password", @type = "password" })
+                        <span class="msgConfPassError glyphicon" style="position: absolute; right: 15px; padding: 15px;"></span>
+                        <div id="msgfpConfirmPassword" class="msgConfPassError hidden"
+                             style="width: 100%; text-align: center; font-size: 14px; color: #ff000a; padding: 5px;">
+                        </div>
+                    </div>
+                    <div class="col-sm-7 col-sm-offset-5 text-right">
+                        <button type="submit" class="fpBtn" title="Confirm New Password">Change Password</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div id="fpMsgModal" class="hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; z-index: 2001;">
+    <div class="col-md-12" style="background: red; font-size: 18px; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px; padding: 5px; border: 1px solid red;">
+        Message
+    </div>
+    <div class="col-md-12" style="background: white; border-bottom: 2px solid red; border-right: 1px solid red; border-left: 1px solid red; padding: 10px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+        <div id="msgContainer" class="col-md-12" style="text-align: center; margin: 5px;">Please Wait...</div>
+        <br />
+        <center>
+            <button id="fpmsgbtn" onclick="hideModals()" class="fpBtn">- OK -</button>
+        </center>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        var fpPassIndicator = false,
+            fpConfirmPass = false,
+            fpNewPassword = false;
+        $('input#fpNewPassword').focusout(function (e) {
+            var currInput = $(this).val(),
+                upperLetter = false,
+                smallLetter = false,
+                hasNumber = false;
+            fpPassIndicator = false;
+            fpConfirmPass = false;
+            fpNewPassword = false;
+
+            if (currInput == "")
+                inputInvalid('fpNewPassword', 'msgPassError', 'Password field is required');
+            else if (currInput.length < 8)
+                inputInvalid('fpNewPassword', 'msgPassError', 'Password should be atleast 8 characters long');
+            else {
+                for (var count = 0; (count < currInput.length && (!smallLetter || !hasNumber || !upperLetter)) ; count++) {
+                    if (!isNaN(currInput[count]))
+                    { hasNumber = true; }
+                    else if (currInput[count] == currInput[count].toUpperCase())
+                    { smallLetter = true; }
+                    else if (currInput[count] == currInput[count].toLowerCase())
+                    { upperLetter = true; }
+                }
+
+                if (smallLetter && hasNumber && upperLetter) {
+                    inputValid('fpNewPassword', 'msgPassError');
+                    fpPassIndicator = true;
+                    fpNewPassword = true;
+                }
+                else {
+                    fpPassIndicator = false;
+                    fpNewPassword = false;
+                    inputInvalid('fpNewPassword', 'msgPassError', 'Password must contain atleast 1 lowercase letter, 1 uppercase letter & 1 digit number');
+                }
+            }
+
+            if (fpPassIndicator) {
+                if ($('input#fpConfirmPassword').val() != $('input#fpNewPassword').val()) {
+                    inputInvalid('fpConfirmPassword', 'msgConfPassError', 'Password mismatch');
+                }
+                else {
+                    inputValid('fpConfirmPassword', 'msgConfPassError');
+                }
+            }
+            else {
+                $('.msgConfPassError').addClass('hidden');
+            }
+        });
+
+        $('input#fpConfirmPassword').keyup(function (e) {
+            if (fpPassIndicator) {
+                if (($(this).val() != $('input#fpNewPassword').val()) || $(this).val() == "" || $('input#fpNewPassword').val() == "") {
+                    fpConfirmPass = false;
+                    inputInvalid('fpConfirmPassword', 'msgConfPassError', 'Password mismatch');
+                }
+                else {
+                    fpConfirmPass = true;
+                    inputValid('fpConfirmPassword', 'msgConfPassError');
+                    $('span.msgPassError').removeClass('glyphicon-remove');
+                    $('span.msgPassError').removeClass('glyphicon-ok');
+                }
+            }
+        });
+
+        $('form#ForgotPassword-Form').submit(function (e) {
+            e.preventDefault();
+
+            if (fpPassIndicator && fpConfirmPass && fpNewPassword) {
+                ajxloadtoggle("Confirming new password...");
+                $.ajax({
+                    url: '../ForgotPassword/fpChangePassword',
+                    type: "POST",
+                    data: $('form#ForgotPassword-Form').serialize(),
+                    success: function (data) {
+                        if (data.code == 0)
+                            fpMsgBox(data.message);
+                        else if (data.code == 1) {
+                            fpMsgBox(data.message);
+                            setTimeout(function () {
+                                window.location.replace("/");
+                            }, 3000);
+                        }
+                        else {
+                            alert(data.message);
+                            ajxloadtoggle();
+                        }
+                    },
+                    error: function (error) {
+                        alert("Something went wrong, Please try again!");
+                        ajxloadtoggle();
+                    }
+                });
+            }
+        });
+    });
+
+    var globalEncCID = "", globalEncFN = "";
+
+    function fpMsgBox(msg) {
+        $('#fpMsgModal').removeClass('hidden');
+        document.getElementById('msgContainer').innerHTML = msg;
+    }
+
+    function hideModals() {
+        ajxloadtoggle('Loading...');
+        ajxloadtoggle();
+        $('#fpMsgModal').addClass('hidden')
+    }
+</script>

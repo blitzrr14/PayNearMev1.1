@@ -26,9 +26,6 @@ body {
   /*max-width: 1030px !important;*/
 }
 
-
- 
-
 header {
     margin-bottom: 8px;
 }
@@ -165,21 +162,19 @@ label {
 }
 
 @media (max-width: 630px) {
-     .last-login {
+  .last-login {
     font-size: 12px;
   }
   .welcome {
     font-size:15px;
-}
+  }
   .mlonline-msg {
     font-size: 15px;
     letter-spacing: 3px;
     line-height: 1.2px;
     text-shadow: 1px 1px black;
+   }
 }
-
-}
-
 
 .log-detail{
     background: #ff000a;
@@ -190,10 +185,7 @@ label {
     font-weight: 500;
     font-size:25px;
     padding: 10px;
-
 }
-
-
 
 .log-welcome {
     height: 70px;
@@ -201,7 +193,6 @@ label {
 }
 
 .item-detail {
- 
     padding: 0px 20px;
     /*background-image:url("../Images/Home/maxresdefault.jpg");*/
     background-image:url("../Images/Home/San Francisco Bridge.jpg");
@@ -211,11 +202,9 @@ label {
     width:100%;
     height:100%;
     color:white;
-
 }
 
-.quick-link-icon{
-   
+.quick-link-icon {
     background-position: center top;
     background-repeat: no-repeat;
     background-size: contain;
@@ -226,8 +215,7 @@ label {
     text-indent:-9999px;
 }
 
-.quick-link-icon{
-    
+.quick-link-icon {
     background-position: center top;
     background-repeat: no-repeat;
     background-size: contain;
@@ -434,3 +422,87 @@ label {
     
     width:90% !important;
 }
+
+/*-------------------------------ForgotPassword CSS-------------------------------------------*/
+.fpHeader {
+    border: 2px solid #ff1c1c;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: red;
+    padding-top: 15px;
+    min-width: 630px;
+}
+.fpBody {
+    border: 2px solid lightgrey;
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 15px;
+    min-width: 630px;
+}
+.fpDataContainer {
+    width: 600px;
+    margin: 0 auto;
+    font-size: 14px;
+    font-weight: lighter;
+    position: relative;
+    min-height: 290px;
+}
+.fpBtn {
+    -webkit-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+    -moz-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+    -ms-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+    -o-background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+    background: linear-gradient(pink, #de0000, #de0000, #de0000, #de0000, #720000);
+    margin-top: 10px;
+    color: white;
+    border-radius: 5px;
+    border-top-color: #ff3F3F;
+    border-left-color: #ff3F3F;
+    border-right-color: #E70000;
+    border-bottom-color: #E70000;
+    padding: 5px;
+    outline: red;
+}
+.fpBtn:hover {
+    -webkit-background: linear-gradient(pink, red, red, red, red, darkred);
+    -moz-background: linear-gradient(pink, red, red, red, red, darkred);
+    -ms-background: linear-gradient(pink, red, red, red, red, darkred);
+    -o-background: linear-gradient(pink, red, red, red, red, darkred);
+    background: linear-gradient(pink, red, red, red, red, darkred);
+}
+.fpBtn:active {
+    -webkit-background: linear-gradient(darkred, red, red, red, red, red);
+    -moz-background: linear-gradient(darkred, red, red, red, red, red);
+    -ms-background: linear-gradient(darkred, red, red, red, red, red);
+    -o-background: linear-gradient(darkred, red, red, red, red, red);
+    background: linear-gradient(darkred, red, red, red, red, red);
+}
+.fpDataHolder {
+    transition-duration: 1s;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    margin: 0 auto;
+}
+.fpHide {
+    width: 0%;
+    left: 50%;
+    z-index: -1;
+}
+.fpShow {
+    width: 100%;
+    left: 0%;
+    z-index: 1;
+}
+.fpInner {
+    transition-duration: 1s;
+    width: 600px;
+}
+.fpInnerHide {
+    transform: translateX(-50%);
+}
+.fpInnerShow {
+    transform: translateX(0%);
+}  
+/*--------------------------------------------------------------------------------------------*/
