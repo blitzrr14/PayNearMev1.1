@@ -3,15 +3,34 @@
         font-weight: bold;
     }
     li > span {
-        font-weight: lighter;
+        font-weight: 100;
+    }
+    .UAPLists {
+        padding: 0 15px;
+        margin: 20px 0;
+    }
+    .UAP-container {
+        position: fixed;
+        transition-duration: 1s;
+        z-index: 2001;
+        left: 50%;
+        transform: translateX(-50%);
+        color: black;
+    }
+    .UAP-show {
+        top: 100px;
+        opacity: 1;
+    }
+    .UAP-hide {
+        top: 130px;
+        opacity: 0;
     }
 </style>
-<div style="position: fixed; top: 100px; z-index: 2001; left: 50%; transform: translateX(-50%);">
+<div id="UAP-body" class="UAP-container UAP-hide" style="display: none;">
     <div class="fpHeader" style="min-width: 350px;">
         <h2 class="col-md-12" style="color: white;"><b>ML Remit User Agreement</b></h2>
     </div>
-    <div class="fpBody col-md-12" style="text-align: justify; min-width: 350px; background-color: white; height: 400px; overflow-y: scroll;">
-        
+    <div class="fpBody col-md-12" style="text-align: justify; min-width: 350px; background-color: white; height: 400px; overflow-y: scroll; font-weight: 100;">
         This User Agreement is solely between you, the “user” and M. Lhuillier Financial Services, Inc.,
         dba, ML Remit, (“ML”) which is effective as of the date you use the service.
         This contract governs the terms and conditions, under which you use and access ML’s online and mobile app services,
@@ -20,64 +39,802 @@
         your transaction with our third party partners.
         Should you not agree with these terms and conditions, please immediately stop using the service,
         exit the webpage or remove the mobile application from your device.
-        
-        <div style="padding: 0 15px; margin: 20px 0;">
-                <b>1. Definitions</b>
+        <hr />
+        <div class="UAPLists">
+            <b>1. Definitions.</b>
             <ol type="a">
                 <li>
+                    User, You, Customer, Sender:
                     <span>
-                        User, You, Customer, Sender: Refers to the individual that has registered to use ML’s
+                        Refers to the individual that has registered to use ML’s
                         services and has given consent to the Terms and Conditions set forth in this document.
                     </span>
                 </li>
                 <li>
+                    Company, MLFSI, us, we, our:
                     <span>
-                        Company, MLFSI, us, we, our: Refers to M.Lhuillier Financial Services, Inc.
+                        Refers to M.Lhuillier Financial Services, Inc.
                     </span>
                 </li>
                 <li>
+                    Receiver, Beneficiary:
                     <span>
-                        Receiver, Beneficiary:  Refers to the person who will receive your transaction.
+                        Refers to the person who will receive your transaction.
                     </span>
                 </li>
                 <li>
+                    Paying Agent:
                     <span>
-                        Paying Agent: Michel J. Lhuillier Financial Service (MJL) is the sole payer for all transactions paid in the Philippines.
+                        Michel J. Lhuillier Financial Service (MJL) is the sole payer for all transactions paid in the Philippines.
                     </span>
                 </li>
                 <li>
+                    Paying cash upon Sendout:
                     <span>
-                        Paying cash upon Sendout: MLFSI has an Agreement with a 3rd party licensed transmitter company, PayNearMe MT, Inc., who authorized the 7-Eleven stores as Agent to collect the cash from ML customers to complete the remittance transaction.
+                        MLFSI has an Agreement with a 3rd party licensed transmitter company, PayNearMe MT, Inc.,
+                        who authorized the 7-Eleven stores as Agent to collect the cash from ML customers to
+                        complete the remittance transaction.
                     </span>
                 </li>
                 <li>
+                    Transaction:
                     <span>
-                        Transaction: Refers to the request you made to send money abroad to your beneficiary.
+                        Refers to the request you made to send money abroad to your beneficiary.
                     </span>
                 </li>
                 <li>
+                    Sending Amount, Principal Amount:
                     <span>
-                        Sending Amount, Principal Amount: Refers to the principal amount you request to send to your beneficiary.
+                        Refers to the principal amount you request to send to your beneficiary.
                     </span>
                 </li>
                 <li>
+                    Transfer Fee:
                     <span>
-                        Transfer Fee: Refers to the service fee charged by MFLSI to process your transaction.
+                        Refers to the service fee charged by MFLSI to process your transaction.
                     </span>
                 </li>
                 <li>
+                    Exchange Rate:
                     <span>
-                        Exchange Rate:Refers to the amount paid to you per dollar in Philippine Pesos.
+                        Refers to the amount paid to you per dollar in Philippine Pesos.
                     </span>
                 </li>
                 <li>
+                    Payout Amount:
                     <span>
-                        Payout Amount:  Refers to the amount in Philippine peso amount your beneficiary will receive depending on the current exchange rate displayed before processing and completing your transaction.
+                        Refers to the amount in Philippine peso amount your beneficiary will receive depending on the current exchange rate displayed before processing and completing your transaction.
                     </span>
                 </li>
-                
-                
             </ol>
         </div>
+        <div class="UAPLists">
+            <b>2. General Information about our Services.</b>
+            <ol type="a">
+                <li>
+                    Eligible Users.
+                    <span>
+                        To access our Services as a Sender or Receiver, you must be at least eighteen (18) years old
+                        and be able to form legally binding contracts under applicable law.
+                        You must be a resident of the United States of America and reside in the State of California.
+                    </span>
+                </li>
+                <li>
+                    Eligible Transactions.
+                    <span>
+                        Money remittance transaction requests made through our website or mobile applications are
+                        only authorized for non-commercial  users.  In addition, money remittance transactions
+                        should only be processed for known beneficiaries; such as family members and never to strangers.
+                        You should never initiate or process a transaction on behalf of someone else.
+                        The user must always be the sender of the transaction.
+                    </span>
+                </li>
+                <li>
+                    Creating a Users.
+                    <span>
+                        To initiate the service, the user must register by creating a username and password.
+                        You may register by using our website and mobile application.  When a transaction is
+                        processed the information will be reviewed and we may either approve or reject a
+                        transaction based on our sole discretion.  MLFSI may request additional information
+                        either from you, the user, or from the beneficiary to make a determinationin regard
+                        to the completion of your transaction.MLFSIis a licensed money remittance company in
+                        California and is not registered as a money services business outside of the United States.
+                    </span>
+                </li>
+            </ol>
+        </div>
+        <div class="UAPLists">
+            <b>3. Information collected from user.</b>
+            <ol type="a">
+                <li>
+                    User Account.
+                    <span>
+                        To become a registered User, we require that you become a Known Customer,
+                        and we must gather the following personal information:  First, Middle (if applicable),
+                        Last Name, date of birth, mobile number, and other information necessary to identify you.
+                        In addition, we may require other information such as a copy of a valid government-issued
+                        identification, your social security number, your occupation, nationality and place of birth.
+                    </span>
+                </li>
+                <li>
+                    Beneficiary required information.
+                    <span>
+                        To complete a transaction, you must also provide the following beneficiary / receiver’s
+                        information: First, Middle (if applicable), Last Name, as it may appear in the receiver’s
+                        valid government-issued identification, which he/she will present to collect his/her transaction.,
+                        the country and city in which the beneficiary will collect his/her transaction.
+                        In addition, we may require additional beneficiary information, such as date of birth,
+                        place of birth and nationality.  In some cases, the beneficiary’s identification may be
+                        required to process the transaction.
+                    </span>
+                </li>
+            </ol>
+        </div>
+        <div class="UAPLists">
+            <b>4. Transaction information.</b>
+            <ol type="a">
+                <li>
+                    Principal / Sending Amount.
+                    <span>
+                        The <i> Principal / Transaction Amountin USD </i>
+                        is the amount you request to send to your beneficiary.
+                    </span>
+                </li>
+                <li>
+                    Transaction Fees.
+                    <span>
+                        As a registered user, you agree to pay a fee for the service provided,
+                        which is called a Transaction Fee.  Therefore, in addition,
+                        to the principal amount you request to send to your beneficiary you
+                        will be charged a transaction fee.
+                    </span>
+                </li>
+                <li>
+                    Exchange Rate.
+                    <span>
+                        The exchange rate applicable to your transaction will be displayed to  you for
+                        approval and confirmation before you complete a transaction. The exchange rate
+                        displayed for your approval and confirmation will be valid for a limited time.
+                        If you go to the 7-Eleven store to pay for your transaction after the time expires,
+                        the transaction is automatically canceled and you have to create a new transaction.
+                        Once you pay at 7-Eleven for your transaction and the transaction is completed,
+                        the exchange rate will remain the same until your transaction is collected by your beneficiary.
+                    </span>
+                </li>
+                <li>
+                    Other Charges.
+                    <span>
+                        If you use your mobile device to process a transaction, you are responsible for any fees
+                        that your phone service provider may charge, such as fees for SMS and data services.
+                    </span>
+                </li>
+            </ol>
+        </div>
+        <div class="UAPLists">
+            <b>5. Payment</b>
+            <div style="padding-left: 15px;">
+                Once you have agreed to the exchange rate and fees charged for your requested transaction,
+                the system will provide you with a code which you will use to make the payment at a PayNearMe/7-Eleven
+                location.  Once payment is received by 7-Eleven, you will be provided with a code and your transaction
+                is complete.  At this point your transaction is available for payout to your beneficiary.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>6. Transaction Payouts</b>
+            <div style="padding-left: 15px;">
+                Your transaction will be available for pick up at any M.Lhuillier branch in the Philippines.
+                You agree we are not responsible for any unforeseen event that may cause your transaction not
+                to be paid at the location your beneficiary chooses to go.Your beneficiary will be required to
+                provide a valid government issued identification and the transaction reference number to collect
+                his/her transaction.  You agree that if for any reason the beneficiary’s name does not completely
+                match the information in his/her identification, the payout location has the discretion not to release
+                the funds to the beneficiary.  At which point you must call MLFSI’s help desk to correct the beneficiary’s
+                information. <br />
+                You agree that you will not hold us liable for any damages resulting from our payout partner’s decision
+                not to provide you or your beneficiary service based on their discretion and criteria.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>7. Transaction Restrictions</b>
+            <div style="padding-left: 15px;">
+                At any time of the transaction process, we may refuse a transaction based solely on our discretion.
+                Reasons for which we may refuse a transaction at any time may be due to the aggregated amount you have
+                sent within a certain period of time, number of transactions you have made within a period of time, number
+                of beneficiaries associated to your account, users within your same mailing address.  We reserve the right
+                at any time, and from time to time, to modify or discontinue the service with or without notice. <br />
+                You agree to notify us immediately after any unauthorized use of your account / username and password.
+                Your username and password are confidential and you agree to never share such information with anyone.
+                We have the right to disable your username and password, whether chosen by you or provided by us, in our
+                sole discretion.
+            </div>
+            <ol type="a">
+                <li>
+                    Delays.
+                    <span>
+                        We do our best to process your transaction in a timely manner, however there might be cases
+                        in which intentionally and without prior noticewe may  delay your service for reasons relating
+                        but not limited to the following:
+                    </span>
+                    <ol type="i">
+                        <li>
+                            Identity Verification
+                        </li>
+                        <li>
+                            Fraud
+                        </li>
+                        <li>
+                            Anti Money Laundering(AML) Compliance Review
+                        </li>
+                        <li>
+                            Contacting User / Beneficiary for Verification
+                        </li>
+                        <li>
+                            Comply with Applicable Law
+                        </li>
+                        <li>
+                            System availability
+                        </li>
+                        <li>
+                            Currency availability
+                        </li>
+                        <li>
+                            Paying Agent Delays
+                        </li>
+                    </ol>
+                    Refund is available for certain circumstances as described below in <a href="#8c">Section 8c</a>.
+                </li>
+                <li style="padding-top:5px;">
+                    Commercial Transactions
+                </li>
+                <li style="padding-top: 5px;">
+                    Unauthorized Transactions.
+                    <span>
+                        You may not use the Service in violation of this User Agreement or applicable laws rules or regulations.
+                        It is a violation of this User Agreement to use the Service for any of the following activities (without
+                        limitation): sexually-oriented materials or services, gambling activities, fraud, money-laundering,
+                        funding terrorist organizations; purchase or sale of tobacco, firearms, prescription drugs, or other
+                        controlled substances; or sending money to a Beneficiary that has violated the User Agreement.If you use
+                        the Service in connection with illegal conduct, we reserve the right to report you to the appropriate law
+                        enforcement agency or agencies. The Service is intended for our customers to send or request money transfers
+                        to family members and friends.  We may, in our sole discretion, cancel any Transaction and close any account
+                        that we suspect is being utilized for any purpose prohibited by this User Agreement including sending
+                        Transactions from, to or on behalf of a business or other non-human entity. You acknowledge that Company
+                        is not liable for your use of the Service in violation of this User Agreement.
+                    </span>
+                </li>
+                <li style="padding-top: 5px;">
+                    Ineligibility.
+                    <span>
+                        We may, in our sole discretion, refuse Transactions from certain Senders, for certain Beneficiaries,
+                        including without limitation, toindividuals that are included on the Specially Designated Nationals
+                        list, Non-cooperative Countries and Territories list, and such other lists as may be issued from time
+                        to time by the U.S. Department of Treasury and other government agencies.
+                    </span>
+                </li>
+                <li style="padding-top: 5px;">
+                    Third Party Transactions.
+                    <span>
+                        You may not process a transaction on behalf of someone else, even if the person is related to you.
+                        That person must register for its own username and password. You may not process a transaction on
+                        behalf of a business or other non-human entity such as a charitable organization. We have the right
+                        to cancel a transaction and or service for any person that violates this requirement.
+                    </span>
+                </li>
+                <li style="padding-top: 5px;">
+                    Other.
+                    <span>
+                        As a user of our service or in the course of your interactions with the service, you will not:
+                    </span>
+                    <ol type="i">
+                        <li>
+                            Breach this User Agreement, or any other agreement between you and the Company;
+                        </li>
+                        <li>
+                            Open more than one account
+                        </li>
+                        <li>
+                            Provide false, inaccurate, or misleading information
+                        </li>
+                        <li>
+                            Refuse to cooperate in an investigation or provide confirmation of your identity
+                            or any information you provide to us;
+                        </li>
+                        <li>
+                            User an anomyizing proxy;
+                        </li>
+                        <li>
+                            Share Transaction numbers or information with anyone except the Company, your Recipient,
+                            or Beneficiary, and you will advise your Sender, Recipient or Beneficiary not to share Transaction
+                            numbers or information; or
+                        </li>
+                        <li>
+                            Violate any other restrictions in this User Agreement.
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+        <div class="UAPLists">
+            <b>8. Changes, Cancellation, Claims / Right to Dispute, and Refund Policy</b>
+            <ol type="a">
+                <li>
+                    Changes.
+                    <span>
+                        If your beneficiary’s information is incorrect, you may request a change by calling the MLFSI Customer
+                        Care 24-hour service at (844) 456-2543.  If your transaction has not been paid out, your request will be
+                        approved and you will be contacted and provided with a new reference number. Your receiver must present
+                        this new reference number and a valid government-issued identification that fully and correctly displays
+                        the name of the receiver in the new transaction.  If you would like to change your receiver’s name, you
+                        must request CANCELLATION request.  We reserve the right to ask additional information with the purpose
+                        of verifying your identity when you call to request any change.
+                    </span>
+                </li>
+                <li>
+                    Cancellation.
+                    <span>
+                        If you wish to cancel your transaction for a refund you must call MLFSI Customer Care 24-hour service
+                        at (844) 456-2543 to file a Cancellation request.  If your transaction has not been paid out, your
+                        Cancellation request will be approved and you will be mailed a check for the principal amount of your
+                        transaction. Cancellation Requests will be processed and completed within 30 calendar days.
+                    </span>
+                </li>
+                <li id="8c">
+                    Refunds.
+                    <span>
+                        Subject to regulatory constraints and MLFSI’s compliance policies, strives to grant refunds to all
+                        customers in a timely fashion. We will notify you of our decision whether to approve the refund in
+                        writing via email or mail. Please remember that Receivers cannot request the cancellation of a transaction.
+                        Refunds will be issued after a Cancellation request has been approved. All refunds will be issued in checks.
+                        You will receive your refund check in the mail for the principal amount. If you CANCEL your transaction due
+                        to a problem relating to the service you are entitled for a full refund.  To receive a full refund, you must
+                        file a CLAIM and REFUND request.
+                        <span style="padding-top: 10px; display: block;">
+                            A refund requested for a Transaction cancelled by the Sender within 30 minutes of payment for such Transaction
+                            will be processed within five (5) business days. A refund requested for a Transaction cancelled after
+                            30 minutes of payment for such transaction it will be processed within thirty (30) calendar days.
+                        </span>
+                        <span style="padding-top: 10px; display: block;">
+                            We have the discretion to hold any transfers that have not been picked up <span style="text-decoration: line-through">within</span> after 90 days from the day
+                            you paid for the Transaction.
+                        </span>
+                        <span style="padding-top: 10px; display: block;">
+                            Refunds are only made in US dollars and will not be adjusted to account for changes in the value of the
+                            US dollar or any foreign currency from the time that you paid for the Transaction.
+                        </span>
+                        <span style="padding-top: 10px; display: block;">
+                            In the event that we deny a Transaction after payment has been received at 7-Eleven, the Transaction will
+                            be treated as if it had been cancelled and, subject to our refund policy, a refund will be processed by ML
+                            within five (5) business days of the date the Transaction is denied.
+                        </span>
+                        <span style="padding-top: 10px; display: block;">
+                            The customer is entitled to a refund of the money to be transmitted as a result of the agreement if
+                            M. LHUILLIER FINANCIAL SERVICES, INC. does not forward the money received from the customer within 10 days
+                            of the date of its receipt, or does not give instructions committing an equivalent amount of money to the
+                            person designated by the customer within 10 days of the date of the receipt of the money from the customer
+                            unless otherwise instructed by the customer. If the customer’s instructions as to when the moneys shall be
+                            forwarded or transmitted are not complied with and the money has not yet been forwarded or transmitted the
+                            customer has a right to a refund of the customer’s money.
+                        </span>
+                        <br />
+                        If the consumer wants a refund, the consumer must mail or deliver his or her written request to: <br />
+                        <br />
+                        M. LHUILLIER FINANCIAL SERVICES, INC. <br />
+                        21700 Oxnard St., Suite 940 <br />
+                        Woodland Hills, CA 91367 <br />
+                        <br />
+                        If the customer does not receive a refund, the customer must be entitled to his/her money back plus a
+                        penalty of up to $1,000 and attorney’s fees pursuant to Section 2102 of the California Financial Code.
+                    </span>
+                </li>
+            </ol>
+        </div>
+        <div class="UAPLists">
+            <b id="9">9. Dispute:</b>
+            <ol type="a">
+                <li>
+                    Right to Dispute:
+                    <span>
+                        You have the right to dispute errors in your transaction. If you think there is an error,
+                        contact us within 180 days at 1844-456-2543 or <span style="color: darkred;">support@mlhuillierusa.com</span>.
+                        You can also contact us for a written explanation of your rights. You can cancel for a full refund
+                        within 30 minutes of payment, unless the funds have been picked up or deposited.
+
+                        <span style="padding-top: 10px; display: block;">
+                            For questions or complaints about M. Lhuillier Financial Services, Inc. contact:
+                        </span>
+                        <span style="padding-top: 10px; display: block;">
+                            California Department of Business Oversight:
+                        </span>
+                        866-275-2677 <br />
+                        <a href="http://www.dbo.ca.gov" target="_blank">www.dbo.ca.gov</a>
+                        <span style="padding-top: 10px; display: block;">
+                            Consumer Financial Protection Bureau:
+                        </span>
+                        855-411-2372 <br />
+                        855-729-2372 (TTY/TTD)<br />
+                        <a href="https://www.consumerfinance.gov" target="_blank">www.consumerfinance.gov</a>
+                    </span>
+                </li>
+            </ol>
+        </div>
+        <div class="UAPLists">
+            <b>10. RESOLVING ERRORS</b>
+            <div style="padding-left: 15px;">
+                In accordance with Electronic Fund Transfers (Regulation E), “allows a sender to provide notice of an error
+                within 180 days of the promised date of delivery of a remittance transfer.” MLFSI will proceed as follows:
+                <div style="padding-top: 5px;">
+                    Upon receiving the sender’s notice of an error, MLFSI will launch an investigation and
+                    correct the error within 90 days of receiving the error notice.
+                </div>
+                <ol style="font-weight: 100;">
+                    <li>
+                        MLFSI will report results to sender within three business days after completing the investigation
+                    </li>
+                    <li>
+                        If error occurred, MLFSI will report the results orally or in writing and must correct error within
+                        one business day, or as soon as reasonably practicable or receiving sender’s instructions.
+                    </li>
+                    <li>
+                        If no error has occurred, MLFSI will give the sender a written explanation of the results of the
+                        investigation, and notify the sender that he or she has the right to request any documentation MLFSI
+                        relied upon in making the determination. In addition, MLFSI must also provide a written explanation
+                        if you determine that an error occurred but the error is of a different type or a different amount
+                        than the error that the sender reported.
+                    </li>
+                </ol>
+                Sender must request with MLFSI headquarters, including any documentation with respect to the alleged error,
+                by e-mail to <span style="color: darkred;">support@mlhuillierusa.com</span>. After the conclusion of the
+                investigation all supporting documentation pertaining to the error will be retained by MLFSI for a period
+                of two years from the date the error notification was filed by the sender. A customer who cannot come to an
+                MLFSI branch may call the customer service hotline at 1-877-688-4588 and file the Error Inquiry Request Form
+                orally through a MLFSI customer service representative.
+            </div>
+
+        </div>
+        <div class="UAPLists">
+            <b>11. Privacy Policy</b>
+            <div style="padding-left: 15px;">
+                M. Lhuillier Financial Services, Inc. does not disclose any non-public personal or financial information about
+                its customers to anyone except as permitted by the California Financial Information Privacy Act (CFIPA) and the
+                Gramm-Leach-Bliley Act. We do not sell or exchange customer lists or customer information. We collect, use and
+                verify the information we believe necessary to complete authorized transactions. Customer information is utilized
+                to evaluate, process, administer and enforce the transactions our customers request and authorize. Therefore, in
+                compliance with CFIPA we may disclose customer information that we collect, in order to establish, administer and
+                manage the customer’s money transmissions to our affiliates. We may also disclose customer personal information,
+                as permitted by laws mentioned above and other Anti-Money Laundering Laws, to non-affiliated third parties in
+                connection with a subpoena or similar legal process, a fraud investigation, to record a public record or as part
+                of an audit or examination. We will also use personal information to identify our customers, to communicate with
+                them, and to help us respond to their questions.
+                <div style="padding-top: 10px;">
+                    Only authorized M. Lhuillier Financial Services, Inc. employees, who are trained in the proper handling of
+                    customer’s personal information, will have access to personal information. Employees who violate our privacy
+                    policy will be subject to our disciplinary procedures. We maintain physical, electronic and procedural safeguards
+                    to protect personal information. We continually assess new technology for protecting information and upgrade our
+                    systems when appropriate. Whenever we hire other organizations to provide us or our customers with services, we
+                    require them to conform to our privacy standards, to allow us to audit them for compliance and to enter a
+                    confidentiality agreement that restricts the use of personal information to those purposes intended and prohibits
+                    independent use of the information.
+                </div>
+                <div style="padding-top: 10px;">
+                    If a customer wishes to request their record of transaction they must fill out M. Lhuillier Financial Services,
+                    Inc.’s Customer’s Record of Remittance Request Form, available upon request with the customer service contact
+                    which must be signed and completed to process the request. The form includes the following fields:
+                </div>
+                <ol style="font-weight: 100;">
+                    <li>
+                        Date of Request
+                    </li>
+                    <li>
+                        Customer Name
+                    </li>
+                    <li>
+                        Address
+                    </li>
+                    <li>
+                        Phone
+                    </li>
+                    <li>
+                        Information Requested
+                    </li>
+                    <li>
+                        Date in which information was provided
+                    </li>
+                    <li>
+                        Type of Identiification
+                    </li>
+                    <li>
+                        Identification Number
+                    </li>
+                    <li>
+                        Expiration Date
+                    </li>
+                    <li>
+                        Date of Birth
+                    </li>
+                    <li>
+                        Signature
+                    </li>
+                    <li>
+                        Copy of Picture ID
+                    </li>
+                </ol>
+                The form shall be processed by the Compliance Department. The record will be delivered to the customer at a
+                branch location or by mail, which ever method the customer chooses. All customer requests will be locked and
+                maintained for a period of five years in compliance with regulatory requirements.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>12. Know Your Customer Policy</b>
+            <div style="padding-left: 15px">
+                In general, and at a minimum, even where transactions do not reach or breach the record keeping requirement
+                under the Bank Secrecy Act, MLFSI shall take reasonable steps to ensure that the customer is who he/she
+                claims to be. You authorize us, directly or through third parties, to make any inquiries we consider
+                necessary to validate the information that you provide to us. This may require you to take additional
+                steps to confirm ownership or your e-mail address, mobile device, or verifying your information against
+                third party databases or through other sources, which may also include verifying your Beneficiary’s information.
+                MLFSI reserves the right to require additional identification and/or information, including the source of money,
+                purpose and relation to counterparty to affect a transaction. It also reserves the right to reject a transaction
+                that, in its sole determination, is inconsistent with MLFSI’s compliance policies or where data supplied to it
+                are insufficient to make a certain conclusion.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>13. Fraud</b>
+            <div style="padding-left: 15px">
+                MLFSI shall exert all efforts to properly identify and verify the identity of its customers it shall also endeavor
+                to identify and do continuing due diligence of its own directors, the senior management and employees and undertakes
+                to do the following:
+
+                <ul>
+                    <li>
+                        Part of MLFSI’s hiring policy is a background check of the applicant or prospective hire to uncover any
+                        possible previous criminal record or unlawful activity and the possibility that the prospective employee
+                        has a connection with a terrorist organization.
+                    </li>
+                    <li>
+                        Monitor or look out for some of the indicative behaviors in an employee:
+                        <ol style="font-weight: 100">
+                            <li>
+                                The employee is living beyond his/her known financial means;
+                            </li>
+                            <li>
+                                Refuses to take vacations or scheduled/agreed vacations;
+                            </li>
+                            <li>
+                                Attempts to have exclusive business relationship with certain clients or agents of MLFSI;
+                            </li>
+                            <li>
+                                Habitually stays working at off hours.
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+                Failure to notice clear and manifest signs that some of their own or fellow employees may be involved in activities
+                that violate the BSA, which may render MLFSI as willfully blind to the actions that the employee may be conducting
+                in violation of the BSA. Thus, it is critical for all personnel within MLFSI to be vigilant about unusual behavior
+                within their ranks.
+                <div style="padding: 5px 0;">
+                    To facilitate detection and prompt resolution of any such concerns, MLFSI deems it proper for the Compliance Officer
+                    to receive and promptly report to the Chief Operating Officer (COO) or Chief Executive Officer (CEO) any complaints
+                    and concerns arising from potential BSA violations among the staff or employees.
+                </div>
+                PROTECT YOURSELF FROM SCAMS AND FRAUD. Only send money to people you know or pay, safeguard your password, send or request
+                for yourself and not on behalf of others, and use our services for legal purposes only.
+
+                <div style="padding-top: 5px">
+                    ML is not responsible for completed transactions (paid transactions) that are later on, you the user discovered to be fraud.
+                    In order to prevent Fraud please carefully read the FRAUD Prevention Section of this agreement.
+                </div>
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>14. State Disclosures</b>
+            <div style="padding-left: 15px">
+                <b>California.</b> If you have complaints with respect to any aspect of the money transmission activities conducted
+                by M.Lhuillier Financial Services, Inc., you may contact the California Department of Business Oversight at its
+                toll-free telephone number, 1-866-275-2677, by email at consumer.services@dbo.ca.gov, or by mail at Department of
+                Business Oversight, Consumer Services, 1515 K Street, Suite 200, Sacramento, CA 95814
+                <div style="padding-top: 5px;">
+                    <b>RIGHT TO REFUND:</b> You, the customer, are entitled to a refund of the money to be transmitted as the result
+                    of this agreement if M. LHUILLIER FINANCIAL SERVICES, INC. does not forward the money received from you within 10
+                    days of the date of its receipt, or does not give instructions committing an equivalent amount of money to the
+                    person designated by you within 10 days of the date of the receipt of the funds from you unless otherwise instructed
+                    by you. If your instructions as to when the moneys shall be forwarded or transmitted are not complied with and the
+                    money has not yet been forwarded or transmitted you have a right to a refund of your money. If you want a refund,
+                    you must mail or deliver your written request to M. LHUILLIER FINANCIAL SERVICES, INC. at 21700 Oxnard St., Suite
+                    940, Woodland Hills, CA 91367. If you do not receive your refund, you may be entitled to your money back plus a
+                    penalty of up to $1,000 and attorney’s fees pursuant to Section 2102 of the California Financial Code.
+                </div>
+                <div style="padding-top: 5px; font-weight: bold;">
+                    KARAPATAN SA PAG-REFUND: Ikaw, bilang kustomer ay may karapatan na maibalik ang iyong perang ipadadala bunga ng
+                    kasunduan na ito kung ang M. LHUILLIER FINANCIAL SERVICES, INC ay hindi ipinadala ang perang natanggap mula sa
+                    iyo sa loob ng 10 araw simula sa petsa ng resibong ito o hindi nakapagbigay ng mga tagubilin na nangangako ng
+                    katumbas na halaga ng pera sa taong iyong itinalaga sa loob ng 10 araw simulasa petsa ng pagtanggap ng pondo mula
+                    sa iyo, maliban na lamang kung mayroon kang ibang tagubilin. Kung ang iyong mga tagubilin ay kung kailan dapat
+                    ipadadala ang pera o kung ang paghahatid ay hindi pa naisakatuparan at ang pera ay hindi pa naipadadala o
+                    naihahatid, may karapatan kang maibalik ang iyong pera. Kung nais mong maibalik ito, kailangan mong magpadala ng
+                    sulat na kahilingan sa M. LHUILLIER FINANCIAL SERVICES, INC. at 21700 Oxnard St., Suite 940, Woodland Hills,
+                    CA 91367. Kung hindi mo natanggap pabalik ang iyong pera, maaari mong makuha pabalik ang iyong pera dagdag ang
+                    isang multa na maaaring umabot sa $1,000 at kabayaran para sa abogado na sa ngayon sa Seksyon na 2102 ng
+                    Batas para Pampinansyal ng California (California Financial Code).
+                </div>
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>15. Intellectual Property</b>
+            <div style="padding-left: 15px">
+                You acknowledge that the Service, including but not limited to the content of our websites, text, graphics, links,
+                buttons, logos, and images, as well as all other patents, copyrights, trademarks, trade secrets, service marks, logos,
+                and product and service names are owned exclusively by Company (the "Intellectual Property"). You agree not to display,
+                use, copy, or modify the Intellectual Property in any manner. You are authorized solely to view and retain a copy of
+                the pages of our websites for your own personal, non-commercial use. You further agree not to: (i) engage in or use any
+                automated devices, data mining, robots, scraping or similar data gathering or extraction methods to access or use the
+                Service; (ii) modify, copy, frame, scrape, rent, lease, loan, sell, distribute or create derivative works based on the
+                Service, in whole or in part, except that the foregoing does not apply to the information that you legally upload to
+                the Service; (iii) remove or alter any author, trademark or other proprietary notice or legend displayed on our
+                websites (or printed pages thereof); or (iv) infringe Company's or any third party's copyright, patent, trademark,
+                trade secret or other intellectual property rights, or rights of publicity or privacy.
+                <div style="padding: 5px 0;">
+                    The technology and software underlying the Service or distributed in connection therewith are the property of
+                    M. Lhuillier Financial Services, Inc., its affiliates and Service Providers (the "Software"). Subject to the terms
+                    and conditions of this User Agreement, ML hereby grants you a non-transferable, non-sublicensable, and
+                    non-exclusive right and license to use the object code of any Software on your device(s) solely in connection with
+                    the Service, provided that you agree not to copy (except as expressly provided herein), modify, create a derivative
+                    work of, reverse engineer, reverse assemble or otherwise attempt to discover any source code, sell, assign,
+                    sublicense, or otherwise transfer any right in the Software. Any rights not expressly granted herein are reserved
+                    by Company.
+                </div>
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>16. Disclaimer and Warranties</b>
+            <div style="padding-left: 15px;">
+                THE SERVICE AND SOFTWARE, IF APPLICABLE, IS PROVIDED "AS IS" AND WITHOUT ANY WARRANTY OR CONDITION, EXPRESS, IMPLIED
+                OR STATUTORY. WE, OUR SUBSIDIARIES, EMPLOYEES, SUPPLIERS, VENDORS, AND SERVICE PROVIDERS SPECIFICALLY DISCLAIM ANY
+                IMPLIED WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. <br />
+                We make reasonable efforts to ensure that Transactions are processed in a timely manner, but we make no representations
+                or warranties regarding the time needed to complete processing because the Service is largely dependent on many factors
+                outside our control. Some jurisdictions do not allow the disclaimer of implied warranties, so the foregoing disclaimer
+                may not apply to you. Notwithstanding the foregoing, you may have a right to a refund as expressly described herein.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>17. Dispute Resolution by Binding Arbitration</b>
+            <ol type="a">
+                <li>
+                    Disputes.
+                    <span>
+                        If a dispute arises between you and Company, our goal is to learn about and address your concerns.
+                        If we are unable to address your concerns to your satisfaction, we will seek to provide you with a neutral
+                        and cost-effective means of resolving the dispute quickly. Disputes between you and Company regarding the
+                        Service may be reported to <a href="#9">Customer Service</a> (See Section 9)
+                    </span>
+                </li>
+                <li>
+                    Arbitration.
+                    <span>
+                        For any claim (excluding claims for injunctive or other equitable relief) where the total amount of the award
+                        sought is less than $10,000.00 USD, the party requesting relief may elect to resolve the dispute in a
+                        cost-effective manner through binding non-appearance-based arbitration. If a party elects arbitration, that
+                        party will initiate such arbitration through an established alternative dispute resolution ("<b>ADR</b>")
+                        provider mutually agreed upon by the parties. The ADR provider and the parties must comply with the following
+                        rules: (i) the arbitration shall be conducted by telephone, online and/or be solely based on written submissions,
+                        with the specific manner to be chosen by the party initiating the arbitration; (ii) the arbitration shall not
+                        involve any personal appearance by the parties or witnesses unless otherwise mutually agreed by the parties;
+                        and (iii) any judgment on the award rendered by the arbitrator may be entered in any court of competent jurisdiction.
+                    </span>
+                </li>
+            </ol>
+        </div>
+        <div class="UAPLists">
+            <b>18. Limitation of Liability</b>
+            <div style="padding-left: 15px;">
+                EXCEPT FOR CLAIMS UNDER SECTION 2102 OF THE CALIFORNIA FINANCIAL CODE ARISING FROM TRANSACTIONS ORIGINATING IN
+                CALIFORNIA, IN NO EVENT SHALL COMPANY, ITS SUPPLIERS, VENDORS, SERVICE PROVIDERS, SERVICE COMPANIES, OR THEIR
+                RESPECTIVE SUBSIDIARIES, OFFICERS, DIRECTORS, AGENTS, PARTNERS, EMPLOYEES OR CONSULTANTS BE LIABLE FOR ANY DIRECT,
+                INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR EXEMPLARY DAMAGES BEYOND THE SUM OF $500.00 (IN ADDITION TO REFUNDING
+                THE TRANSACTION AMOUNT AND TRANSACTION FEES), INCLUDING BUT NOT LIMITED TO, DAMAGES FOR LOSS OF PROFITS, GOODWILL,
+                USE, DATA OR OTHER INTANGIBLE LOSSES (EVEN IF COMPANY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES) RESULTING
+                FROM NEGLIGENCE ON THE PART OF COMPANY, ITS SUPPLIERS, VENDORS, SERVICE PROVIDERS, SERVICE COMPANIES, OR THEIR
+                RESPECTIVE SUBSIDIARIES, OFFICERS, DIRECTORS, AGENTS, PARTNERS, EMPLOYEES OR CONSULTANTS.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>19. Indemnity</b>
+            <div style="padding-left: 15px;">
+                You agree to indemnify and hold Company, its suppliers, vendors, Service Providers, Service Companies and their
+                respective subsidiaries, officers, directors, agents, partners, employees, and consultants harmless from any claim
+                or demand, including reasonable attorneys' fees, made by any third-party due to or arising out of your use of the
+                Service, your connection to the Service, your violation of the User Agreement or any law, or your violation of any
+                rights of a third party.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>20. Electronic Communications</b>
+            <div style="padding-left: 15px;">
+                You acknowledge that this User Agreement shall be entered into electronically. Unless otherwise required by applicable
+                law, the following categories of information ("<b>Communications</b>") will only be provided by electronic means and not in
+                paper format or through other non-electronic means: (i) this User Agreement and our Privacy Policy and any amendments,
+                modifications or supplements to them; (ii) your records of Transactions through the Service; (iii) any initial,
+                periodic or other disclosures or notices provided in connection with the Service, including without limitation those
+                required by federal or state law; (iv) any customer service communications, including without limitation communications
+                with respect to claims of error or unauthorized use of the Service; and (v) any other communication related to Company
+                or the Service. <br />
+                You may withdraw your consent to receive all Communications electronically, but if you do, your use of the Service
+                shall be terminated. In order to withdraw your consent, you must contact us using our contact information at the end
+                of this User Agreement. <br />
+                In order to access and retain Communications, you must have: (i) an Internet browser that is java-script enabled, and
+                supports 128-bit encryption and the acceptance of first party cookies, (ii) an e-mail account and the capability to
+                read e-mail from M. Lhuillier, and (iii) a device and Internet connection capable of supporting the foregoing.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>21. Entire Agreement</b>
+            <div style="padding-left: 15px;">
+                The User Agreement constitutes the entire agreement between you and Company relating to the Service and governs your
+                use of the Service, superseding any prior agreements between you and Company or any other party in connection with the
+                Service.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>22. Changes to the Terms and Conditions</b>
+            <div style="padding-left: 15px;">
+                We reserve the right to withdraw or amend this Service, and any material we provide for the Service, in our sole
+                discretion without notice, except as otherwise required by law. We will not be liable if for any reason all or any
+                part of the Service is unavailable at any time or for any period. From time to time, we may restrict access, in our
+                sole discretion, to some parts of the Service, or the entire Service, to certain Users.
+                <div style="padding-top: 5px;">
+                    We may amend these Terms & Conditions at any time by posting a revised version on <span style="color: darkred;">mlremit.com</span>
+                    or any other website that we maintain for the purposes of providing the Services. The most current version of the
+                    Terms & Conditions will supersede all previous versions and are effective at the time we post them. We encourage you
+                    to periodically review our agreements to stay informed of our updates and to take notice of any changes we make, as
+                    they are binding on you. We may provide you with notice regarding material upcoming changes to the Terms &
+                    Conditions by email or SMS. You agree that your continued use of the Service following the posting of revised Terms
+                    & Conditions means that you accept and agree to the revised Terms & Conditions.
+                </div>
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>23. Customer Updates</b>
+            <div style="padding-left: 15px;">
+                You must promptly update us with any change in your e-mail address and telephone number by updating your profile on our
+                websites. If we do not have correct contact information, we may not be able to notify you with important information or
+                changes in your Transaction status.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>24. Licenses</b>
+            <div style="padding-left: 15px;">
+                M. Lhuillier Financial Services, Inc. is licensed as a money transmitter in the state of California by the
+                Department of Business Oversight.
+            </div>
+        </div>
+        <div class="UAPLists">
+            <b>25. Contact Information</b>
+            <div style="padding-left: 15px;">
+                Questions, notifications, and requests for refunds or further information can be sent to us, as follows: online; by
+                telephone at (844) 456-2543 (outside the United States, call +1 (818-8886100)); or by mail at M. Lhuillier Financial
+                Services, Inc. Customer Service, 21700 Oxnard Street, Suite 940, Woodland Hills, CA 91367.
+            </div>
+        </div>
+        <hr />
+        <center>
+            <button id="btnUAP" class="fpBtn">Accept & Agree to Terms and Conditions</button>
+        </center>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#btnUAP').click(function () {
+            $('#UAP-body').addClass('UAP-hide');
+            $('#UAP-body').removeClass('UAP-show');
+            setTimeout(function () {
+                $('#UAP-body').attr('style', 'display: none;');
+            }, 1000);
+            ajxloadtoggle()
+            $('span#displayPolicyChecker').removeClass('hidden');
+            document.getElementById('privacyPolicyAgreement').checked = true;
+        })
+    });
+</script>
