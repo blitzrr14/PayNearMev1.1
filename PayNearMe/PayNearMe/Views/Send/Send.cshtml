@@ -3,7 +3,6 @@
     ViewBag.Title = "Send";
 }
 
-
 <div class="page">
     <div id="f1_upload_process" style="display: none"></div>
     <!-- including body part -->
@@ -313,19 +312,55 @@
                                                                    
                                                                 </tbody>
                                                             </table>
+
+                                                            <style>
+                                                                .promoCodeUI {
+                                                                    transition-duration: .5s;
+                                                                    overflow: hidden
+                                                                }
+                                                                .pcuiShow {
+                                                                    height: 47px;
+                                                                }
+                                                                .pcuiHide {
+                                                                    height: 0px;
+                                                                }
+                                                            </style>
+                                                            <div style="margin-bottom: 20px; text-align: right;">
+                                                                <input id="cbPC" type="checkbox" />
+                                                                <span style="color:red;">Have a Promo Code ?</span>
+                                                                <div class="promoCodeUI pcuiHide">
+                                                                    Enter Promo Code : 
+                                                                    <input style="text-align: center;" type="text" placeholder="enter promo code" />
+                                                                    <button type="button" class="btn btn-success">Validate</button>
+                                                                </div>
+                                                            </div>
+                                                            
                                                             @*<div>@Html.HiddenFor(model => model.sendercustid, new { @id = "sendercustid", @Value = Model.sendercustid })</div>*@
                                                             <div>@Html.HiddenFor(model => model.receiver, new { @id = "receiverCustID" })</div>
                                                             <div class="send-money__steps-btn" style="text-align:right">
                                                                 <button data-style="slide-left" class="btn btn-success" id="sendoutOrderConfirm" type="button">
                                                                     <span class="ladda-label">Confirm Transaction</span>
-                                                                  
                                                                 </button>
                                                                 <button class="btn btn-success" id="editSendout" type="button" style="margin-left:20px">
                                                                     <span class="ladda-label">Edit Transaction</span>
-
                                                                 </button>
                                                             </div>
-                                                           
+                                                            <script>
+                                                                $(document).ready(function () {
+                                                                    $('#cbPC').on('click', function () {
+                                                                        if (document.getElementById('cbPC').checked == true)
+                                                                        {
+                                                                            $('.promoCodeUI').removeClass('pcuiHide');
+                                                                            $('.promoCodeUI').addClass('pcuiShow');
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            $('.promoCodeUI').removeClass('pcuiShow');
+                                                                            $('.promoCodeUI').addClass('pcuiHide');
+                                                                        }   
+                                                                    })
+                                                                });
+                                                            </script>
                                                         </div>
                                                     </div>
                                                 </div>
