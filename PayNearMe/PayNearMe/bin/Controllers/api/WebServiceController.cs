@@ -3155,16 +3155,15 @@ namespace PayNearMe.Controllers.api
         public void sendEmailActivation(String userID, String firstName, String activationCode, String mobileToken)
         {
             SmtpClient client = new SmtpClient();
-            client.EnableSsl = true;
+            client.EnableSsl = false;
             client.UseDefaultCredentials = false;
-            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.Host = smtpServer;
             client.Port = 587;
             client.Credentials = new NetworkCredential(smtpUser, smtpPass);
             MailMessage msg = new MailMessage();
             msg.To.Add(userID);
 
-            msg.From = new MailAddress("ML Remit Global<donotreply@developer.com>");
+            msg.From = new MailAddress("donotreply@mlhuillier1.com");
             msg.Subject = "PayNearMe - Email Activation";
             msg.Body = "Good day Ma'am/Sir " + firstName + ",<br /><br />"
                      + "With Mlhuillier as easy to send money to your friends and family around<br />"
@@ -4689,22 +4688,19 @@ namespace PayNearMe.Controllers.api
 
 
                     SmtpClient client = new SmtpClient();
-                    client.EnableSsl = true;
-                    client.UseDefaultCredentials = true;
-                    //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.EnableSsl = false;
+                    client.UseDefaultCredentials = false;
                     client.Host = smtpServer;
                     client.Port = 587;
-                    client.EnableSsl = true;
-                    client.UseDefaultCredentials = false;
                     client.Credentials = new NetworkCredential(smtpUser, smtpPass);
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;
                     MailMessage msg = new MailMessage();
                     msg.To.Add(email);
 
-                    msg.From = new MailAddress("ML Remit Global<donotreply.donotreply@developer1.com>");
+                    msg.From = new MailAddress("donotreply@mlhuillier1.com");
                     msg.Subject = "PayNearMe - Transaction Report";
                     msg.Body = "Good day Ma'am/Sir  ,<br /><br />"
-                             + "With Mlhuillier as easy to send money to your freinds and family around<br />"
+                             + "With Mlhuillier as easy to send money to your friends and family around<br />"
                              + "different parts of the world in a fast, convenient and secure way.<br /><br />"
                              + "Attached is your Transaction Report.<br /><br />";
 

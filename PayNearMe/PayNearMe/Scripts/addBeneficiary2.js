@@ -35,7 +35,7 @@ $(document).ready(function () {
             return;
         }
         else if ($('#sendingAmount').val() > 1000) {
-            errModal("Send Amount Must 1000 USD Above");
+            errModal("Send Amount Must 1000 USD Below");
             return;
         }
         else if ($('#beneId').val().toString() == '') {
@@ -67,8 +67,24 @@ $(document).ready(function () {
                     $('#receiverCustID').val(receiverCustId);
                     $('#confirmSendingCharge').val($('#serviceFee').text());
                     $('#amountPO').val(amountpo.toFixed(2))
+
+              
                     $('#beneficiarybody').slideUp();
                     $('#confirmationbody').slideDown();
+
+                    //promocode----------------------------------------------------
+                    $("#Discount").val("0.0");
+                    $("#NetTransferFee").val("0.0");
+                    $("#TotalAfterDiscount").val("0.0");
+                    $(".promoCodeTrue").hide();
+                    $("#confirmPromoCode").val('').attr('readonly', false).focus();
+                    $("#btnRemovePC").hide();
+                    $("#btnValidatePC").show();
+                    //-------------------------------------------------------------
+
+
+
+
                     
                 }
                
@@ -231,3 +247,214 @@ $(document).ready(function () {
 
 
 });
+
+//---------- SENDOUT JS ----------------
+
+    $(document).ready(function () {
+
+        $("#beneficiaryformR").click(function () {
+            ajxloadtoggle();
+            var uri = $("#beneficiaryformR").attr("data-addbene");
+            $.ajax({
+                url: uri,
+                type: 'POST',
+                success: function (data) {
+
+                    $("#addBenficiaryPartial").html(data);
+                    $("#addBenficiaryPartial").css("margin-top", "-70px");
+                    $("#BeneficiaryMainId").hide();
+                    ajxloadtoggle();
+                },
+                error: function (response) {
+                    errModal("There was a problem on your request, please try again! Thank You!");
+                    ajxloadtoggle();
+                }
+            });
+        });
+
+        $("#sendoutOrderConfirm").click(function () {
+            ajxloadtoggle();
+            var model = $("#SendOrder").serialize();
+            var uri = $("#sendoutOrderConfirm").attr("data-submit");
+            $.ajax({
+                url: uri,
+                type: 'POST',
+                data: model,
+                success: function (data) {
+
+                    if (data.respcode == "ok") {
+                        successModal(data.trackingUrl,data.amount);
+                    }
+                    else
+                    {
+                        failModal(data.message);
+
+                    }
+                    ajxloadtoggle();
+
+                },
+                error: function (response) {
+                    failModal("There was a problem on your request, please try again! Thank You!");
+                    ajxloadtoggle();
+                }
+            });
+        });
+
+        $("#editSendout").click(function ()
+        {
+            $('#beneficiarybody').slideDown();
+            $('#confirmationbody').slideUp();
+        });
+
+        $("#btnValidatePC").click(function ()
+        {
+            var promoCode = $("#confirmPromoCode").val();
+            var charge = $("#confirmSendingCharge").val();
+            var amount = $("#confirmSendingAmount").val();
+            var user = "wsuser";
+            var pass = "wspasswordRrykuqt14!";
+            if (promoCode == '' || promoCode == null)
+            {
+                return errModal("Please input promocode.");
+            }
+
+            ajxloadtoggle();
+            var uri = $("#btnValidatePC").attr("data-validate");
+            var form = $('#SendOrder');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
+            var model = { __RequestVerificationToken: token,Username: user, Password: pass, promoCode: promoCode, Charge: charge, Amount: amount };
+
+            $.ajax({
+                url: uri,
+                type: 'POST',
+                data: model,
+                success: function (resp) {
+
+                    var respx = JSON.parse(resp);
+                    if (respx.respcode == 1) {
+
+                        $("#Discount").val(respx.discount.toFixed("2"));
+                        $("#NetTransferFee").val(respx.newCharge.toFixed("2"));
+                        $("#TotalAfterDiscount").val(respx.newTotal.toFixed("2"));
+                        $(".promoCodeTrue").show();
+                        $("#btnRemovePC").show();
+                        $("#btnValidatePC").css('display', 'none');
+                        $("#confirmPromoCode").attr('readonly', true);
+
+
+                    }
+                    else {
+                        errModal(respx.message);
+
+                    }
+                    ajxloadtoggle();
+
+                },
+                error: function (resp) {
+                    errModal("There was a problem on your request, please try again! Thank You!");
+                    ajxloadtoggle();
+                }
+            });
+
+        });
+
+        $("#btnRemovePC").click(function () {
+            ajxloadtoggle();
+            var form = $('#SendOrder');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
+            var model = { __RequestVerificationToken: token, Username: 'wsuser', Password: 'wspasswordRrykuqt14!', promoCode: $("#confirmPromoCode").val() };
+          //  var model = {  Username: 'wsuser', Password: 'wspasswordRrykuqt14!', promoCode: $("#confirmPromoCode").val() };
+
+            var uri = $("#btnRemovePC").attr("data-remove");
+
+            $.ajax({
+                url: uri,
+                type: 'POST',
+                data: model,
+                success: function (resp) {
+
+                    var respx = JSON.parse(resp);
+
+                    if (respx.respcode == 1) {
+
+                        $("#Discount").val("0.0");
+                        $("#NetTransferFee").val("0.0");
+                        $("#TotalAfterDiscount").val("0.0");
+                        $(".promoCodeTrue").hide();
+                        $("#confirmPromoCode").val('').attr('readonly', false).focus();
+                        $("#btnRemovePC").hide();
+                        $("#btnValidatePC").show();
+
+
+                    }
+                    else {
+                        errModal(respx.message);
+
+                    }
+                    ajxloadtoggle();
+
+                },
+                error: function (resp) {
+                    errModal("There was a problem on your request, please try again! Thank You!");
+                    ajxloadtoggle();
+                }
+            });
+
+        });
+
+
+        $("#linkPNM").click(function () {
+
+            var uri = $("#linkPNM").attr("data-xxsend");
+            window.location.href = uri;
+        });
+
+
+        $('#cbPC').on('click', function () {
+            if (document.getElementById('cbPC').checked == true) {
+                $('.promoCodeUI').removeClass('pcuiHide');
+                $('.promoCodeUI').addClass('pcuiShow');
+
+                //promocode----------------------------------------------------
+                $("#Discount").val("0.0");
+                $("#NetTransferFee").val("0.0");
+                $("#TotalAfterDiscount").val("0.0");
+                $(".promoCodeTrue").hide();
+                $("#confirmPromoCode").val('').attr('readonly', false).focus();
+                $("#btnRemovePC").hide();
+                $("#btnValidatePC").show();
+                //-------------------------------------------------------------
+
+            }
+            else {
+                $('.promoCodeUI').removeClass('pcuiShow');
+                $('.promoCodeUI').addClass('pcuiHide');
+
+                //promocode----------------------------------------------------
+                $("#Discount").val("0.0");
+                $("#NetTransferFee").val("0.0");
+                $("#TotalAfterDiscount").val("0.0");
+                $(".promoCodeTrue").hide();
+                $("#confirmPromoCode").val('').attr('readonly', false);
+                $("#btnRemovePC").hide();
+                $("#btnValidatePC").show();
+                //-------------------------------------------------------------
+            }
+        })
+
+    });
+function errModal(message) {
+    $("#modContent").html(message);
+    $("#myModal").show();
+}
+
+function successModal(trackingURL, amount) {
+    $("#linkPNM").attr("href", trackingURL);
+    $("#myModalSuccess").show();
+    $("#amountSuccess").text(amount);
+}
+
+function failModal(message) {
+    $("#contentFail").html(message);
+    $("#myModalFailed").show();
+}

@@ -40,6 +40,7 @@ namespace PayNearMe.Controllers
         // GET: /Account/Login
         
         [AllowAnonymous]
+        
         public ActionResult Login()
 
         {
@@ -108,6 +109,8 @@ namespace PayNearMe.Controllers
         }
 
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public JsonResult Submit(LoginViewModel model)
         {
             try

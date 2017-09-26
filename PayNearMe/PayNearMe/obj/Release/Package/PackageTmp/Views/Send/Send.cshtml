@@ -3,7 +3,6 @@
     ViewBag.Title = "Send";
 }
 
-
 <div class="page">
     <div id="f1_upload_process" style="display: none"></div>
     <!-- including body part -->
@@ -75,7 +74,7 @@
                                                             @Html.DropDownList("receiverName", Model.beneficiarylist, new { @class = "form-control", @required = "required", @id = "beneId" })
                                                             <div class="beneficiary-btn-cont">
                                                                 @*<button class="btn btn-link add-beneficiary--btn" onclick="showBeneficiaryForm();"><span class="add-beneficiary--icon">Add New Beneficiary</span></button>*@
-                                                                <button class="btn btn-link add-beneficiary--btn" id="beneficiaryformR"><span class="add-beneficiary--icon">Add New Beneficiary</span> </button>
+                                                                <button class="btn btn-link add-beneficiary--btn" id="beneficiaryformR" data-addbene="@Url.Action("AddBeneficiary", "Benefeciary")"><span class="add-beneficiary--icon">Add New Beneficiary</span> </button>
                                                             </div>
                                                             <div class="beneficiary-btn-cont" id="AdditionalField"></div>
                                                         </div>
@@ -250,9 +249,24 @@
                                                                         <td class="table-data-label">Exchange Rate </td>
                                                                         <td class="table-data-value" id="eRateStep3">@Html.TextBoxFor(model => model.trans.ExchangeRate, new { @Value = Model.trans.ExchangeRate, @id = "exchangeRate", @style = "text-align:right;border:none", @readonly = "true" }) PHP</td>
                                                                     </tr>
-                                                                    <tr >
+                                                                    <tr style="background-color: rgba(0, 0, 0, 0.36);">
                                                                         <td class="table-data-label bold-text">Total</td>
                                                                         <td class="table-data-value bold-text">@Html.TextBoxFor(model => model.trans.Total, "0.00", new { @id = "confirmSendingTotal", @style = "text-align:right;border:none", @readonly = "true" }) USD</td>
+                                                                    </tr>
+
+                                                                    <tr class="promoCodeTrue">
+                                                                        <td class="table-data-label">Discount</td>
+                                                                        <td class="table-data-value">@Html.TextBoxFor(model => model.trans.Discount,"0.00", new { @id = "Discount", @style = "text-align:right;border:none", @readonly = "true" }) USD</td>
+                                                                    </tr>
+
+                                                                    <tr class="promoCodeTrue">
+                                                                        <td class="table-data-label">Net Transfer Fee</td>
+                                                                        <td class="table-data-value">@Html.TextBox("NetTransferFee","0.00", new { @id = "NetTransferFee", @style = "text-align:right;border:none", @readonly = "true" }) USD</td>
+                                                                    </tr>
+
+                                                                    <tr class="promoCodeTrue" style="background-color: rgba(0, 0, 0, 0.36);">
+                                                                        <td class="table-data-label bold-text">Total After Discount</td>
+                                                                        <td class="table-data-value bold-text">@Html.TextBox("TotalAfterDiscount","0.00", new { @id = "TotalAfterDiscount", @style = "text-align:right;border:none", @readonly = "true" }) USD</td>
                                                                     </tr>
 
                                                                     <tr>
@@ -313,19 +327,42 @@
                                                                    
                                                                 </tbody>
                                                             </table>
+
+                                                            <style>
+                                                                .promoCodeUI {
+                                                                    transition-duration: .5s;
+                                                                    overflow: hidden
+                                                                }
+                                                                .pcuiShow {
+                                                                    height: 47px;
+                                                                }
+                                                                .pcuiHide {
+                                                                    height: 0px;
+                                                                }
+                                                            </style>
+                                                            <div style="margin-bottom: 20px; text-align: right; display:none">
+                                                                <input id="cbPC" type="checkbox" />
+                                                                <span style="color:red;">Have a Promo Code ?</span>
+                                                                <div class="promoCodeUI pcuiHide">
+                                                                    Enter Promo Code : 
+                                                                    @Html.TextBoxFor(model => model.trans.PromoCode, new { @id = "confirmPromoCode", @style="text-align: center;", @type="text",@placeholder="enter promo code" })
+                                                                    @*<input id="confirmPromoCode" style="text-align: center;" type="text" placeholder="enter promo code" />*@
+                                                                    <button id="btnValidatePC" type="button" class="btn btn-success" data-validate="@Url.Action("validatePromoCode", "Send")">Validate</button>
+                                                                    <button id="btnRemovePC" type="button" class="btn btn-success" style="display:none" data-remove="@Url.Action("removePromoCode", "Send")">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                            
                                                             @*<div>@Html.HiddenFor(model => model.sendercustid, new { @id = "sendercustid", @Value = Model.sendercustid })</div>*@
                                                             <div>@Html.HiddenFor(model => model.receiver, new { @id = "receiverCustID" })</div>
                                                             <div class="send-money__steps-btn" style="text-align:right">
-                                                                <button data-style="slide-left" class="btn btn-success" id="sendoutOrderConfirm" type="button">
+                                                                <button data-style="slide-left" class="btn btn-success" id="sendoutOrderConfirm" type="button" data-submit="@Url.Action("Submit", "Send")">
                                                                     <span class="ladda-label">Confirm Transaction</span>
-                                                                  
                                                                 </button>
                                                                 <button class="btn btn-success" id="editSendout" type="button" style="margin-left:20px">
                                                                     <span class="ladda-label">Edit Transaction</span>
-
                                                                 </button>
                                                             </div>
-                                                           
+                                                         
                                                         </div>
                                                     </div>
                                                 </div>
@@ -370,7 +407,7 @@
                 <span style="font-size:15px">The cashier will process the transaction and hand you a receipt.</span>
                 <br />
                 <br />
-                <a id="linkPNM" href="" target="_blank" style="color:blue"><img src=" ~/images/paynearme%20web%20button_7-11.png" style="width:200px;height:50px;border:0;"></a>
+                <a id="linkPNM" href="" target="_blank" style="color:blue" data-xxsend="@Url.Action("Send", "Send")"><img src=" ~/images/paynearme%20web%20button_7-11.png" style="width:200px;height:50px;border:0;"></a>
                 <br />
                 <br />
               
@@ -405,83 +442,4 @@
 
 </div>
 
-<script>
 
-    $(document).ready(function () {
-        $("#beneficiaryformR").click(function ()
-        {
-            ajxloadtoggle();
-            $.ajax({
-                url: '@Url.Action("AddBeneficiary", "Benefeciary")',
-                type: 'POST',
-                success: function (data) {
-
-                    $("#addBenficiaryPartial").html(data);
-                    $("#addBenficiaryPartial").css("margin-top", "-70px");
-                    $("#BeneficiaryMainId").hide();
-                    ajxloadtoggle();
-                },
-                error: function (response) {
-                    errModal("There was a problem on your request, please try again! Thank You!");
-                    ajxloadtoggle();
-                }
-            });
-        });
-
-        $("#sendoutOrderConfirm").click(function () {
-            ajxloadtoggle();
-            var model = $("#SendOrder").serialize();
-            $.ajax({
-                url: '@Url.Action("Submit", "Send")',
-                type: 'POST',
-                data: model,
-                success: function (data) {
-                   
-                    if (data.respcode == "ok") {
-                        successModal(data.trackingUrl,data.amount);
-                    }
-                    else
-                    {
-                        failModal(data.message);
-                     
-                    }
-                    ajxloadtoggle();
-
-                },
-                error: function (response) {
-                    failModal("There was a problem on your request, please try again! Thank You!");
-                    ajxloadtoggle();
-                }
-            });
-        });
-
-        $("#editSendout").click(function ()
-        {
-            $('#beneficiarybody').slideDown();
-            $('#confirmationbody').slideUp();
-        });
-
-        $("#linkPNM").click(function ()
-        {
-            
-            window.location.href = '@Url.Action("Send", "Send")';
-        });
-    
-    });
-    function errModal(message) {
-        $("#modContent").html(message);
-        $("#myModal").show();
-    }
-
-    function successModal(trackingURL,amount)
-    {
-        $("#linkPNM").attr("href", trackingURL);
-        $("#myModalSuccess").show();
-        $("#amountSuccess").text(amount);
-    }
-
-    function failModal(message) {
-        $("#contentFail").html(message);
-        $("#myModalFailed").show();
-    }
-</script>

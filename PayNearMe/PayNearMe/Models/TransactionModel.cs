@@ -33,6 +33,10 @@ namespace PayNearMe.Models
         public String receiverCustId { get; set; }
 
         public String PaymentIdentifier { get; set; }
+
+        public String PromoCode { get; set; }
+
+        public Double Discount { get; set; }
    
 
 

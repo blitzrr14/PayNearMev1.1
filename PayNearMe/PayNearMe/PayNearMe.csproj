@@ -252,6 +252,7 @@
     <Compile Include="Models\Response\pnm_xmlschema_v1_7.cs" />
     <Compile Include="Models\Response\ProfileResponse.cs" />
     <Compile Include="Models\Response\LoginResponse.cs" />
+    <Compile Include="Models\Response\PromoResponse.cs" />
     <Compile Include="Models\Response\RequestException.cs" />
     <Compile Include="Models\Response\SendoutReq.cs" />
     <Compile Include="Models\Response\TokenResponse.cs" />

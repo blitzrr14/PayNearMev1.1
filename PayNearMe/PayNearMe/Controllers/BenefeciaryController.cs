@@ -80,6 +80,7 @@ namespace PayNearMe.Controllers
         }
 
         [HttpPost]
+       
         public ActionResult SelectBeneficiary(String receiverCustID)
         {
             if (Session["UserID"] == null)
@@ -103,6 +104,7 @@ namespace PayNearMe.Controllers
         }
 
         [HttpPost]
+      
         public ActionResult EditReceiver(BeneficiaryModel model)
         {
             WebServiceController ws = new WebServiceController();
@@ -121,6 +123,7 @@ namespace PayNearMe.Controllers
 
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult Submit(BeneficiaryModel model)
         {
             try

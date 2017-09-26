@@ -200,7 +200,7 @@ namespace PayNearMe.Controllers
         {
             String autolink = generateAutoForgotPasswordLink(email, SecurityCode, CustID, FullName);
             SmtpClient client = new SmtpClient();
-            client.EnableSsl = true;
+            client.EnableSsl = false;
             client.UseDefaultCredentials = true;
             client.Host = "smtp.gmail.com";                                                     
             client.Port = 587;

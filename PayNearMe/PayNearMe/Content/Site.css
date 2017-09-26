@@ -105,7 +105,21 @@ input[type=password]
     padding: 15px;
     height: 46px !important;
     font-size: 14px !important;
+   
 }
+
+table input[type=text] {
+    padding: 15px;
+    height: 35px !important;
+    font-size: 14px !important;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+input#confirmPromoCode[readonly] {
+    cursor: not-allowed;
+    background-color: #eeeeee;
+}
+
 select {
     padding: 10px 15px !important;
     height: 46px !important;
@@ -504,5 +518,13 @@ label {
 }
 .fpInnerShow {
     transform: translateX(0%);
+}
+
+.promoCodeTrue {
+
+    display:none;
 }  
+
+
+
 /*--------------------------------------------------------------------------------------------*/

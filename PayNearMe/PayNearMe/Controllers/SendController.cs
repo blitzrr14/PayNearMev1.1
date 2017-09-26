@@ -29,6 +29,8 @@ namespace PayNearMe.Controllers
         private ILog kplog;
         private static double pnmCharge = 3.99;
         private String siteIdentifier = string.Empty;
+        private static string wsuser = "wsuser";
+        private static string wspass = "wspasswordRrykuqt14!";
        
         public SendController() 
         {
@@ -91,6 +93,7 @@ namespace PayNearMe.Controllers
             {
 
                 model.trans.ExchangeRate = Convert.ToDouble(rFrex.buying);
+                Session["ExchangeRate"] = model.trans.ExchangeRate;
 
             }
             else
@@ -100,7 +103,6 @@ namespace PayNearMe.Controllers
             }
 
 
-            model.trans.ExchangeRate = Convert.ToDouble(Session["ExchangeRate"]);
             model.beneficiarylist = listselect;
             TempData["ErrorMessage"] = null;
             model.siteIdentifier = siteIdentifier;
@@ -109,7 +111,7 @@ namespace PayNearMe.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Submit(SendModel model)
+        public ActionResult Submit(SendModel model,Double NetTransferFee, Double TotalAfterDiscount)
         {
             try
             {
@@ -128,8 +130,13 @@ namespace PayNearMe.Controllers
                 }
 
 
-            
-                
+                if (!string.IsNullOrEmpty(model.trans.PromoCode))
+                {
+                    model.trans.Charge = NetTransferFee;
+                    model.trans.Total = TotalAfterDiscount;
+                  
+                }
+               
               
                 var trans = new TransactionModel()
                 {
@@ -141,7 +148,9 @@ namespace PayNearMe.Controllers
                     POAmountPHP = model.trans.POAmountPHP,
                     Total = model.trans.Total,
                     receiverCustId = model.receiver,
-                    senderCustID = Session["CustomerID"].ToString()
+                    senderCustID = Session["CustomerID"].ToString(),
+                    PromoCode = string.IsNullOrEmpty(model.trans.PromoCode) ? "" : model.trans.PromoCode,
+                    Discount = model.trans.Discount
                     
 
                 };
@@ -169,6 +178,7 @@ namespace PayNearMe.Controllers
         [HttpGet]
         public ActionResult getCharge(Double amount, String bcode, String zcode)
         {
+
 
             Double dailyLimit = service.getDailyLimit(Session["CustomerID"].ToString());
             Double monthlyLimit = service.getMonthlyLimit(Session["CustomerID"].ToString());
@@ -209,6 +219,182 @@ namespace PayNearMe.Controllers
 
                 return Json(chargeGResp, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult validatePromoCode(String Username, String Password,String promoCode, Double Charge, Double Amount) 
+        {
+
+            try
+            {
+
+            
+
+            PromoResponse resp = new PromoResponse();
+
+            if (Username != wsuser || Password != wspass) 
+            {
+                resp = new PromoResponse { respcode = 0, message = "UnAuthorizeAccess"};
+                return new JsonResult { Data = JsonConvert.SerializeObject(resp), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+            String customerID = Session["CustomerID"].ToString();
+            DateTime dt = service.getServerDateGlobal(false);
+
+            using (MySqlConnection con = new MySqlConnection(connection)) 
+            {
+                con.Open();
+
+                using (MySqlCommand cmd = con.CreateCommand()) 
+                {
+                    cmd.CommandText = "Select * FROM kpformsglobal.PayNearMePromoCode where promoCode = @promoCode AND (@dt BETWEEN dateFrom and dateTo)";
+                    cmd.Parameters.AddWithValue("promoCode", promoCode );
+                    cmd.Parameters.AddWithValue("dt", dt.ToString("yyyy-MM-dd HH:mm:ss"));
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+                    if (rdr.HasRows)
+                    {
+                        rdr.Read();
+                        Int32 isactive = Convert.ToInt32(rdr["isactive"]);
+                        if (isactive < 1) 
+                        {
+                            resp = new PromoResponse { respcode = 0, message = "Promocode is inactive." };
+                            return new JsonResult { Data = JsonConvert.SerializeObject(resp), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                        }
+                        Int32 numberOfUsage = Convert.ToInt32(rdr["numberOfUsage"]);
+                        String type = rdr["type"].ToString();
+                        Double value = Convert.ToDouble(rdr["amount"]);
+                        String promoName = rdr["promoName"].ToString();
+
+                        rdr.Close();
+
+                        cmd.Parameters.Clear();
+                        cmd.CommandText = "Select TimesUsed from kpcustomersglobal.PNMPromocode where CustomerID  = @customerID and PromoCode = @PromoCode";
+                        cmd.Parameters.AddWithValue("customerID",customerID);
+                        cmd.Parameters.AddWithValue("PromoCode",promoCode);
+                        MySqlDataReader rdrPNM = cmd.ExecuteReader();
+                        if (rdrPNM.HasRows)
+                        {
+                            rdrPNM.Read();
+                            Int32 TimesUsed = Convert.ToInt32(rdrPNM["TimesUsed"]);
+                            if (TimesUsed > numberOfUsage)
+                            {
+                                resp = new PromoResponse { respcode = 0, message = "Exceeded number of usage." };
+                                return new JsonResult { Data = JsonConvert.SerializeObject(resp), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                            }
+
+                            TimesUsed++;
+                            rdrPNM.Close();
+                            cmd.Parameters.Clear();
+                            cmd.CommandText = "UPDATE kpcustomersglobal.PNMPromocode SET TimesUsed = @TimesUsed where CustomerID = customerID and PromoCode = @PromoCode";
+                            cmd.Parameters.AddWithValue("customerID", customerID);
+                            cmd.Parameters.AddWithValue("PromoCode", promoCode);
+                            cmd.Parameters.AddWithValue("TimesUsed", TimesUsed);
+                            cmd.ExecuteNonQuery();
+
+                        }
+                        else 
+                        {
+                            rdrPNM.Close();
+                            cmd.Parameters.Clear();
+                            cmd.CommandText = "INSERT INTO kpcustomersglobal.PNMPromocode (CustomerID,PromoCode,TimesUsed) VALUES (@CustomerID,@PromoCode,@TimesUsed)";
+                            cmd.Parameters.AddWithValue("customerID", customerID);
+                            cmd.Parameters.AddWithValue("PromoCode", promoCode);
+                            cmd.Parameters.AddWithValue("TimesUsed", 1);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        Double discount = 0.00;
+                        if (type.ToUpper() == "FIXED") 
+                        {
+                            Charge = Charge - value;
+
+                            discount = value;
+                        }
+                        else if (type.ToUpper() == "PERCENTAGE") 
+                        {
+
+                            value = Math.Round((Charge * value),2);
+                            Charge = Charge - value;
+                            discount = value;
+                        }
+
+                        if (Charge < 0) 
+                        {
+                            Charge = 0.00;
+                        }
+
+                        Double Total = Amount + Charge;
+
+
+                        resp = new PromoResponse { respcode = 1, message = "Success", newCharge = Charge, newTotal = Total, discount = discount, promoName = promoName };
+                        return new JsonResult { Data = JsonConvert.SerializeObject(resp), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+                    }
+                    else 
+                    {
+                        resp = new PromoResponse { respcode = 0, message = "Promocode is invalid." };
+                        return new JsonResult { Data = JsonConvert.SerializeObject(resp), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                    
+
+                    }
+                
+                }
+            
+            }
+
+            }
+            catch (Exception ex)
+            {
+
+                var resp = new PromoResponse { respcode = 0, message = ex.ToString() };
+                return new JsonResult { Data = JsonConvert.SerializeObject(resp), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+
+        
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult removePromoCode(String Username, String Password, String promoCode) 
+        {
+
+            try
+            {
+            PromoResponse resp = new PromoResponse();
+            if (Username != wsuser || Password != wspass)
+            {
+                resp = new PromoResponse { respcode = 0, message = "UnAuthorizeAccess" };
+                return new JsonResult { Data = JsonConvert.SerializeObject(resp), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+
+            using(MySqlConnection con = new MySqlConnection(connection))
+            {
+                con.Open();
+
+                using (MySqlCommand cmd = con.CreateCommand()) 
+                {
+                    cmd.CommandText = "UPDATE kpcustomersglobal.PNMPromocode SET TimesUsed = (TimesUsed - 1) where CustomerID = @customerID AND PromoCode = @PromoCode";
+                    cmd.Parameters.AddWithValue("PromoCode",promoCode);
+                    cmd.Parameters.AddWithValue("customerID",Session["CustomerID"].ToString());
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+
+                    resp = new PromoResponse { respcode = 1, message = "Success"};
+                    return new JsonResult { Data = JsonConvert.SerializeObject(resp), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+                
+                }
+            }
+
+            }
+            catch (Exception ex)
+            {
+
+                var resp = new PromoResponse { respcode = 0, message = ex.ToString()};
+                return new JsonResult { Data = JsonConvert.SerializeObject(resp), JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+
+
         }
 
         private ChargeResponse calculateChargeGlobal(Double amount, String bcode, String zcode)
