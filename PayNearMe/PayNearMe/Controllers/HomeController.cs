@@ -41,7 +41,7 @@ namespace PayNearMe.Controllers
                 model = (HomeModel)Session["HomeModel"];
                 model.DailyLimit = ws.getDailyLimit(Session["CustomerID"].ToString()).ToString();
                 model.MonthlyLimit = ws.getMonthlyLimit(Session["CustomerID"].ToString()).ToString();
-                model.tl = ws.getAllTransactionByCategoryM(Session["CustomerID"].ToString(), "", "", "Open").tl;
+                model.tl = ws.getRecentTransactions(Session["CustomerID"].ToString()).tl;
                 model.ExchangeRate = Session["ExchangeRate"].ToString();
                 return View(model);
             }

@@ -34,6 +34,7 @@
                                     </div>
                                 </div>
                                 <form id="BeneForm">
+                                    
                                     <div class="beneficiary-information__sec-two  well-lg form-horizontal required-field">
                                         <div class="col-md-12 form-group">
                                             <div class="row">
@@ -197,6 +198,8 @@
                         <div id="" style="">
                             @using (Html.BeginForm("Submit", "Beneficiary", FormMethod.Post, new { id = "BeneConf" }))
                             {
+                                
+                                @Html.AntiForgeryToken()
                             <!-- for payer selection  add bene here-->
                                 <div class="payer-selection" id="cashPickUpScren" style="">
                                     <div class="beneficiary-information-edit well-lg clearfix">

@@ -66,12 +66,14 @@ namespace PayNearMe.Controllers.api
         private String smtpServer = string.Empty;
         private String smtpUser = String.Empty;
         private String smtpPass = String.Empty;
+        private String smtpSender = String.Empty;
         private String mlforex = String.Empty;
         private String ftpUser = String.Empty;
         private String ftpPass = String.Empty;
         private String iDologyServer = String.Empty;
         private String iDologyUser = String.Empty;
         private String iDologyPass = String.Empty;
+        private Boolean smtpSsl;
       
         public WebServiceController()
         {
@@ -89,6 +91,8 @@ namespace PayNearMe.Controllers.api
             smtpServer = config["smtpServer"].ToString();
             smtpUser = config["smtpUser"].ToString();
             smtpPass = config["smtpPass"].ToString();
+            smtpSender = config["smtpSender"].ToString();
+            smtpSsl = Convert.ToBoolean(config["smtpSsl"]);
             secretKey = config["secretKey"].ToString();
             siteIdentifier = config["siteIdentifier"].ToString();
             ftpPass = config["ftpPass"].ToString();
@@ -1728,9 +1732,10 @@ namespace PayNearMe.Controllers.api
                             exchangeRate = rdr1["orderExchangeRate"].ToString()
 
                         });
-                        Count = listData.Count;
+                        
                     }
                     rdr1.Close();
+                    Count = listData.Count;
 
 
 
@@ -1743,6 +1748,67 @@ namespace PayNearMe.Controllers.api
                 kplog.Fatal("FAILED:: respcode: 0 message: " + getRespMessage(0) + " ErrorDetail: " + ex.ToString());
                 return new TransactionResponseMobile { respcode = 0, message = ex.ToString() };
             }
+        }
+
+        public TransactionResponseMobile getRecentTransactions(string CustomerID) 
+        {
+
+            try
+            {
+                List<TransactionDetailsM> listData = new List<TransactionDetailsM>();
+                Int32 Count = 0;
+
+                using (MySqlConnection con = new MySqlConnection(connection))
+                {
+                    DateTime dt = getServerDateGlobal(false);
+                    String Month = dt.ToString("MM");
+                    con.Open();
+
+
+
+                    using (MySqlCommand cmd = con.CreateCommand())
+                    {
+                        cmd.CommandText = "SELECT orderExchangeRate, (select FullName as beneficiaryname from kpcustomersglobal.BeneficiaryHistory where CustIDB=receiverIdentifier) as beneficiaryname,orderPOAmountPHP,siteOrderIdentifier, orderCreated, orderPrincipal, orderChargeML,orderChargePNM, orderAmountTotal,orderTrackingUrl,IF(`status` != 'confirm',IF(NOW() > OrderDuration,'void','open'),'confirm') as `status` FROM paynearme.order" + Month + " WHERE senderIdentifier = @CustomerID  ORDER BY orderCreated desc LIMIT 10;";
+                        cmd.Parameters.AddWithValue("CustomerID", CustomerID);
+                        MySqlDataReader rdr = cmd.ExecuteReader();
+                        while (rdr.Read())
+                        {
+                            listData.Add(new TransactionDetailsM
+                            {
+                                kptn = rdr["siteOrderIdentifier"].ToString(),
+                                TransDate = rdr["orderCreated"].ToString(),
+                                principal = rdr["orderPrincipal"].ToString(),
+                                charge = (Convert.ToDouble(rdr["orderChargeML"]) + Convert.ToDouble(rdr["orderChargePNM"])).ToString(),
+                                totalamount = rdr["orderAmountTotal"].ToString(),
+                                trackingURL = rdr["orderTrackingUrl"].ToString(),
+                                poamount = rdr["orderPOAmountPHP"].ToString(),
+                                Status = rdr["status"].ToString(),
+                                RFullName = rdr["beneficiaryname"].ToString(),
+                                exchangeRate = rdr["orderExchangeRate"].ToString()
+
+                            });
+                            
+                        }
+                        rdr.Close();
+                        Count = listData.Count;
+
+                        kplog.Info("Success : Data Found, respcode = 1, listdata = '" + listData + "'");
+                        return new TransactionResponseMobile { respcode = 1, tl = listData, count = Count };
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                kplog.Fatal("FAILED:: respcode: 0 message: " + getRespMessage(0) + " ErrorDetail: " + ex.ToString());
+                return new TransactionResponseMobile { respcode = 0, message = ex.ToString() };
+            }
+        
+            
+            
+        
+        
         }
 
         //Done Loggings RR
@@ -2999,7 +3065,7 @@ namespace PayNearMe.Controllers.api
                List<System.Web.Mvc.SelectListItem> list = new List<System.Web.Mvc.SelectListItem>();
                using (MySqlCommand cmd = con.CreateCommand())
                {
-                   cmd.CommandText = "SELECT * FROM kpformsglobal.`sysallowedidtype` WHERE zonecode = 3";
+                   cmd.CommandText = "SELECT * FROM kpformsglobal.`sysallowedidtype` WHERE zonecode = 3 AND idType != 'VOTER`S ID';";
                    MySqlDataReader rdr = cmd.ExecuteReader();
                    if (rdr.HasRows)
                    {
@@ -3154,23 +3220,49 @@ namespace PayNearMe.Controllers.api
         [HttpGet]
         public void sendEmailActivation(String userID, String firstName, String activationCode, String mobileToken)
         {
+
+            DateTime dt = getServerDateGlobal(false);
             SmtpClient client = new SmtpClient();
-            client.EnableSsl = false;
+            client.EnableSsl = smtpSsl;
             client.UseDefaultCredentials = false;
             client.Host = smtpServer;
             client.Port = 587;
             client.Credentials = new NetworkCredential(smtpUser, smtpPass);
             MailMessage msg = new MailMessage();
+
             msg.To.Add(userID);
 
-            msg.From = new MailAddress("donotreply@mlhuillier1.com");
-            msg.Subject = "PayNearMe - Email Activation";
+            msg.From = new MailAddress(smtpSender);
+            msg.Subject = "ML Remit - Email Activation";
+
+
+            //msg.Body = "["+dt.ToString("yyyy-MM-dd HH:mm:ss")+"] Start of message <br /><br />"
+            //        + "<img src='https://mlremit.mlhuillier1.com/paynearme/Images/logo_en.png'/><br/>"
+            //        + "Good day Ma'am/Sir <b>" + firstName + "</b>,<br />"
+            //        + "<br/>With M. Lhuillier it is easy to send money to your friends and family around "
+            //        + "different parts of the world in a fast, convenient and secure way.<br />"
+            //        + "Please confirm your e-mail address to activate <br/> M. Lhuillier account. <br/>"
+            //        + "Let's activate your account! <br />"
+            //        + "Activation Code : <b>" + activationCode + "</b>"
+            //        + "<br />"
+            //        + "<br />This mail is auto generated. Please do not reply. <br /><br />"
+            //        + "["+dt.ToString("yyyy-MM-dd HH:mm:ss")+"] End of message <br />";
+
             msg.Body = "Good day Ma'am/Sir " + firstName + ",<br /><br />"
-                     + "With Mlhuillier as easy to send money to your friends and family around<br />"
-                     + "different parts of the world in a fast, convenient and secure way.<br /><br />"
-                     + "Please confirm your e-mail address to activate Mlhuillier account.<br /><br />"
-                     + "Activation Code : <b>" + activationCode + "</b> <br /><br />"
-                     + "Mobile Pin Code <b>" + mobileToken + "</b>";
+                  + "With Mlhuillier as easy to send money to your friends and family around<br />"
+                  + "different parts of the world in a fast, convenient and secure way.<br /><br />"
+                  + "Please confirm your e-mail address to activate Mlhuillier account.<br /><br />"
+                  + "Activation Code : " + activationCode + " <br /><br />"
+                  + "This mail is auto generated. Please do not reply. <br /><br />";
+                  
+                    
+
+            //msg.Body = "Good day Ma'am/Sir " + firstName + ",<br /><br />"
+            //         + "With Mlhuillier as easy to send money to your friends and family around<br />"
+            //         + "different parts of the world in a fast, convenient and secure way.<br /><br />"
+            //         + "Please confirm your e-mail address to activate Mlhuillier account.<br /><br />"
+            //         + "Activation Code : <b>" + activationCode + "</b> <br /><br />";
+            
             msg.IsBodyHtml = true;
             try
             {
@@ -4688,7 +4780,7 @@ namespace PayNearMe.Controllers.api
 
 
                     SmtpClient client = new SmtpClient();
-                    client.EnableSsl = false;
+                    client.EnableSsl = smtpSsl;
                     client.UseDefaultCredentials = false;
                     client.Host = smtpServer;
                     client.Port = 587;
@@ -4697,12 +4789,25 @@ namespace PayNearMe.Controllers.api
                     MailMessage msg = new MailMessage();
                     msg.To.Add(email);
 
-                    msg.From = new MailAddress("donotreply@mlhuillier1.com");
-                    msg.Subject = "PayNearMe - Transaction Report";
-                    msg.Body = "Good day Ma'am/Sir  ,<br /><br />"
-                             + "With Mlhuillier as easy to send money to your friends and family around<br />"
-                             + "different parts of the world in a fast, convenient and secure way.<br /><br />"
-                             + "Attached is your Transaction Report.<br /><br />";
+                    //msg.From = new MailAddress("donotreply@mlhuillier1.com");
+                    //msg.Subject = "ML Remit - Transaction Report";
+                    //msg.Body = "Good day Ma'am/Sir  ,<br /><br />"
+                    //         + "With Mlhuillier as easy to send money to your friends and family around<br />"
+                    //         + "different parts of the world in a fast, convenient and secure way.<br /><br />"
+                    //         + "Attached is your Transaction Report.<br /><br />";
+
+                    msg.Body = "<div style=\"font-size: 16px; font-family: Consolas; text-align: justify; margin: 0 auto; width: 500px; color: black; padding: 20px; border-left: 1px solid #130d01; border-right: 1px solid #130d01; border-radius: 20px;\">"
+                   + "<img src='https://mlremit.mlhuillier1.com/paynearme/Images/logo_en.png' style='margin-left:15%'/>"
+                   + "<p> Good day Ma'am/Sir <b>" + model.firstName + "</b>,</p>"
+                   + "<p>"
+                   + "With M. Lhuillier it is easy to send money to your friends and family around "
+                   + "different parts of the world in a fast, convenient and secure way."
+                   + "</p>"
+                   + "Attached File is your Transaction Report, Thank You!.<br /><br />"
+                   + "<br /><br />"
+                   + "<div style=\"font-size: 14px; border-top: 1px solid lightgray; text-align: center; padding-top: 5px; background-color: gray;\">"
+                   + "-- This mail is auto generated. Please do not reply. --"
+                   + "</div></div>";
 
                     msg.Attachments.Add(new Attachment(stream, fileName + ".pdf"));
                     msg.IsBodyHtml = true;
