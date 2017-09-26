@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="DefaultConnection_ConnectionString" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\WORK\\Git\\PayNearMev1\.1\\PayNearMe\\PayNearMe\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\WORK\\PAYNEARME\\v1\.0\\PayNearMe\\PayNearMe\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
 </parameters>
