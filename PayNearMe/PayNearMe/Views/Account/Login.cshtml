@@ -81,7 +81,7 @@
             if ($('#login-form').valid())
             {
                 var datos = $('#login-form').serialize();
-                ajxloadtoggle("Verifying Account");
+                ajxloadtoggle();
                 $.ajax({
                    async: true,
                    type: 'POST',

@@ -27,16 +27,20 @@ namespace PayNearMe.Controllers
         private String connection = string.Empty;
         IDictionary config;
         private ILog kplog;
-        private static double pnmCharge = 3.99;
+        //private static double pnmCharge = 3.99;
         private String siteIdentifier = string.Empty;
         private static string wsuser = "wsuser";
         private static string wspass = "wspasswordRrykuqt14!";
+        private double pnmCharge = 3.99;
+        private double pnmCharge501 = 5.99;
        
         public SendController() 
         {
             config = (IDictionary)(ConfigurationManager.GetSection("PayNearMeAPISection"));
             connection = config["globalcon"].ToString();
             siteIdentifier = config["siteIdentifier"].ToString();
+            pnmCharge = Convert.ToDouble(config["pnm500Charge"]);
+            pnmCharge501 = Convert.ToDouble(config["pnmAbove500Charge"]);
             
             service = new WebServiceController();
           
@@ -195,7 +199,18 @@ namespace PayNearMe.Controllers
             var chargeGResp = calculateChargePerBranchGlobal(amount, bcode, zcode);
             if (chargeGResp.respcode == 1)
             {
-                chargeGResp.charge = chargeGResp.charge + Convert.ToDecimal(pnmCharge);
+                Decimal partialCharge;
+                Decimal partialTotal = Convert.ToDecimal(amount) + chargeGResp.charge + Convert.ToDecimal(pnmCharge);
+                if (partialTotal > 500)
+                {
+                     partialCharge = chargeGResp.charge + Convert.ToDecimal(pnmCharge501);
+                }
+                else 
+                {
+                     partialCharge = chargeGResp.charge + Convert.ToDecimal(pnmCharge);
+                }
+                chargeGResp.charge = partialCharge;
+
                 return Json(chargeGResp, JsonRequestBehavior.AllowGet);
 
             }
@@ -209,7 +224,19 @@ namespace PayNearMe.Controllers
                 }
                 else
                 {
-                    response.charge = response.charge + Convert.ToDecimal(pnmCharge);
+                    Decimal partialCharge;
+                    Decimal partialTotal = Convert.ToDecimal(amount) + response.charge + Convert.ToDecimal(pnmCharge);
+                    if (partialTotal > 500)
+                    {
+                        partialCharge = response.charge + Convert.ToDecimal(pnmCharge501);
+                    }
+                    else
+                    {
+                        partialCharge = response.charge + Convert.ToDecimal(pnmCharge);
+                    }
+                    response.charge = partialCharge;
+
+                 //   response.charge = response.charge + Convert.ToDecimal(pnmCharge);
                     return Json(response,JsonRequestBehavior.AllowGet);
                 }
 
