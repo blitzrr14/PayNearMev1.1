@@ -19,6 +19,11 @@ namespace PayNearMe.Controllers
     {
         IDictionary config;
         private String connection = string.Empty;
+        private String smtpServer = string.Empty;
+        private String smtpUser = string.Empty;
+        private String smtpPass = string.Empty;
+        private String smtpSender = string.Empty;
+        private Boolean smtpSsl = false;
         private ILog kplog;
         private AESEncryption encdata = new AESEncryption();
         private String encStringKey = "B905BD7BFBD902DCB115B327F9018CEA";
@@ -26,7 +31,13 @@ namespace PayNearMe.Controllers
         public ForgotPasswordController() {
             config = (IDictionary)(ConfigurationManager.GetSection("PayNearMeAPISection"));
             connection = config["globalcon"].ToString();
+            smtpServer = config["smtpServer"].ToString();
+            smtpUser = config["smtpUser"].ToString();
+            smtpPass = config["smtpPass"].ToString();
+            smtpSender = config["smtpSender"].ToString();
+            smtpSsl = Convert.ToBoolean(config["smtpSsl"].ToString());
             kplog = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            
         }
 
         public ActionResult Index()
@@ -200,14 +211,14 @@ namespace PayNearMe.Controllers
         {
             String autolink = generateAutoForgotPasswordLink(email, SecurityCode, CustID, FullName);
             SmtpClient client = new SmtpClient();
-            client.EnableSsl = false;
+            client.EnableSsl = smtpSsl;
             client.UseDefaultCredentials = true;
-            client.Host = "smtp.gmail.com";                                                     
+            client.Host = smtpServer;                                                     
             client.Port = 587;
-            client.Credentials = new NetworkCredential("fake01esoj@gmail.com", "M@K#d0nj0s31"); 
+            client.Credentials = new NetworkCredential(smtpUser, smtpPass); 
             MailMessage msg = new MailMessage();
             msg.To.Add(email);
-            msg.From = new MailAddress("ML PayNearMe<fake01esoj@gmail.com>");
+            msg.From = new MailAddress("ML PayNearMe<" + smtpSender + ">");
             msg.Subject = "PayNearMe - Request Forgot Password";
             msg.Body = "<div style=\"font-size: 16px; font-family: Consolas; text-align: justify; margin: 0 auto; width: 500px; color: black; padding: 20px; border-left: 1px solid #FFF0CA; border-right: 1px solid #FFF0CA; border-radius: 20px;\">"
                      + "<p> Good day Ma'am/Sir <b>" + FullName + "</b>,</p>"
