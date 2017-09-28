@@ -73,7 +73,8 @@ namespace PayNearMe.Controllers.api
         private String iDologyServer = String.Empty;
         private String iDologyUser = String.Empty;
         private String iDologyPass = String.Empty;
-        private Boolean smtpSsl;
+        private Boolean smtpSsl = false;
+        private Boolean iDology = false;
       
         public WebServiceController()
         {
@@ -100,6 +101,8 @@ namespace PayNearMe.Controllers.api
             iDologyServer = config["iDologyServer"].ToString();
             iDologyUser = config["iDologyUser"].ToString();
             iDologyPass = config["iDologyPass"].ToString();
+            iDology = Convert.ToBoolean(config["iDology"]);
+
         }
 
         //done loggings
@@ -848,27 +851,31 @@ namespace PayNearMe.Controllers.api
 
             try
             {
-                var apiIDologyResp = ExpectID_IQ_Check(req).Result;
 
-
-                if (apiIDologyResp == "FAIL")
+                if(iDology == true)
                 {
-                    kplog.Error("apiIDOLOGY FAIL: Name=" + Name);
-                    return new AddKYCResponse { respcode = 0, message = "Please check and make sure you provided a valid information, if persist please contact support!" };
+                    var apiIDologyResp = ExpectID_IQ_Check(req).Result;
+
+                    if (apiIDologyResp == "FAIL")
+                    {
+                        kplog.Error("apiIDOLOGY FAIL: Name=" + Name);
+                        return new AddKYCResponse { respcode = 0, message = "Please check and make sure you provided a valid information, if persist please contact support!" };
+                    }
+                    else if (apiIDologyResp == "ERROR")
+                    {
+                        kplog.Error("apiIDOLOGY ERROR: Name=" + Name);
+                        return new AddKYCResponse { respcode = 0, message = "Something went wrong, Please try Again!" };
+                    }
                 }
-                else if (apiIDologyResp == "ERROR")
-                {
-                    kplog.Error("apiIDOLOGY ERROR: Name=" + Name);
-                    return new AddKYCResponse { respcode = 0, message = "Something went wrong, Please try Again!" };
-                }
+                
 
 
-                if (OfacMatch(Name))
-                {
-                    kplog.Error("OFAC FAIL: Name= " + Name);
-                    return new AddKYCResponse { respcode = 0, message = "Unable to register. Please contact Support!" };
+                //if (OfacMatch(Name))
+                //{
+                //    kplog.Error("OFAC FAIL: Name= " + Name);
+                //    return new AddKYCResponse { respcode = 0, message = "Unable to register. Please contact Support!" };
 
-                }
+                //}
 
 
                 dt = getServerDateGlobal();
@@ -4315,68 +4322,68 @@ namespace PayNearMe.Controllers.api
             }
         }
 
-        private Boolean OfacMatch(String name)
-        {
-            Int32 Percentage = 100;
+        //private Boolean OfacMatch(String name)
+        //{
+        //    Int32 Percentage = 100;
 
-            using (MySqlConnection con = new MySqlConnection(dbconofac))
-            {
-                try
-                {
-                    con.Open();
-                    using (MySqlCommand cmd = con.CreateCommand())
-                    {
+        //    using (MySqlConnection con = new MySqlConnection(dbconofac))
+        //    {
+        //        try
+        //        {
+        //            con.Open();
+        //            using (MySqlCommand cmd = con.CreateCommand())
+        //            {
 
 
-                        cmd.Parameters.Clear();
-                        cmd.CommandText = "SELECT * FROM( " +
-                        "Select o.fullNAme, o.uid, o.firstName, o.lastName, o.sdnType,  split_str(split_str(split_str(o.dateOfBirthList,'dateOfBirth',2),'\":\"',2),'\",',1) AS dateOfBirth, split_str(split_str(split_str(o.placeOfBirthList,'placeOfBirth',2),'\":\"',2),'\",',1) AS placeofbirth, a.fullName as alias, o.soundexvalue, " +
-                        "ROUND(JaroWinkler((o.fullName),@FullName)*100,0) as score1, " +
-                        "ROUND(JaroWinkler((o.rfullName),@FullName)*100,0) as score2, " +
-                        "ROUND(JaroWinkler((o.lastname),@FullName)*100,0) as score3, " +
-                        "ROUND(JaroWinkler((o.firstname),@FullName)*100,0) as score4 " +
-                        "FROM kpofacglobal.ofac o LEFT JOIN kpofacglobal.aliasofac a ON a.CustomerID = o.uid WHERE " +
-                        "ROUND(JaroWinkler((o.fullName),@FullName)*100,0)>=@Percent OR " +
-                        "ROUND(JaroWinkler((o.rfullName),@FullName)*100,0)>=@Percent OR " +
-                        "ROUND(JaroWinkler((o.firstName),@FullName)*100,0)>=@Percent OR " +
-                        "ROUND(JaroWinkler((o.lastName),@FullName)*100,0)>=@Percent " +
-                        " UNION DISTINCT " +
-                        "Select o.fullNAme, o.uid, o.firstName, o.lastName, o.sdnType, split_str(split_str(split_str(o.dateOfBirthList,'dateOfBirth',2),'\":\"',2),'\",',1) " +
-                        " AS dateOfBirth, split_str(split_str(split_str(o.placeOfBirthList,'placeOfBirth',2),'\":\"',2),'\",',1) " +
-                        " AS placeofbirth, a.fullName as alias, a.soundexvalue, " +
-                        "ROUND(JaroWinkler((a.fullName),@FullName)*100,0) as score1, " +
-                        "ROUND(JaroWinkler((a.rfullName),@FullName)*100,0) as score2, " +
-                        "ROUND(JaroWinkler((a.lastname),@FullName)*100,0) as score3, " +
-                        "ROUND(JaroWinkler((a.firstname),@FullName)*100,0) as score4 " +
-                        "FROM kpofacglobal.ofac o LEFT JOIN kpofacglobal.aliasofac a ON a.CustomerID = o.uid WHERE " +
-                        "ROUND(JaroWinkler((a.fullName),@FullName)*100,0)>=@Percent OR " +
-                        "ROUND(JaroWinkler((a.rfullName),@FullName)*100,0)>=@Percent or " +
-                        "ROUND(JaroWinkler((a.firstName),@FullName)*100,0)>=@Percent or " +
-                        "ROUND(JaroWinkler((a.lastName),@FullName)*100,0)>=@Percent )as xx";
+        //                cmd.Parameters.Clear();
+        //                cmd.CommandText = "SELECT * FROM( " +
+        //                "Select o.fullNAme, o.uid, o.firstName, o.lastName, o.sdnType,  split_str(split_str(split_str(o.dateOfBirthList,'dateOfBirth',2),'\":\"',2),'\",',1) AS dateOfBirth, split_str(split_str(split_str(o.placeOfBirthList,'placeOfBirth',2),'\":\"',2),'\",',1) AS placeofbirth, a.fullName as alias, o.soundexvalue, " +
+        //                "ROUND(JaroWinkler((o.fullName),@FullName)*100,0) as score1, " +
+        //                "ROUND(JaroWinkler((o.rfullName),@FullName)*100,0) as score2, " +
+        //                "ROUND(JaroWinkler((o.lastname),@FullName)*100,0) as score3, " +
+        //                "ROUND(JaroWinkler((o.firstname),@FullName)*100,0) as score4 " +
+        //                "FROM kpofacglobal.ofac o LEFT JOIN kpofacglobal.aliasofac a ON a.CustomerID = o.uid WHERE " +
+        //                "ROUND(JaroWinkler((o.fullName),@FullName)*100,0)>=@Percent OR " +
+        //                "ROUND(JaroWinkler((o.rfullName),@FullName)*100,0)>=@Percent OR " +
+        //                "ROUND(JaroWinkler((o.firstName),@FullName)*100,0)>=@Percent OR " +
+        //                "ROUND(JaroWinkler((o.lastName),@FullName)*100,0)>=@Percent " +
+        //                " UNION DISTINCT " +
+        //                "Select o.fullNAme, o.uid, o.firstName, o.lastName, o.sdnType, split_str(split_str(split_str(o.dateOfBirthList,'dateOfBirth',2),'\":\"',2),'\",',1) " +
+        //                " AS dateOfBirth, split_str(split_str(split_str(o.placeOfBirthList,'placeOfBirth',2),'\":\"',2),'\",',1) " +
+        //                " AS placeofbirth, a.fullName as alias, a.soundexvalue, " +
+        //                "ROUND(JaroWinkler((a.fullName),@FullName)*100,0) as score1, " +
+        //                "ROUND(JaroWinkler((a.rfullName),@FullName)*100,0) as score2, " +
+        //                "ROUND(JaroWinkler((a.lastname),@FullName)*100,0) as score3, " +
+        //                "ROUND(JaroWinkler((a.firstname),@FullName)*100,0) as score4 " +
+        //                "FROM kpofacglobal.ofac o LEFT JOIN kpofacglobal.aliasofac a ON a.CustomerID = o.uid WHERE " +
+        //                "ROUND(JaroWinkler((a.fullName),@FullName)*100,0)>=@Percent OR " +
+        //                "ROUND(JaroWinkler((a.rfullName),@FullName)*100,0)>=@Percent or " +
+        //                "ROUND(JaroWinkler((a.firstName),@FullName)*100,0)>=@Percent or " +
+        //                "ROUND(JaroWinkler((a.lastName),@FullName)*100,0)>=@Percent )as xx";
 
-                        cmd.Parameters.AddWithValue("FullName", name);
-                        cmd.Parameters.AddWithValue("Percent", Percentage);
-                        MySqlDataReader rcvRdr = cmd.ExecuteReader();
+        //                cmd.Parameters.AddWithValue("FullName", name);
+        //                cmd.Parameters.AddWithValue("Percent", Percentage);
+        //                MySqlDataReader rcvRdr = cmd.ExecuteReader();
 
-                        if (rcvRdr.HasRows)
-                        {
-                            con.Close();
-                            return true;
-                        }
-                        else
-                        {
-                            con.Close();
-                            return false;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    kplog.Error("ERROR : '" + ex.ToString() + "'");
-                    throw new Exception(ex.ToString());
-                }
-            }
-        }
+        //                if (rcvRdr.HasRows)
+        //                {
+        //                    con.Close();
+        //                    return true;
+        //                }
+        //                else
+        //                {
+        //                    con.Close();
+        //                    return false;
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            kplog.Error("ERROR : '" + ex.ToString() + "'");
+        //            throw new Exception(ex.ToString());
+        //        }
+        //    }
+        //}
 
         private ChargeResponse calculateChargePerBranchGlobalMobile(String bcode, String zcode)
         {
