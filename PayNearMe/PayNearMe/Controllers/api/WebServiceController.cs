@@ -3289,10 +3289,8 @@ namespace PayNearMe.Controllers.api
             try
             {
                 byte[] byteresponse = Convert.FromBase64String(strBase64);
-
                 Stream stream2 = new MemoryStream(byteresponse);
                 Uri path = new Uri(filepath);
-
                 FtpWebRequest req = (FtpWebRequest)WebRequest.Create(path);
                 req.UseBinary = true;
                 req.Method = WebRequestMethods.Ftp.UploadFile;
