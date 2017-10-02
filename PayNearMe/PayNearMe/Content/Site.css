@@ -150,12 +150,10 @@ label {
 }
 
 .mlonline-msg {
-    
     font-size:20px;
-    letter-spacing:3px;
+    letter-spacing:2px;
     line-height:1.2px;
     text-shadow: 1px 1px black;
-   
 }
 
 @media (max-width: 1141px) {
@@ -525,6 +523,14 @@ label {
     display:none;
 }  
 
+@font-face {
+    font-family: 'TR France Bold';
+    src: url(../fonts/TRFranceBold.ttf);
+}
 
+.trfranceb {
+    font-family: 'TR France Bold';
+    font-size: 26px;
+}
 
 /*--------------------------------------------------------------------------------------------*/

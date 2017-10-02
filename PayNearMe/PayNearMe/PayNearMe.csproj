@@ -349,6 +349,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="fonts\fre3of9x.ttf" />
     <Content Include="fonts\free3of9.ttf" />
+    <Content Include="fonts\TRFranceBold.ttf" />
     <None Include="Properties\PublishProfiles\PayNearMe.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
