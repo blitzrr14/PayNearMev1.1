@@ -30,9 +30,9 @@
                 </div>
                 <div class="col-md-12 clearfix form-group" style="text-align: right;">
                     <div class="col-md-12">
-                        <div style="display: inline-block; border-right: 1px solid black; padding-right: 10px; margin-right: 10px;display:none">
+                        <div style="display: inline-block; border-right: 1px solid black; padding-right: 10px; margin-right: 10px;">
                             <label>
-                                @Html.ActionLink("Forgot Password", "Index", "ForgotPassword", null, new { @style = "color:blue;font-size:14px; font-weight: 700;" })
+                                @Html.ActionLink("Forgot Password", "Index", "ForgotPassword", null, new { @style = "color:blue;font-size:14px; font-weight: 700;" ,@tabindex="-1" })
                             </label>
                         </div>
                         <button class="btn btn-red size18" type="button" id="btnLoginAjx">Login</button>
@@ -81,7 +81,7 @@
             if ($('#login-form').valid())
             {
                 var datos = $('#login-form').serialize();
-                ajxloadtoggle("Verifying Account");
+                ajxloadtoggle();
                 $.ajax({
                    async: true,
                    type: 'POST',

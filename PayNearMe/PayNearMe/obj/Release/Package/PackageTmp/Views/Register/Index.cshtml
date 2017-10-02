@@ -101,6 +101,7 @@
                     <div class="col-sm-10">
                         <div class="col-sm-4">
                             @Html.TextBoxFor(model => model.data.firstName, new { @class = "form-control naming", @maxlength = "30", @minlength = "2", @type = "text", @placeholder = "First", @required = "required" })
+                            <span style="color:red;font-size:11px">Pleae enter name as it appears on your ID</span> <br />
                             @Html.ValidationMessageFor(model => model.data.firstName)
                         </div>
                         <div class="col-sm-4">
@@ -190,7 +191,7 @@
                     <div class="col-sm-10">
                         <div class="col-sm-9">
                             @Html.TextBoxFor(model => model.data.Street, new { @class = "form-control textcap", @type = "text", @maxlength="120", @placeholder = "Street", @required = "required" })
-                            <span style="color:green">None PO. Box Address</span> <br />
+                            <span style="color:red;font-size:12px">Do not use PO. Box Address</span> <br />
                             @Html.ValidationMessageFor(model => model.data.Street)
                         </div>
                         <div class="col-sm-3">

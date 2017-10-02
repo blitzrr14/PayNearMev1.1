@@ -68,7 +68,7 @@
 
     $('form#ForgotPassword-Form').submit(function (e) {
         e.preventDefault();
-
+        var uri = $("#fpmsgbtn").attr("data-login");
         if (fpPassIndicator && fpConfirmPass && fpNewPassword) {
             ajxloadtoggle("Confirming new password...");
             $.ajax({
@@ -81,7 +81,7 @@
                     else if (data.code == 1) {
                         fpMsgBox(data.message);
                         $('#fpmsgbtn').click(function () {
-                            window.location.replace("/");
+                            window.location.href = uri;
                         });
                     }
                     else {

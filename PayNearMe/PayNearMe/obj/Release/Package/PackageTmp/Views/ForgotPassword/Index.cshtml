@@ -75,7 +75,12 @@
             </div>
         </div>
     }
+    <div style="display: table; text-align: right; padding: 30px 0; background-color: #eee; width: 100%; padding: 15px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;">
+        @Html.ActionLink("Go back to Login Page", "Login", "Account").
+    </div>
 </div>
+
+
 
 <div id="fpMsgModal" class="hidden" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 300px; z-index: 2001;">
     <div class="col-md-12" style="background: red; font-size: 18px; color: white; border-top-left-radius: 8px; border-top-right-radius: 8px; padding: 5px; border: 1px solid red;">
@@ -85,7 +90,7 @@
         <div id="msgContainer" class="col-md-12" style="text-align: center; margin: 5px;">Please Wait...</div>
         <br />
         <center>
-            <button id="fpmsgbtn" onclick="hideModals()" class="fpBtn">- OK -</button>
+            <button id="fpmsgbtn" data-login ="@Url.Action("Login", "Account")" onclick="hideModals()" class="fpBtn">- OK -</button>
         </center>
     </div>
 </div>

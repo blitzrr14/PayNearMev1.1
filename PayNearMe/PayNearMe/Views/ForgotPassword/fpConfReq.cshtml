@@ -54,7 +54,7 @@
         <div id="msgContainer" class="col-md-12" style="text-align: center; margin: 5px;">Please Wait...</div>
         <br />
         <center>
-            <button id="fpmsgbtn" onclick="hideModals()" class="fpBtn">- OK -</button>
+            <button id="fpmsgbtn" data-login="@Url.Action("Login", "Account")" onclick="hideModals()" class="fpBtn">- OK -</button>
         </center>
     </div>
 </div>
@@ -128,37 +128,37 @@
             }
         });
 
-        $('form#ForgotPassword-Form').submit(function (e) {
-            e.preventDefault();
+        //$('form#ForgotPassword-Form').submit(function (e) {
+        //    e.preventDefault();
 
-            if (fpPassIndicator && fpConfirmPass && fpNewPassword) {
-                ajxloadtoggle("Confirming new password...");
-                $.ajax({
-                    url: '../ForgotPassword/fpChangePassword',
-                    type: "POST",
-                    data: $('form#ForgotPassword-Form').serialize(),
-                    success: function (data) {
-                        if (data.code == 0)
-                            fpMsgBox(data.message);
-                        else if (data.code == 1) {
-                            fpMsgBox(data.message);
-                            setTimeout(function () {
-                                var uri = $("#fpmsgbtn").attr("data-login");
-                                window.location.href = uri;
-                            }, 3000);
-                        }
-                        else {
-                            alert(data.message);
-                            ajxloadtoggle();
-                        }
-                    },
-                    error: function (error) {
-                        alert("Something went wrong, Please try again!");
-                        ajxloadtoggle();
-                    }
-                });
-            }
-        });
+        //    if (fpPassIndicator && fpConfirmPass && fpNewPassword) {
+        //        ajxloadtoggle("Confirming new password...");
+        //        $.ajax({
+        //            url: '../ForgotPassword/fpChangePassword',
+        //            type: "POST",
+        //            data: $('form#ForgotPassword-Form').serialize(),
+        //            success: function (data) {
+        //                if (data.code == 0)
+        //                    fpMsgBox(data.message);
+        //                else if (data.code == 1) {
+        //                    fpMsgBox(data.message);
+        //                    setTimeout(function () {
+        //                        var uri = $("#fpmsgbtn").attr("data-login");
+        //                        window.location.href = uri;
+        //                    }, 3000);
+        //                }
+        //                else {
+        //                    alert(data.message);
+        //                    ajxloadtoggle();
+        //                }
+        //            },
+        //            error: function (error) {
+        //                alert("Something went wrong, Please try again!");
+        //                ajxloadtoggle();
+        //            }
+        //        });
+        //    }
+        //});
     });
 
     var globalEncCID = "", globalEncFN = "";

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IIS Web Application Name" description="" value="Default Web Site/Global/PayNearMe" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\WORK\\PAYNEARME\\v1\.0\\PayNearMe\\PayNearMe\\obj\\Release\\Package\\PackageTmp$" />
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\WORK\\PAYNEARME\\v1\.0\\PayNearMe\\PayNearMe\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\WORK\\Git\\PayNearMev1\.1\\PayNearMe\\PayNearMe\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\WORK\\Git\\PayNearMev1\.1\\PayNearMe\\PayNearMe\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
   <parameter name="DefaultConnection-Web.config Connection String" description="" value="DefaultConnection_ConnectionString" tags="">
-    <parameterEntry kind="XmlFile" scope="D:\\WORK\\PAYNEARME\\v1\.0\\PayNearMe\\PayNearMe\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="D:\\WORK\\Git\\PayNearMev1\.1\\PayNearMe\\PayNearMe\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
   </parameter>
 </parameters>
