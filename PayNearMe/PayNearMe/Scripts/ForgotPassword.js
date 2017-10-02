@@ -81,7 +81,8 @@
                     else if (data.code == 1) {
                         fpMsgBox(data.message);
                         $('#fpmsgbtn').click(function () {
-                            window.location.replace("/");
+                            var uri = $("#fpmsgbtn").attr("data-login");
+                            window.location.href = uri;
                         });
                     }
                     else {
