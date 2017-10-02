@@ -218,8 +218,8 @@ namespace PayNearMe.Controllers
             client.Credentials = new NetworkCredential(smtpUser, smtpPass); 
             MailMessage msg = new MailMessage();
             msg.To.Add(email);
-            msg.From = new MailAddress("ML PayNearMe<" + smtpSender + ">");
-            msg.Subject = "PayNearMe - Request Forgot Password";
+            msg.From = new MailAddress("ML Remit<" + smtpSender + ">");
+            msg.Subject = "ML Remit - Request Forgot Password";
             msg.Body = "<div style=\"font-size: 16px; font-family: Consolas; text-align: justify; margin: 0 auto; width: 500px; color: black; padding: 20px; border-left: 1px solid #FFF0CA; border-right: 1px solid #FFF0CA; border-radius: 20px;\">"
                      + "<p> Good day Ma'am/Sir <b>" + FullName + "</b>,</p>"
                      + "<p>"
