@@ -71,18 +71,18 @@ namespace PayNearMe.Controllers
                                 rdr.Close();
                             }
                             else
-                                response.message = "The email address specified <br /> has not been registered...";
+                                response.message = "The email address specified <br /> has not been registered.";
                         }
                     }
                 }
                 catch (Exception ex)
                 {   response.code = -1;
-                    response.message = "A System Error has occured Please try again...";
+                    response.message = "A System Error has occured Please try again.";
                     kplog.Error("[CheckEmail] System Error: " + ex.Message);
                 }
             }
             else
-                response.message = "Please kindly provide an <br /> email address...";
+                response.message = "Please kindly provide an <br /> email address.";
 
             return new JsonResult { Data = response };
         }
@@ -114,27 +114,27 @@ namespace PayNearMe.Controllers
                             if (cmd.ExecuteNonQuery() > 0)
                             {   if (sendSecurityCode(email, securityCode, custID, fullName))
                                 {   response.code = 1;
-                                    response.message = "Code sent...<br /> Please check your email";
+                                    response.message = "Code sent,<br /> Please check your email.";
                                 }
                                 else
                                 {   response.code = 0;
-                                    response.message = "Service error : Unable to mail code... <br /> send request timeout";
+                                    response.message = "Service error : Unable to mail code, <br /> send request timeout.";
                                 }
                             }
                             else
-                                throw new Exception("Server Error : failed to update security code...");
+                                throw new Exception("Server Error : failed to update security code.");
                         }
                     }
                 }
                 catch (Exception ex)
                 {   kplog.Error("[RequestCode] where email = '" + email + "', encCID = '" + encCID + "', encFN = '" + encFN + "'; ErrorMessage = " + ex.ToString());
                     response.code = -1;
-                    response.message = "Server error upon generating security code";
+                    response.message = "Server error upon generating security code.";
                 }
             }
             else
             {   response.code = 0;
-                response.message = "Invalid request code data";
+                response.message = "Invalid request code data.";
             }
             return new JsonResult { Data = response };
         }
@@ -172,16 +172,16 @@ namespace PayNearMe.Controllers
                                 {
                                     if (sendSecurityCode(email, securityCode, custID, fullName))
                                     {   response.code = 1;
-                                        response.message = "Code sent...<br /> Please check your email";
+                                        response.message = "Code sent,<br /> Please check your email.";
                                     }
                                     else
-                                        response.message = "Service error : Unable to mail code... <br /> send request timeout";
+                                        response.message = "Service error : Unable to mail code, <br /> send request timeout.";
                                 }
                                 else
-                                    response.message = "Data provided an error <br /> Please refresh the page..."; 
+                                    response.message = "Data provided an error, <br /> Please refresh the page."; 
                             }
                             else
-                                response.message = "Unable to find user info <br /> Please refresh the page...."; 
+                                response.message = "Unable to find user info, <br /> Please refresh the page."; 
                         }
                     }
                 }
@@ -189,7 +189,7 @@ namespace PayNearMe.Controllers
                 {
                     kplog.Error("[ResendCode] where email = '" + email + "', encCID = '" + encCID + "', encFN = '" + encFN + "'; ErrorMessage = " + ex.ToString());
                     response.code = -1;
-                    response.message = "Server error upon resending security code";
+                    response.message = "Server error upon resending security code.";
                 }
             }
             return new JsonResult { Data = response };
@@ -284,16 +284,16 @@ namespace PayNearMe.Controllers
                         response.message = "Verified...";
                     }
                     else
-                        response.message = "Invalid security code...";
+                        response.message = "Invalid security code.";
                 }
                 else
-                    response.message = "Invalid request code data <i>(empty)</i>";
+                    response.message = "Invalid request code data <i>(empty)</i>.";
             }
             catch (Exception ex)
             {
                 kplog.Error("[CheckCode] where email = '" + email + "', code = '" + securityCode + "', encCID = '" + encCID + "', encFN = '" + encFN + "'; ErrorMessage = " + ex.ToString());
                 response.code = -1;
-                response.message = "Server error upon verifying security code. Please try again... ";
+                response.message = "Server error upon verifying security code, Please try again. ";
             }
 
             return new JsonResult { Data = response };
@@ -324,7 +324,7 @@ namespace PayNearMe.Controllers
             }
             catch (Exception ex)
             {
-                kplog.Error("[fpConfReq] Unable to read forgot password autogenerated link..." + ex.Message);
+                kplog.Error("[fpConfReq] Unable to read forgot password autogenerated link." + ex.Message);
                 return View("Error", new ErrorModel { ErrorCode = "fp", ErrorMessage = "Service error, Please generate another by reprocessing your forgot password request." });
             }
         }
@@ -378,17 +378,17 @@ namespace PayNearMe.Controllers
                         if (cmd.ExecuteNonQuery() > 0)
                         {
                             response.code = 1;
-                            response.message = "Successfully Updated Password! <br /> Redirecting to login page...";
+                            response.message = "Successfully Updated Password! <br /> Redirecting to login page.";
                         }
                         else
-                            response.message = "Data mismatch [unable to update]...<br /> Please refresh the page and try again";
+                            response.message = "Data mismatch [unable to update],<br /> Please refresh the page and try again.";
                     }
                 }
             }
             catch (Exception ex)
             {
                 response.code = -1;
-                response.message = "Server error in confirming new password...";
+                response.message = "Server error in confirming new password.";
                 kplog.Error("[fpChangePassword] System Error..." + ex.Message);
             }
             return new JsonResult { Data = response };
