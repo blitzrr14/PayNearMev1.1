@@ -165,14 +165,15 @@ namespace PayNearMe.Controllers.api
                             {
                                 string checking = String.Empty;
 
-                                if (rcvrmiddlename == null)
+                                if (string.IsNullOrEmpty(rcvrmiddlename))
                                 {
-                                    checking = "select sendercustid from kpcustomersglobal.BeneficiaryHistory where sendercustid=@sendercustid and firstname=@firstname and lastname=@lastname;";
+                                   // checking = "select sendercustid from kpcustomersglobal.BeneficiaryHistory where sendercustid=@sendercustid and firstname=@firstname and lastname=@lastname;";
+                                    checking = "select b.sendercustid,p.isActivate,p.ReceiverCustID from kpcustomersglobal.BeneficiaryHistory b inner join kpcustomersglobal.BeneficiaryPayNearMe p ON p.ReceiverCustID = b.CustIDB where b.sendercustid=@sendercustid and b.firstname=@firstname and b.lastname=@lastname;";
                                     rcvrmiddlename = "";
                                 }
                                 else
                                 {
-                                    checking = "select sendercustid from kpcustomersglobal.BeneficiaryHistory where sendercustid=@sendercustid and firstname=@firstname and lastname=@lastname and middlename=@middlename;";
+                                    checking = "select b.sendercustid,p.isActivate,p.ReceiverCustID  from kpcustomersglobal.BeneficiaryHistory b inner join kpcustomersglobal.BeneficiaryPayNearMe p ON p.ReceiverCustID = b.CustIDB where b.sendercustid=@sendercustid and b.firstname=@firstname and b.lastname=@lastname and b.middlename=@middlename;";
                                 }
                                 command.Transaction = trans;
                                 command.CommandText = checking;
@@ -184,11 +185,47 @@ namespace PayNearMe.Controllers.api
                                 MySqlDataReader reader = command.ExecuteReader();
                                 if (reader.Read())
                                 {
+                                    Int32 isactivate = Convert.ToInt32(reader["isActivate"]);
+                                    String receiverCustID = reader["ReceiverCustID"].ToString();
                                     reader.Close();
 
-                                    con.Close();
-                                    kplog.Info("Beneficiary Already Exist");
-                                    return new CustomerResultResponse { respcode = 0, message = "Beneficiary Already Exist" };
+                                    if (isactivate == 1)
+                                    {
+                                        con.Close();
+                                        kplog.Info("Beneficiary Already Exist");
+                                        return new CustomerResultResponse { respcode = 0, message = "Beneficiary Already Exist" };
+                                    }
+                                    else 
+                                    {
+                                        command.Parameters.Clear();
+                                        command.CommandText = "UPDATE kpcustomersglobal.BeneficiaryPayNearMe SET isActivate = 1 where ReceiverCustID = @receiverCustID;";
+                                        command.Parameters.AddWithValue("receiverCustID", receiverCustID);
+                                        command.ExecuteNonQuery();
+
+                                        string uptblbeneficiary = "update kpcustomersglobal.BeneficiaryHistory set MiddleName=@nrmname, FullName=@nrfullname, CityState=@nrcity, ZipCode=@nrzipcode, BirthDate=@nrbdate, Gender=@nrgender, Relation=@nrrelation, ContactNo=@nrcontact, lasttransdate = now(), Street = @nrstreet, Country = @nrcountry where sendercustid=@sendercustid1  and CustIDB=@rcvrcustid";
+                                        command.CommandText = uptblbeneficiary;
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("sendercustid1", sendercustid);
+                                        command.Parameters.AddWithValue("nrmname", rcvrmiddlename);
+                                        command.Parameters.AddWithValue("nrfullname", rcvrlastname + ", " + rcvrfirstname + " " + rcvrmiddlename);
+                                        command.Parameters.AddWithValue("nrcity", rcvrcitystate);
+                                        command.Parameters.AddWithValue("nrzipcode", rcvrzipcode);
+                                        command.Parameters.AddWithValue("nrbdate", rcvrbirthdate == String.Empty ? null : Convert.ToDateTime(rcvrbirthdate).ToString("yyyy-MM-dd"));
+                                        command.Parameters.AddWithValue("nrgender", rcvrgender);
+                                        command.Parameters.AddWithValue("nrrelation", rcvrrelation);
+                                        command.Parameters.AddWithValue("nrcontact", rcvrcontactno);
+                                        command.Parameters.AddWithValue("rcvrcustid", receiverCustID);
+                                        command.Parameters.AddWithValue("nrstreet", rcvrstreet);
+                                        command.Parameters.AddWithValue("nrcountry", rcvrcountry);
+                                        command.ExecuteNonQuery();
+
+
+                                        trans.Commit();
+                                        con.Close();
+                                        return new CustomerResultResponse { respcode = 1, message = "Beneficiary's information is successfully added!", receiverCustID = benecustid };
+                                    }
+
+                                    
                                 }
                                 else
                                 {
